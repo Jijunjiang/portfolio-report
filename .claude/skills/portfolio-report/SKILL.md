@@ -97,6 +97,14 @@ report can surface.
 
 ## 5. Option-selling suggestions
 
+**Excluded symbols — never suggest an option trade on these, in either
+direction, regardless of embedded gain, capacity, or how attractive the
+premium looks:**
+- `GOOG` (user preference — no options activity on this name at all)
+
+Check this list before generating any suggestion, not after — don't compute
+a candidate strike for an excluded symbol and then discard it.
+
 Only suggest against symbols already held (covered calls, using
 `shares_available_for_sells` / 100 for contract capacity) or against cash
 available (`buying_power.unleveraged_buying_power`, cash-secured puts on
