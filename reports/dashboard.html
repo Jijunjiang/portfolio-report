@@ -1,0 +1,476 @@
+<title>Portfolio Report — 2026-07-05</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --bg: #f2f1ec;
+    --surface: #fbfaf6;
+    --surface-2: #ffffff;
+    --ink: #1c2420;
+    --ink-muted: #5b645f;
+    --ink-faint: #8a938c;
+    --border: #dcd9ce;
+    --accent: #2f6f6a;
+    --accent-soft: #dfeceb;
+    --gain: #2f7d4f;
+    --gain-soft: #e2f0e6;
+    --loss: #ac4d38;
+    --loss-soft: #f6e6e1;
+    --caution: #a8791f;
+    --caution-soft: #f4ecd8;
+    --shadow: 0 1px 2px rgba(28, 36, 32, 0.06), 0 8px 24px rgba(28, 36, 32, 0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101512;
+      --surface: #161c19;
+      --surface-2: #1b211d;
+      --ink: #e9ece7;
+      --ink-muted: #9aa39d;
+      --ink-faint: #6d766f;
+      --border: #2a332e;
+      --accent: #5db3a9;
+      --accent-soft: #1c302d;
+      --gain: #62c78a;
+      --gain-soft: #1a2e21;
+      --loss: #e2846c;
+      --loss-soft: #33201b;
+      --caution: #e0ac52;
+      --caution-soft: #362a15;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101512;
+    --surface: #161c19;
+    --surface-2: #1b211d;
+    --ink: #e9ece7;
+    --ink-muted: #9aa39d;
+    --ink-faint: #6d766f;
+    --border: #2a332e;
+    --accent: #5db3a9;
+    --accent-soft: #1c302d;
+    --gain: #62c78a;
+    --gain-soft: #1a2e21;
+    --loss: #e2846c;
+    --loss-soft: #33201b;
+    --caution: #e0ac52;
+    --caution-soft: #362a15;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+  :root[data-theme="light"] {
+    --bg: #f2f1ec;
+    --surface: #fbfaf6;
+    --surface-2: #ffffff;
+    --ink: #1c2420;
+    --ink-muted: #5b645f;
+    --ink-faint: #8a938c;
+    --border: #dcd9ce;
+    --accent: #2f6f6a;
+    --accent-soft: #dfeceb;
+    --gain: #2f7d4f;
+    --gain-soft: #e2f0e6;
+    --loss: #ac4d38;
+    --loss-soft: #f6e6e1;
+    --caution: #a8791f;
+    --caution-soft: #f4ecd8;
+    --shadow: 0 1px 2px rgba(28, 36, 32, 0.06), 0 8px 24px rgba(28, 36, 32, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  header.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  h1 {
+    font-family: ui-serif, "Iowan Old Style", Georgia, Cambria, "Times New Roman", serif;
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0.2rem 0 0;
+    text-wrap: balance;
+  }
+
+  .top .netnum {
+    text-align: right;
+  }
+  .top .netnum .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .top .netnum .value {
+    font-family: ui-serif, "Iowan Old Style", Georgia, Cambria, serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: ui-serif, "Iowan Old Style", Georgia, Cambria, serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 2.75rem 0 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  h2 .idx {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  p.lede {
+    color: var(--ink-muted);
+    max-width: 68ch;
+    margin: -0.4rem 0 1.25rem;
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+  }
+  .tile .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.4rem;
+  }
+  .tile .num {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .tile .sub {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+  }
+  .tile .num.gain { color: var(--gain); }
+  .tile .num.loss { color: var(--loss); }
+
+  .callout {
+    background: var(--caution-soft);
+    border: 1px solid var(--caution);
+    border-left-width: 4px;
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.25rem 0;
+  }
+  .callout .tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--caution);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .callout p { margin: 0.4rem 0; }
+  .callout strong { color: var(--ink); }
+
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 0.88rem;
+  }
+  th, td {
+    padding: 0.55rem 0.85rem;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  th:first-child, td:first-child { text-align: left; }
+  th {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    background: var(--surface-2);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.sym { font-weight: 600; }
+
+  .gain-cell { color: var(--gain); }
+  .loss-cell { color: var(--loss); }
+
+  .bar-cell { width: 130px; }
+  .bar-track {
+    position: relative;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    position: absolute;
+    top: 0; bottom: 0;
+    border-radius: 4px;
+  }
+  .bar-fill.gain { background: var(--gain); left: 50%; }
+  .bar-fill.loss { background: var(--loss); right: 50%; }
+
+  .pill {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .pill.safe { background: var(--gain-soft); color: var(--gain); }
+  .pill.risk { background: var(--loss-soft); color: var(--loss); }
+  .pill.watch { background: var(--caution-soft); color: var(--caution); }
+
+  .flag { font-size: 0.78rem; }
+  .flag.yes { color: var(--caution); font-weight: 600; }
+  .flag.tight { color: var(--loss); font-weight: 700; }
+  .flag.no { color: var(--ink-faint); }
+
+  .suggestion-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.3rem 1.4rem;
+    box-shadow: var(--shadow);
+  }
+  .suggestion-card h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.05rem;
+  }
+  .suggestion-card .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.9rem;
+    margin: 1rem 0;
+  }
+  .suggestion-card .metrics div .m-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+  }
+  .suggestion-card .metrics div .m-val {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .suggestion-card .note {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    border-top: 1px dashed var(--border);
+    padding-top: 0.8rem;
+    margin-top: 0.6rem;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 640px) {
+    .top .netnum { text-align: left; }
+    header.top { flex-direction: column; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <div class="eyebrow">Daily portfolio report · Robinhood</div>
+      <h1>2026&#8202;-&#8202;07&#8202;-&#8202;05</h1>
+    </div>
+    <div class="netnum">
+      <div class="label">Total net worth</div>
+      <div class="value mono">$2,220,799</div>
+    </div>
+  </header>
+
+  <h2><span class="idx">01</span> Overview</h2>
+  <p class="lede">Baseline run — no prior report to diff against yet. Five accounts, but essentially all activity lives in one margin account.</p>
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">Main account value</div>
+      <div class="num mono">$2,174,541</div>
+      <div class="sub">margin, individual · ••••2213</div>
+    </div>
+    <div class="tile">
+      <div class="label">Unrealized gain</div>
+      <div class="num mono gain">+$1,145,257</div>
+      <div class="sub">60% GOOG, 15% INTC</div>
+    </div>
+    <div class="tile">
+      <div class="label">Margin loan-to-value</div>
+      <div class="num mono">18.4%</div>
+      <div class="sub">$494,861 borrowed / $2,690,207 equity</div>
+    </div>
+    <div class="tile">
+      <div class="label">Open option premium</div>
+      <div class="num mono">$56,447</div>
+      <div class="sub">91% concentrated in one INTC position</div>
+    </div>
+    <div class="tile">
+      <div class="label">Realized P&amp;L, trailing 12mo</div>
+      <div class="num mono loss">&minus;$62,437</div>
+      <div class="sub">informational, not tax advice</div>
+    </div>
+  </div>
+
+  <h2><span class="idx">02</span> Tax exposure</h2>
+  <div class="callout">
+    <div class="tag">Standout finding</div>
+    <p><strong>The INTC covered call is already past its strike.</strong> Short 17&nbsp;contracts of the $120 call expiring 9/18, and INTC closed at <strong>$120.41</strong>. The 1,756 shares behind it were bought at $20.98 — assignment would realize roughly <strong>+$174,600</strong> of gain in one transaction, and this call spans INTC's 7/23 earnings report, which could push it further ITM before September.</p>
+    <p>Worth a deliberate decision — roll up/out to cut the odds, or accept the assignment — rather than letting it happen by default.</p>
+  </div>
+  <p class="lede">Other large embedded gains, for context on what's most tax-sensitive to touch: GOOG +$682,742 &middot; HOOD +$86,385 &middot; TSM +$63,570 &middot; ASML +$54,614 &middot; BRK.B +$13,804. Holding period (short- vs. long-term) can't be determined from the data available — Robinhood's API returns one blended cost per symbol, not per-lot dates.</p>
+
+  <h2><span class="idx">03</span> Holdings — main account</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Symbol</th><th>Qty</th><th>Avg cost</th><th>Price</th><th>Value</th><th>Unrealized gain</th><th class="bar-cell">Relative</th></tr>
+      </thead>
+      <tbody class="mono">
+        <tr><td class="sym">GOOG</td><td>2,923.00</td><td>$122.23</td><td>$355.82</td><td>$1,040,063</td><td class="gain-cell">+$682,742</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:50%"></div></div></td></tr>
+        <tr><td class="sym">INTC</td><td>1,756.00</td><td>$20.98</td><td>$120.41</td><td>$211,440</td><td class="gain-cell">+$174,599</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:12.8%"></div></div></td></tr>
+        <tr><td class="sym">HOOD</td><td>1,500.00</td><td>$55.14</td><td>$112.73</td><td>$169,095</td><td class="gain-cell">+$86,385</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:6.3%"></div></div></td></tr>
+        <tr><td class="sym">TSM</td><td>207.50</td><td>$128.11</td><td>$434.45</td><td>$90,150</td><td class="gain-cell">+$63,570</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:4.7%"></div></div></td></tr>
+        <tr><td class="sym">ASML</td><td>52.00</td><td>$719.62</td><td>$1,769.89</td><td>$92,034</td><td class="gain-cell">+$54,614</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:4.0%"></div></div></td></tr>
+        <tr><td class="sym">SOFI</td><td>4,500.00</td><td>$12.62</td><td>$18.26</td><td>$82,170</td><td class="gain-cell">+$25,380</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:1.9%"></div></div></td></tr>
+        <tr><td class="sym">SPG</td><td>306.67</td><td>$130.54</td><td>$226.09</td><td>$69,340</td><td class="gain-cell">+$29,308</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:2.1%"></div></div></td></tr>
+        <tr><td class="sym">O</td><td>3,421.48</td><td>$57.09</td><td>$63.83</td><td>$218,382</td><td class="gain-cell">+$23,061</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:1.7%"></div></div></td></tr>
+        <tr><td class="sym">BRK.B</td><td>537.52</td><td>$481.65</td><td>$507.33</td><td>$272,367</td><td class="gain-cell">+$13,804</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:1.0%"></div></div></td></tr>
+        <tr><td class="sym">SLG</td><td>507.40</td><td>$40.62</td><td>$53.46</td><td>$27,126</td><td class="gain-cell">+$6,515</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.5%"></div></div></td></tr>
+        <tr><td class="sym">UBER</td><td>620.00</td><td>$70.64</td><td>$74.43</td><td>$46,147</td><td class="gain-cell">+$2,350</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.2%"></div></div></td></tr>
+        <tr><td class="sym">BX</td><td>151.40</td><td>$120.63</td><td>$122.76</td><td>$18,587</td><td class="gain-cell">+$322</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.1%"></div></div></td></tr>
+        <tr><td class="sym">NKE</td><td>1,000.00</td><td>$44.13</td><td>$44.08</td><td>$44,075</td><td class="loss-cell">&minus;$55</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.1%"></div></div></td></tr>
+        <tr><td class="sym">BULL</td><td>10,000.00</td><td>$7.19</td><td>$7.16</td><td>$71,600</td><td class="loss-cell">&minus;$300</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.2%"></div></div></td></tr>
+        <tr><td class="sym">RC</td><td>5,000.00</td><td>$1.94</td><td>$1.79</td><td>$8,925</td><td class="loss-cell">&minus;$775</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.6%"></div></div></td></tr>
+        <tr><td class="sym">ORCL</td><td>360.20</td><td>$159.97</td><td>$140.29</td><td>$50,529</td><td class="loss-cell">&minus;$7,091</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.5%"></div></div></td></tr>
+        <tr><td class="sym">MSFT</td><td>281.33</td><td>$409.82</td><td>$389.65</td><td>$109,635</td><td class="loss-cell">&minus;$5,675</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.4%"></div></div></td></tr>
+        <tr><td class="sym">META</td><td>120.22</td><td>$611.38</td><td>$582.64</td><td>$70,050</td><td class="loss-cell">&minus;$3,455</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.3%"></div></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="idx">04</span> Margin</h2>
+  <p class="lede">Approximation only — no maintenance-requirement tool exists here; check the app for the authoritative figure.</p>
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">Loan-to-value</div>
+      <div class="num mono">18.4%</div>
+      <div class="sub">conservative — well under typical call territory</div>
+    </div>
+    <div class="tile">
+      <div class="label">Buying power (margined)</div>
+      <div class="num mono">$1,320,462</div>
+    </div>
+    <div class="tile">
+      <div class="label">Buying power (unleveraged)</div>
+      <div class="num mono">$660,231</div>
+      <div class="sub">gap ≈ margin cushion in dollars</div>
+    </div>
+  </div>
+  <p class="lede" style="margin-top:1rem">Concentration watch: GOOG + INTC are ~46% of equity value, and INTC already carries a short call — a sharp drop in either name compresses margin cushion and option risk at the same time.</p>
+
+  <h2><span class="idx">05</span> Open option positions</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Underlying</th><th>Type</th><th>Strike</th><th>Exp</th><th>Qty</th><th>Premium</th><th>Price</th><th>Status</th><th>Earnings overlap</th></tr>
+      </thead>
+      <tbody class="mono">
+        <tr><td class="sym">INTC</td><td>call</td><td>$120</td><td>9/18</td><td>17</td><td>$51,374</td><td>$120.41</td><td><span class="pill risk">ATM/ITM</span></td><td class="flag yes">yes — 7/23</td></tr>
+        <tr><td class="sym">TSM</td><td>put</td><td>$310</td><td>7/17</td><td>2</td><td>$160</td><td>$434.45</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
+        <tr><td class="sym">TSM</td><td>call</td><td>$600</td><td>7/17</td><td>1</td><td>$300</td><td>$434.45</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
+        <tr><td class="sym">META</td><td>put</td><td>$440</td><td>10/16</td><td>1</td><td>$740</td><td>$582.64</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29</td></tr>
+        <tr><td class="sym">O</td><td>put</td><td>$55</td><td>8/21</td><td>20</td><td>$600</td><td>$63.83</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 8/5</td></tr>
+        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>9/18</td><td>5</td><td>$350</td><td>$226.09</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 8/10</td></tr>
+        <tr><td class="sym">NKE</td><td>put</td><td>$40</td><td>8/21</td><td>10</td><td>$1,320</td><td>$44.08</td><td><span class="pill safe">OTM</span></td><td class="flag no">none found</td></tr>
+        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>7/17</td><td>1</td><td>$260</td><td>$226.09</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">MSFT</td><td>put</td><td>$350</td><td>7/17</td><td>1</td><td>$188</td><td>$389.65</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">HOOD</td><td>call</td><td>$200</td><td>7/17</td><td>15</td><td>$225</td><td>$112.73</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">UBER</td><td>put</td><td>$68</td><td>7/24</td><td>3</td><td>$390</td><td>$74.43</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">SOFI</td><td>put</td><td>$14</td><td>7/24</td><td>20</td><td>$280</td><td>$18.26</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">ORCL</td><td>put</td><td>$120</td><td>7/31</td><td>2</td><td>$260</td><td>$140.29</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="idx">06</span> Option-selling suggestion</h2>
+  <div class="suggestion-card">
+    <h3>Write a GOOG covered call — $410 strike, exp 2026&#8209;08&#8209;21</h3>
+    <p class="lede" style="margin-top:0.2rem">GOOG has no covered call against it today, despite being the largest position and largest embedded gain by far. Because of that gain, this stays comfortably OTM rather than optimized for maximum premium.</p>
+    <div class="metrics mono">
+      <div><div class="m-label">Premium</div><div class="m-val">$3.55/sh</div></div>
+      <div><div class="m-label">Per contract</div><div class="m-val">$355</div></div>
+      <div><div class="m-label">Delta</div><div class="m-val">0.15</div></div>
+      <div><div class="m-label">Days to exp.</div><div class="m-val">47</div></div>
+      <div><div class="m-label">Ann. yield</div><div class="m-val">6.7%</div></div>
+      <div><div class="m-label">Max capacity</div><div class="m-val">29 ctr.</div></div>
+    </div>
+    <p class="note">Spans GOOG's 7/22 earnings report — expect the quoted premium and delta to move around that date. Suggest starting smaller than full capacity (e.g. 10 contracts, ≈$3,550 collected) given this is new exposure on the single largest, most tax-sensitive position.</p>
+  </div>
+  <p class="lede" style="margin-top:1rem">No cash-secured put suggestions this run — the idle cash (joint account $14,261.74, Roth $119.57) isn't sized against a specific watched name yet.</p>
+
+  <footer>
+    Generated from live Robinhood data via the <code class="mono">portfolio-report</code> skill. Analysis and suggestions only — no trades were placed. Not tax or investment advice.
+  </footer>
+
+</div>

@@ -1,0 +1,138 @@
+---
+name: portfolio-report
+description: Generate the daily Robinhood portfolio report — consolidated holdings, margin usage, tax exposure, and option-selling suggestions across all accounts. Use for "daily report", "portfolio report", "how are my holdings doing", "run today's report", "should I sell any options".
+---
+
+# Portfolio daily report
+
+Read-only analysis and suggestions only. Never call `place_equity_order` or
+`place_option_order` from this skill. If the user wants to act on a
+suggestion, that's a separate, explicit conversation — don't chain into it
+automatically.
+
+## 1. Gather accounts
+
+Call `get_accounts`. For each active account, call `get_portfolio`. Skip
+deep analysis (positions, options, PnL) for accounts with `total_value` under
+~$100 — just list them with their balance. For every other account, run the
+full pipeline below.
+
+Mask account numbers in any output: show only `••••<last 4>`. Use the
+account `nickname` when set, otherwise `brokerage_account_type`, to refer to
+an account in prose (e.g. "your Roth IRA").
+
+Note each account's tax wrapper up front, since it changes everything
+downstream:
+- `ira_roth` / other IRA types → gains are not currently taxable; skip the
+  tax section for this account entirely.
+- `individual`, `joint_tenancy_with_ros`, etc. → taxable brokerage; run the
+  full tax section.
+
+## 2. Positions and live prices
+
+For each taxable/margin account with meaningful holdings:
+- `get_equity_positions` — quantity, average_buy_price per symbol.
+- `get_option_positions` (`nonzero=true`) — open option positions. This
+  response does NOT include strike or option_type. Resolve those with
+  `get_option_instruments` (batch by `ids`, comma-separated) before doing
+  anything else with the position.
+- `get_equity_quotes` for every held symbol, batched in one call, to get
+  current price (see that tool's own guide for which price field is
+  "current").
+
+### Option position premium math (verified against `get_option_orders`)
+
+`get_option_positions.average_price` is the **per-contract** premium
+already scaled by the 100x multiplier (i.e. it equals `price_per_share *
+100`, not price-per-share and not the position total). It is negative for
+short (credit received) positions.
+
+Total premium collected/paid for a position = `average_price * quantity`.
+Do not multiply by the multiplier again — that double-counts.
+
+Cross-check: `get_option_orders` (filtered narrowly — by `symbol` or
+`created_at_gte` — the unfiltered list is huge and will blow the context
+budget) has `premium` (per-contract) and `processed_premium` (per-contract *
+filled quantity) on each order, confirming the above scaling.
+
+## 3. Margin section (margin accounts only)
+
+There is no dedicated maintenance-margin tool. Approximate from
+`get_portfolio`:
+- Leverage = `cash` (negative = margin loan balance) against `equity_value`.
+- Loan-to-value ≈ `abs(cash) / equity_value` when cash is negative.
+- Quote `buying_power.buying_power` and `buying_power.unleveraged_buying_power`
+  as the actual spendable/cushion figures — they're broker-computed and more
+  authoritative than a hand-rolled maintenance estimate.
+
+State explicitly that this is an approximation, not the broker's real-time
+maintenance requirement, and that a fast drop in the stock positions
+collateralizing the loan is the actual risk (margin call), not a fixed
+percentage. See `playbooks/margin-risk.md` for how to phrase this and what
+thresholds are worth flagging.
+
+## 4. Tax section (taxable accounts only)
+
+Per position: `unrealized_gain = quantity * (current_price -
+average_buy_price)`.
+
+Known limitation: these tools don't expose per-lot purchase dates, so
+short-term vs. long-term holding period **cannot be determined precisely**.
+Say so in the report rather than guessing a holding period. Flag the
+positions with the largest embedded gains regardless of term, since those
+are the ones where an option assignment or a sale has the biggest tax
+consequence.
+
+For realized P&L: `get_realized_pnl` (span `year` or `ytd` isn't valid — use
+`day`/`week`/`month`/`3month`/`year`/`all`, and pass `asset_classes` or it
+errors with "un-specified asset class"). This is realized-only and excludes
+open positions; label it that way. For the underlying trade list use
+`get_pnl_trade_history` only if the user wants line-by-line detail — the
+bucketed `get_realized_pnl` is enough for the daily report.
+
+Cross-reference open short options against their underlying's embedded gain
+using `playbooks/tax-basics.md` — specifically the "assignment risk on a
+big embedded gain" check, which is the single highest-value insight this
+report can surface.
+
+## 5. Option-selling suggestions
+
+Only suggest against symbols already held (covered calls, using
+`shares_available_for_sells` / 100 for contract capacity) or against cash
+available (`buying_power.unleveraged_buying_power`, cash-secured puts on
+watchlist/held names — don't invent new tickers the user hasn't shown
+interest in).
+
+Use `get_option_chains` for the underlying's expirations, then
+`get_option_instruments` filtered by `expiration_dates` and `type` to pull
+strike candidates. Apply `playbooks/covered-calls.md` and
+`playbooks/cash-secured-puts.md` for strike/expiration selection logic.
+
+Before suggesting a **new** covered call against a position that already
+has open short calls, or against a position flagged in the tax section for
+large embedded gain, apply the assignment-risk check first — don't suggest
+a strike that would tip an already-close-to-the-money position further ITM.
+
+Check `get_earnings_calendar` for the underlying over the suggestion's
+expiration window; flag any suggestion that spans an earnings date.
+
+## 6. Output
+
+Write two artifacts each run:
+
+1. `reports/YYYY-MM-DD.md` in this repo — the full report, in this order:
+   consolidated net worth across accounts, per-account breakdown, margin
+   section, tax section, option suggestions, and a "changes since
+   yesterday" diff against the most recent prior file in `reports/` (compare
+   total_value and flag any option position that appeared/disappeared/moved
+   materially ITM).
+2. Refresh the Artifact dashboard (same underlying numbers, dashboard
+   layout) by calling Artifact on the same file path/URL used previously —
+   check `reports/.artifact-url` for the URL from the last run, or create a
+   fresh one if this is the first run and save the returned URL there.
+
+## Playbooks
+
+New analysis techniques (from books, YouTube, etc.) get added as new files
+in `playbooks/` and referenced from the relevant section above — don't grow
+this file itself, keep it as the orchestrator.
