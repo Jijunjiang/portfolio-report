@@ -26,3 +26,12 @@ Worth flagging explicitly:
 Always close the margin section by pointing the user to the Robinhood app's
 own margin/maintenance figures for the authoritative number — this report's
 loan-to-value is a directional signal, not a substitute.
+
+## Margin interest paid
+
+Not available from any tool in this MCP — there's no statement,
+transaction, or interest-charge endpoint. Don't estimate a dollar figure
+from the loan balance and a guessed rate; that would look precise while
+being fabricated. State plainly that this report can't show margin
+interest paid, and point to Robinhood's monthly account statement
+(Statements & History in the app) for the real number.

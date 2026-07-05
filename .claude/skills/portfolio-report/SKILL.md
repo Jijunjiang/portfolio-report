@@ -84,16 +84,26 @@ are the ones where an option assignment or a sale has the biggest tax
 consequence.
 
 For realized P&L: `get_realized_pnl` (span `year` or `ytd` isn't valid — use
-`day`/`week`/`month`/`3month`/`year`/`all`, and pass `asset_classes` or it
-errors with "un-specified asset class"). This is realized-only and excludes
-open positions; label it that way. For the underlying trade list use
+`day`/`week`/`month`/`3month`/`year`/`all`, or `start_date`/`end_date` for a
+custom window). Always pass `asset_classes` or it errors with
+"un-specified asset class". This is realized-only and excludes open
+positions; label it that way. For the underlying trade list use
 `get_pnl_trade_history` only if the user wants line-by-line detail — the
 bucketed `get_realized_pnl` is enough for the daily report.
+
+**YTD realized P&L (every run):** call `get_realized_pnl` with
+`start_date=<Jan 1 of current year>`, `end_date=<today>`, once per asset
+class present on the account (`asset_classes: ["equity"]`,
+`["option"]`, and `["crypto"]` if the account holds crypto per
+`get_portfolio.crypto_value`) — separate calls, since a single call with
+multiple classes returns one combined total, not a breakdown. Report each
+class's YTD total plus the combined sum.
 
 Cross-reference open short options against their underlying's embedded gain
 using `playbooks/tax-basics.md` — specifically the "assignment risk on a
 big embedded gain" check, which is the single highest-value insight this
-report can surface.
+report can surface. See that playbook also for what's and isn't possible on
+short-term vs. long-term gain detail, and for margin interest/fees.
 
 ## 5. Option-selling suggestions
 

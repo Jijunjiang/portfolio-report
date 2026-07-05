@@ -370,6 +370,11 @@
       <div class="num mono loss">&minus;$62,437</div>
       <div class="sub">informational, not tax advice</div>
     </div>
+    <div class="tile">
+      <div class="label">Realized P&amp;L, YTD</div>
+      <div class="num mono loss">&minus;$40,158</div>
+      <div class="sub">options &minus;$37,948 &middot; equity &minus;$2,210 &middot; crypto $0</div>
+    </div>
   </div>
 
   <h2><span class="idx">02</span> Tax exposure</h2>
@@ -378,7 +383,26 @@
     <p><strong>The INTC covered call is already past its strike.</strong> Short 17&nbsp;contracts of the $120 call expiring 9/18, and INTC closed at <strong>$120.41</strong>. The 1,756 shares behind it were bought at $20.98 — assignment would realize roughly <strong>+$174,600</strong> of gain in one transaction, and this call spans INTC's 7/23 earnings report, which could push it further ITM before September.</p>
     <p>Worth a deliberate decision — roll up/out to cut the odds, or accept the assignment — rather than letting it happen by default.</p>
   </div>
-  <p class="lede">Other large embedded gains, for context on what's most tax-sensitive to touch: GOOG +$682,742 &middot; HOOD +$86,385 &middot; TSM +$63,570 &middot; ASML +$54,614 &middot; BRK.B +$13,804. Holding period (short- vs. long-term) can't be determined from the data available — Robinhood's API returns one blended cost per symbol, not per-lot dates.</p>
+  <p class="lede">Other large embedded gains, for context on what's most tax-sensitive to touch: GOOG +$682,742 &middot; HOOD +$86,385 &middot; TSM +$63,570 &middot; ASML +$54,614 &middot; BRK.B +$13,804.</p>
+
+  <div class="table-scroll" style="margin-bottom:1rem">
+    <table style="min-width:420px">
+      <thead><tr><th>Realized P&amp;L YTD (2026-01-01 &rarr; today)</th><th>Amount</th></tr></thead>
+      <tbody class="mono">
+        <tr><td>Options</td><td class="loss-cell">&minus;$37,948.00</td></tr>
+        <tr><td>Equity</td><td class="loss-cell">&minus;$2,209.69</td></tr>
+        <tr><td>Crypto</td><td>$0.00</td></tr>
+        <tr><td><strong>Combined</strong></td><td class="loss-cell"><strong>&minus;$40,157.69</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lede">Options dominate the YTD realized loss — consistent with an active premium-selling strategy where losses show up as short positions bought back above the credit received, or shares called away below a level that would've been better to just hold.</p>
+
+  <div class="callout" style="background:var(--surface); border-color:var(--border); border-left-color: var(--ink-faint)">
+    <div class="tag" style="color:var(--ink-muted)">Two hard data gaps — not estimates, genuinely unavailable here</div>
+    <p><strong>Short-term vs. long-term gain split:</strong> not computable for unrealized or realized gains. Checked directly — trade history has a closing timestamp but no lot acquisition date, and positions carry one blended average cost per symbol. No tool in this connection returns holding period. The real source is Robinhood's 1099-B / tax documents, or the per-position "tax lots" view in the app.</p>
+    <p><strong>Margin interest paid:</strong> no tool here returns interest, fees, or statement data. Check Statements &amp; History in the app for the actual figure — anything shown here would be a fabricated estimate.</p>
+  </div>
 
   <h2><span class="idx">03</span> Holdings — main account</h2>
   <div class="table-scroll">

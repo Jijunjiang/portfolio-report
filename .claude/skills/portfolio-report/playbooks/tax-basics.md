@@ -8,11 +8,27 @@ entirely — see SKILL.md step 1).
 Can compute per position: `unrealized_gain = quantity * (current_price -
 average_buy_price)`. This is exact for the aggregate position.
 
-Cannot compute: short-term vs. long-term split. The available tools return
-an average cost basis across all lots, not individual lot purchase dates.
-Say this plainly in the report rather than assuming long-term (the safer
-assumption for a rough estimate, if one is needed for illustration, but
-always labeled as an assumption, never presented as fact).
+Cannot compute: short-term vs. long-term split, for either unrealized or
+realized gains. Checked directly against `get_pnl_trade_history` — its
+per-trade records have `timestamp` (of the *closing* trade), `symbol`,
+`side`, `quantity`, `price`, and `realized_gain`, but no lot acquisition
+date and no `term` field. `get_equity_positions` likewise gives one
+blended `average_buy_price` per symbol, not per-lot dates. There is no
+tool in this MCP that returns holding period. Don't approximate or guess
+one — say plainly in the report that ST/LT is not available from this
+data source, and point to the source that actually has it: Robinhood's
+1099-B / tax documents (issued after year-end) or the per-position "tax
+lots" view in the app, both of which track this internally for you
+already, just not through this API.
+
+## Margin interest / fees
+
+Not computable at all — there is no tool in this MCP (checked the full
+tool list) that returns margin interest charged, account fees, or any
+statement/transaction-level data. Don't infer a fee from the loan balance
+or estimate a rate. State this as a hard gap in the report and point to
+Robinhood's monthly account statement (Statements & History in the app) or
+the year-end tax documents for the actual figure.
 
 ## The highest-value check: assignment risk on embedded gains
 
@@ -35,6 +51,12 @@ window's total plus a one-line trend (improving/worsening vs. the prior
 comparable window if you have it), not the full bucket dump unless asked.
 Always label it "realized only, excludes open positions" and "informational,
 not tax advice" per that tool's own guide.
+
+Report YTD every run (see SKILL.md step 4 for the exact calls), broken out
+by asset class (equity / option / crypto) rather than one blended number —
+on an account running a heavy options-selling strategy, the option-class
+total is usually where most of the realized activity actually is, and
+blending it with equity hides that.
 
 ## Wash sales
 
