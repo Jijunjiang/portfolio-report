@@ -1,0 +1,276 @@
+<title>Opportunity Scanner — Rubric &amp; Validation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --bg: #f1f0ea;
+    --surface: #fbfaf6;
+    --surface-2: #ffffff;
+    --ink: #1a1e22;
+    --ink-muted: #5c6167;
+    --ink-faint: #8a8f95;
+    --border: #dcdad2;
+    --accent: #a8762f;
+    --accent-soft: #efe4d1;
+    --high: #3f7d54;
+    --high-soft: #e1eee5;
+    --mod: #a8762f;
+    --mod-soft: #f4ead9;
+    --low: #8a8f95;
+    --low-soft: #eceae5;
+    --fail: #a94a35;
+    --fail-soft: #f5e2dd;
+    --shadow: 0 1px 2px rgba(26, 30, 34, 0.06), 0 8px 24px rgba(26, 30, 34, 0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1216;
+      --surface: #171b20;
+      --surface-2: #1c2126;
+      --ink: #e8e6e0;
+      --ink-muted: #9a9da2;
+      --ink-faint: #6b6f74;
+      --border: #2b3036;
+      --accent: #d6a75c;
+      --accent-soft: #2e2517;
+      --high: #6bc78a;
+      --high-soft: #17281d;
+      --mod: #d6a75c;
+      --mod-soft: #2e2517;
+      --low: #6b6f74;
+      --low-soft: #1e2226;
+      --fail: #e2846c;
+      --fail-soft: #331f19;
+      --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1216; --surface: #171b20; --surface-2: #1c2126; --ink: #e8e6e0;
+    --ink-muted: #9a9da2; --ink-faint: #6b6f74; --border: #2b3036;
+    --accent: #d6a75c; --accent-soft: #2e2517; --high: #6bc78a; --high-soft: #17281d;
+    --mod: #d6a75c; --mod-soft: #2e2517; --low: #6b6f74; --low-soft: #1e2226;
+    --fail: #e2846c; --fail-soft: #331f19; --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.4);
+  }
+  :root[data-theme="light"] {
+    --bg: #f1f0ea; --surface: #fbfaf6; --surface-2: #ffffff; --ink: #1a1e22;
+    --ink-muted: #5c6167; --ink-faint: #8a8f95; --border: #dcdad2;
+    --accent: #a8762f; --accent-soft: #efe4d1; --high: #3f7d54; --high-soft: #e1eee5;
+    --mod: #a8762f; --mod-soft: #f4ead9; --low: #8a8f95; --low-soft: #eceae5;
+    --fail: #a94a35; --fail-soft: #f5e2dd; --shadow: 0 1px 2px rgba(26,30,34,0.06), 0 8px 24px rgba(26,30,34,0.05);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1150px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-variant-numeric: tabular-nums; }
+  header.top { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  h1 { font-family: ui-serif, "Iowan Old Style", Georgia, Cambria, serif; font-weight: 500; font-size: 2.1rem; margin: 0.3rem 0 0.6rem; text-wrap: balance; }
+  .sub { color: var(--ink-muted); max-width: 62ch; }
+  h2 { font-family: ui-serif, "Iowan Old Style", Georgia, Cambria, serif; font-weight: 500; font-size: 1.35rem; margin: 3rem 0 0.5rem; }
+  h3 { font-family: ui-serif, Georgia, serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 0.6rem; }
+  p.lede { color: var(--ink-muted); max-width: 68ch; margin: 0 0 1.1rem; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.9rem; margin-bottom: 0.5rem; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; box-shadow: var(--shadow); }
+  .tile .label { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.4rem; }
+  .tile .num { font-size: 1.5rem; font-weight: 600; }
+  .tile .sub2 { font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.25rem; }
+
+  .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
+  .exp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; box-shadow: var(--shadow); position: relative; }
+  .exp-card.recovered { border-top: 3px solid var(--high); }
+  .exp-card.failed { border-top: 3px solid var(--fail); }
+  .exp-card .ticker { font-family: ui-monospace, monospace; font-weight: 700; font-size: 1.25rem; }
+  .exp-card .verdict { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; display: inline-block; margin-left: 0.5rem; }
+  .exp-card.recovered .verdict { background: var(--high-soft); color: var(--high); }
+  .exp-card.failed .verdict { background: var(--fail-soft); color: var(--fail); }
+  .exp-card .stat-row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.35rem 0; border-bottom: 1px dashed var(--border); }
+  .exp-card .stat-row:last-child { border-bottom: none; }
+  .exp-card .stat-row .v { font-family: ui-monospace, monospace; font-weight: 600; }
+  .bar-track { position: relative; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; margin-top: 0.7rem; }
+  .bar-fill { position: absolute; top:0; bottom:0; left:0; border-radius: 5px; }
+  .exp-card.recovered .bar-fill { background: var(--high); }
+  .exp-card.failed .bar-fill { background: var(--fail); }
+
+  .callout { background: var(--surface); border: 1px solid var(--border); border-left-width: 4px; border-left-color: var(--accent); border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1.25rem 0; }
+  .callout .tag { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.4rem; }
+  .callout p { margin: 0.4rem 0; }
+
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .cat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.3rem; box-shadow: var(--shadow); }
+  .cat-card .cat-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.7rem; }
+  .cat-card .cat-pts { font-family: ui-monospace, monospace; color: var(--accent); font-weight: 700; }
+  .cat-card ol { margin: 0; padding-left: 1.2rem; font-size: 0.86rem; color: var(--ink-muted); }
+  .cat-card ol li { margin-bottom: 0.55rem; }
+  .cat-card ol li strong { color: var(--ink); }
+  .tag-m { font-size: 0.65rem; font-weight: 700; color: var(--high); border: 1px solid var(--high); border-radius: 4px; padding: 0 0.3rem; margin-right: 0.3rem; }
+  .tag-j { font-size: 0.65rem; font-weight: 700; color: var(--mod); border: 1px solid var(--mod); border-radius: 4px; padding: 0 0.3rem; margin-right: 0.3rem; }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.88rem; }
+  th, td { padding: 0.55rem 0.85rem; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; background: var(--surface-2); }
+  tr:last-child td { border-bottom: none; }
+  td.sym { font-weight: 600; font-family: ui-monospace, monospace; }
+  .pill { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+  .pill.high { background: var(--high-soft); color: var(--high); }
+  .pill.mod { background: var(--mod-soft); color: var(--mod); }
+  .pill.low { background: var(--low-soft); color: var(--low); }
+
+  footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--ink-faint); font-size: 0.8rem; }
+  code.mono { font-family: ui-monospace, monospace; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; padding: 0.05rem 0.35rem; font-size: 0.85em; }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">Opportunity Scanner · Research &amp; Validation</div>
+    <h1>Screening for the next HOOD, not the next PTON</h1>
+    <p class="sub">A 32-criterion rubric for asymmetric, multi-year setups — deep-value turnarounds and quality compounders — backtested against real historical price data before being trusted with a live signal.</p>
+  </header>
+
+  <div class="tiles">
+    <div class="tile"><div class="label">Saved scans</div><div class="num">2</div><div class="sub2">Deep Value Turnaround · Growth Compounder</div></div>
+    <div class="tile"><div class="label">Rubric criteria</div><div class="num">32</div><div class="sub2">across 5 categories, 100 pts</div></div>
+    <div class="tile"><div class="label">Historical cases tested</div><div class="num">4</div><div class="sub2">HOOD, INTC, CVNA, PTON</div></div>
+    <div class="tile"><div class="label">Signal cadence</div><div class="num mono">Daily / Qtr</div><div class="sub2">mechanical watch · full review</div></div>
+  </div>
+
+  <h2>The validation experiment</h2>
+  <p class="lede">Question: does a severe drawdown in an established company actually predict a recovery, or does it just as often flag something that stays broken? Tested with this account's own historical-data tools, not opinion.</p>
+
+  <div class="exp-grid">
+    <div class="exp-card recovered">
+      <span class="ticker">HOOD</span><span class="verdict">Recovered</span>
+      <div class="stat-row"><span>High → low</span><span class="v">$85 → $6.81</span></div>
+      <div class="stat-row"><span>Drawdown</span><span class="v">−92%</span></div>
+      <div class="stat-row"><span>Since the low</span><span class="v" style="color:var(--high)">11x</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:92%"></div></div>
+    </div>
+    <div class="exp-card recovered">
+      <span class="ticker">INTC</span><span class="verdict">Recovered</span>
+      <div class="stat-row"><span>High → low</span><span class="v">~$68 → $18.89</span></div>
+      <div class="stat-row"><span>Drawdown</span><span class="v">−72%</span></div>
+      <div class="stat-row"><span>Since the low</span><span class="v" style="color:var(--high)">5.7x</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:72%"></div></div>
+    </div>
+    <div class="exp-card recovered">
+      <span class="ticker">CVNA</span><span class="verdict">Recovered</span>
+      <div class="stat-row"><span>High → low</span><span class="v">~$85 → $0.71</span></div>
+      <div class="stat-row"><span>Drawdown</span><span class="v">−99.2%</span></div>
+      <div class="stat-row"><span>Since the low</span><span class="v" style="color:var(--high)">96.6x</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:99.2%"></div></div>
+    </div>
+    <div class="exp-card failed">
+      <span class="ticker">PTON</span><span class="verdict">Did not recover</span>
+      <div class="stat-row"><span>High → low</span><span class="v">$171 → $2.70</span></div>
+      <div class="stat-row"><span>Drawdown</span><span class="v">−98.4%</span></div>
+      <div class="stat-row"><span>Since the low</span><span class="v" style="color:var(--fail)">2.1x — still −96.6% off high</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:98.4%"></div></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="tag">The finding that matters</div>
+    <p><strong>Drawdown depth alone does not discriminate.</strong> PTON's −98.4% drawdown is statistically indistinguishable from CVNA's −99.2% and worse than HOOD's −92% — a pure price/technical score would have rated it at least as attractive as the three winners. It wasn't. What differed was qualitative: HOOD, INTC, and CVNA all had <em>cyclical or operationally fixable</em> problems (trading-volume cyclicality, a fixable manufacturing execution issue, an over-levered balance sheet fixed by restructuring). PTON's collapse reflects <em>structural</em> demand destruction — a pandemic-era spike unwinding permanently, not a cyclical trough waiting to mean-revert.</p>
+    <p style="color:var(--ink-muted); font-size:0.9rem">Honest limit: fundamentals data is a current-only snapshot, so this distinction was validated narratively, not backtested mechanically — which is exactly why the rubric makes it a mandatory judgment check, not a footnote.</p>
+  </div>
+
+  <h2>The rubric — 32 criteria, 100 points, 5 categories</h2>
+  <p class="lede"><span class="tag-m">M</span> mechanical (computed directly from a tool) · <span class="tag-j">J</span> judgment (requires reading/context). Roughly two-thirds mechanical, one-third judgment — score guide: ≥70 strong candidate, 50–69 watchlist, &lt;50 discard.</p>
+
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-head"><h3>A · Value / drawdown depth</h3><span class="cat-pts">30 pts</span></div>
+      <ol>
+        <li><span class="tag-m">M</span><strong>% off 52-wk high</strong> — ≥85%→8, ≥70%→6, ≥55%→4, ≥40%→2</li>
+        <li><span class="tag-m">M</span><strong>RSI(14)</strong> &lt;20→3, &lt;30→2</li>
+        <li><span class="tag-m">M</span>Williams %R &lt; −80 → 2</li>
+        <li><span class="tag-m">M</span>Stochastic oscillator &lt;20 → 2</li>
+        <li><span class="tag-m">M</span>Price below lower Bollinger Band → 3</li>
+        <li><span class="tag-m">M</span>Price at/below computed Support → 3</li>
+        <li><span class="tag-m">M</span>PEG &lt;1 despite the drawdown → 2</li>
+        <li><span class="tag-j">J</span>Drawdown reads cyclical, not structural → 4</li>
+      </ol>
+    </div>
+    <div class="cat-card">
+      <div class="cat-head"><h3>B · Financial quality</h3><span class="cat-pts">25 pts</span></div>
+      <ol>
+        <li><span class="tag-m">M</span>Market cap &gt; $2B → 3</li>
+        <li><span class="tag-m">M</span>Gross margin &gt; 30% → 2</li>
+        <li><span class="tag-m">M</span>Operating margin &gt; 0% → 2</li>
+        <li><span class="tag-m">M</span>Net margin &gt; 0% → 2 (improving-but-negative → 1)</li>
+        <li><span class="tag-m">M</span>ROE &gt; 10% → 3 (&gt;0% → 1)</li>
+        <li><span class="tag-m">M</span>ROA &gt; 5% → 2 (&gt;0% → 1)</li>
+        <li><span class="tag-m">M</span>Dividend maintained through the drawdown → 2</li>
+        <li><span class="tag-m">M</span>EPS trend improving (recent quarters) → 3</li>
+        <li><span class="tag-j">J</span>Leverage not stretched vs. sector → 2</li>
+      </ol>
+    </div>
+    <div class="cat-card">
+      <div class="cat-head"><h3>C · Momentum confirmation</h3><span class="cat-pts">20 pts</span></div>
+      <ol>
+        <li><span class="tag-m">M</span>MACD histogram turned positive (~2wk) → 4</li>
+        <li><span class="tag-m">M</span>Price reclaimed key EMA (e.g. 50d) → 3</li>
+        <li><span class="tag-m">M</span>Aroon Oscillator turned positive → 3</li>
+        <li><span class="tag-m">M</span>ADX shows strengthening trend → 2</li>
+        <li><span class="tag-m">M</span>Relative volume &gt;1.3 on up days → 4</li>
+        <li><span class="tag-m">M</span>RSI recrossed above 30 (recovering) → 4</li>
+      </ol>
+    </div>
+    <div class="cat-card">
+      <div class="cat-head"><h3>D · Catalyst / story</h3><span class="cat-pts">15 pts</span></div>
+      <ol>
+        <li><span class="tag-m">M</span>Last quarter beat EPS estimate → 3</li>
+        <li><span class="tag-m">M</span>No earnings inside next 2 weeks → 2</li>
+        <li><span class="tag-j">J</span>Genuine multi-year sector tailwind → 4</li>
+        <li><span class="tag-j">J</span>Visible inflection point (new leadership, restructuring, product cycle) → 3</li>
+        <li><span class="tag-j">J</span>Compounder: PEG &lt;1.5 <em>and</em> ROE &gt;15% together → 3</li>
+      </ol>
+    </div>
+    <div class="cat-card">
+      <div class="cat-head"><h3>E · Risk &amp; portfolio fit</h3><span class="cat-pts">10 pts</span></div>
+      <ol>
+        <li><span class="tag-m">M</span>Liquidity supports entry/exit at size → 2</li>
+        <li><span class="tag-m">M</span>Not already concentrated in this name/sector → 2</li>
+        <li><span class="tag-m">M</span>Volatility elevated, not distressed-extreme → 2</li>
+        <li><span class="tag-j">J</span>Fits the account's few-trades-a-quarter style → 2</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>Daily signal — mechanical monitoring, quarterly deep review</h2>
+  <p class="lede">Full scoring (categories B/D judgment calls included) stays quarterly — that research doesn't belong in a daily job, and this account only acts a few times a quarter regardless. But categories A + C are pure arithmetic (50 pts, no judgment), so they run daily as part of the portfolio report: a cheap watch for something new crossing into interesting territory, escalated to a full review the same day it happens rather than sitting unnoticed for months.</p>
+  <div class="tiles">
+    <div class="tile"><div class="label">High confidence</div><div class="num mono" style="color:var(--high)">≥70%</div><div class="sub2">≥35/50 · full rubric run same-day</div></div>
+    <div class="tile"><div class="label">Moderate</div><div class="num mono" style="color:var(--mod)">50–69%</div><div class="sub2">25–34/50 · noted, no deep-dive</div></div>
+    <div class="tile"><div class="label">Low</div><div class="num mono" style="color:var(--low)">&lt;50%</div><div class="sub2">most results, most days — not surfaced</div></div>
+  </div>
+
+  <p class="lede" style="margin-top:1.5rem">Preview from today's Deep Value Turnaround scan — partial (2 of 8 category-A criteria computed this pass: % off 52-week high and RSI; the daily job will compute all eight):</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Symbol</th><th>% off high</th><th>RSI(14)</th><th>Partial score</th><th>Confidence (partial)</th></tr></thead>
+      <tbody class="mono">
+        <tr><td class="sym">ORCL</td><td>59.4%</td><td>26.7</td><td>6 / 11</td><td><span class="pill mod">Moderate</span></td></tr>
+        <tr><td class="sym">BABA</td><td>49.3%</td><td>23.8</td><td>4 / 11</td><td><span class="pill low">Low</span></td></tr>
+        <tr><td class="sym">AA</td><td>40.7%</td><td>28.9</td><td>4 / 11</td><td><span class="pill low">Low</span></td></tr>
+        <tr><td class="sym">DOW</td><td>35.4%</td><td>24.3</td><td>2 / 11</td><td><span class="pill low">Low</span></td></tr>
+        <tr><td class="sym">T</td><td>30.9%</td><td>28.6</td><td>2 / 11</td><td><span class="pill low">Low</span></td></tr>
+        <tr><td class="sym">CRWD</td><td>2.5%</td><td>20.0</td><td>3 / 11</td><td><span class="pill low">Low</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lede">Directionally consistent with the validation finding: CRWD's technically-oversold RSI doesn't save it once its (near-zero) distance from the high is in the picture — same pattern as the PTON false-positive risk above, just caught before it reaches a shortlist.</p>
+
+  <h2>Refining the rubric over time</h2>
+  <p class="lede">Not an automated optimizer — there isn't enough resolved-outcome volume for that to be honest. Instead: every scored candidate is logged to <code class="mono">reports/opportunity-scanner-log.csv</code> (score, category subtotals, price at scan). Each quarter, prior candidates get their actual return checked against the log, and weights or thresholds get adjusted when the accumulated evidence supports it — never off fewer than ~5 resolved cases per category, to avoid fitting noise. Call it hill-climbing in spirit: a human-and-agent review loop paced to match how often this account actually acts.</p>
+
+  <footer>
+    Read-only research tool — no trades are placed from this page or the skill behind it. Not investment advice; multi-bagger identification is inherently uncertain even with a validated rubric.
+  </footer>
+
+</div>

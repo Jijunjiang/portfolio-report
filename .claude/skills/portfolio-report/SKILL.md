@@ -185,16 +185,31 @@ considering buying — use the `option-trade-model` skill instead of
 re-deriving that math here. The daily report's screen stays lightweight on
 purpose; that skill is the deep-dive version.
 
-## 7. Output
+## 7. Daily opportunity signal (new-position candidates, not options)
+
+Separate from the option-selling suggestions above — this is about new
+stock positions, per the `opportunity-scanner` skill. Every run: `run_scan`
+both saved scans there, compute each result's mechanical subscore
+(category A + C, 50 pts, no judgment calls — see that skill's step 6),
+and map to a confidence band (≥70%: High, 50–69%: Moderate, <50%: Low).
+
+- **High confidence**: run the full rubric (categories B/D/E too) same-day
+  and include it in today's report as a real signal, not just a mention.
+- **Moderate**: one line in the report, no deep-dive.
+- **Low** (the common case): don't list individual names — just state
+  "no new signals today" so the report doesn't get noisy on quiet days.
+
+## 8. Output
 
 Write two artifacts each run:
 
 1. `reports/YYYY-MM-DD.md` in this repo — the full report, in this order:
    consolidated net worth across accounts, per-account breakdown, margin
    section, tax section (including the roll-netting analysis), dividend
-   income, option suggestions, and a "changes since yesterday" diff against
-   the most recent prior file in `reports/` (compare total_value and flag
-   any option position that appeared/disappeared/moved materially ITM).
+   income, option suggestions, daily opportunity signal, and a "changes
+   since yesterday" diff against the most recent prior file in `reports/`
+   (compare total_value and flag any option position that
+   appeared/disappeared/moved materially ITM).
 2. Refresh the Artifact dashboard (same underlying numbers, dashboard
    layout) by calling Artifact on the same file path/URL used previously —
    check `reports/.artifact-url` for the URL from the last run, or create a

@@ -120,13 +120,31 @@ company) doesn't always resolve upward. Treat this as a research
 shortlist for the user's own few-times-a-quarter, high-conviction
 decisions, not a signal to act on directly.**
 
-## 6. Cadence
+## 6. Cadence — daily mechanical monitoring, quarterly deep review
 
-This account trades a handful of times per quarter by design — don't run
-this daily. Quarterly is the natural default; the user can ask for it
-sooner if something notable is happening. Not currently wired into the
-daily `portfolio-report` automation — run on request, or ask the user if
-they want a standalone scheduled cloud routine for it.
+Full 32-criterion scoring (including the judgment-based categories B and
+D) stays quarterly by design — that depth of research doesn't belong in
+a daily automated job, and this account only acts a few times a quarter
+anyway. But *watching for something new to look at* is cheap enough to
+run daily, so it does:
+
+**Daily confidence score (mechanical only):** every day, as part of
+`portfolio-report`, run both saved scans and compute the **mechanical
+subscore** — category A + category C only (50 points total, no judgment
+calls) — for every result. Map it to a confidence band:
+- **≥35/50 (70%+): High** — a new candidate crossed into territory worth
+  the full rubric. Run categories B/D/E for it same-day and surface it in
+  that day's report, don't wait for the quarterly cycle.
+- **25–34/50 (50–69%): Moderate** — note in the report, no deep-dive yet.
+- **<25/50: Low** — don't surface it; this is most results, most days.
+
+This keeps the daily job cheap (pure scanner filters + arithmetic, no
+manual research) while still catching a genuine new setup the day it
+appears rather than up to three months later. A quiet day just means "no
+new signals," which is the common case and fine to state briefly.
+
+**Quarterly deep review:** unchanged — full rubric on the accumulated
+watchlist, paired with the `refinement.md` outcome review.
 
 ## 7. Files in this skill
 
@@ -139,3 +157,12 @@ they want a standalone scheduled cloud routine for it.
   review outcomes quarterly, reweight/re-threshold on accumulated
   evidence. Not automated — a human-and-agent review loop matched to
   this account's quarterly cadence.
+
+## 8. Rubric/validation page (separate from the daily portfolio dashboard)
+
+`reports/opportunity-scanner.html` presents the rubric, the validation
+backtest, and a preview of the daily mechanical signal — for a human to
+read, not regenerated as often as the daily report. Redeploy it (Artifact
+on the same file path, URL saved in
+`reports/.opportunity-scanner-artifact-url`) when the rubric, validation
+findings, or cadence logic materially change — not every daily run.
