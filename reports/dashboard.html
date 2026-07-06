@@ -538,6 +538,41 @@
   </div>
   <p class="lede" style="margin-top:1rem">No cash-secured put suggestions this run — the idle cash (joint account $14,261.74, Roth $119.57) isn't sized against a specific watched name yet.</p>
 
+  <h2><span class="idx">08</span> Deep-dive option scan</h2>
+  <p class="lede">One-off deeper analysis run on request via the <code class="mono">option-trade-model</code> skill — computed Black-Scholes assignment probability (N(d2)) instead of quoted delta, weighed against the tax cost of forced gain recognition. Not part of the daily screen above; re-run on demand.</p>
+
+  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
+    <div class="tag" style="color:var(--accent)">Existing positions — does anything need rolling?</div>
+    <p><strong>INTC is the only one, and the rigorous number reads better than raw delta suggested.</strong> Quoted delta is 59.3%, but INTC's IV is so high (92.8%) that the true computed assignment probability, N(d2), is <strong>42.8%</strong> — a 16.5-point gap. Tax-adjusted, the expected forced gain across all 17 contracts is <strong>≈$72,400</strong>, not the full $174,600 a naive delta read implies. Still a real, decision-worthy number — the roll-or-hold call from the tax section stands.</p>
+    <p>Everything else open (ORCL, O, SPG ×2, MSFT, SOFI, UBER, TSM put, HOOD, NKE, META) has |delta| ≤ 0.21 — comfortably safe, no roll needed today.</p>
+  </div>
+
+  <p class="lede" style="margin-top:1.25rem">New covered-call candidates screened across 13 symbols with spare share capacity (GOOG excluded), exp 2026-08-21 (47 days out):</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Symbol</th><th>Strike</th><th>Prem/ctr</th><th>N(d2)</th><th>IV/HV</th><th>Ann. return</th><th>Tax-adj. EV/ctr</th><th>Read</th></tr>
+      </thead>
+      <tbody class="mono">
+        <tr><td class="sym">ORCL</td><td>$150</td><td>$832</td><td>35%</td><td>1.12</td><td>46.1%</td><td class="loss-cell">&minus;$684</td><td class="gain-cell" style="text-align:left">Best pick — rich premium, tax-favorable</td></tr>
+        <tr><td class="sym">BX</td><td>$130</td><td>$635</td><td>34%</td><td>0.84</td><td>40.2%</td><td>+$72</td><td class="gain-cell" style="text-align:left">Good — premium covers tax risk 8.8x</td></tr>
+        <tr><td class="sym">MSFT</td><td>$410</td><td>$1,555</td><td>36%</td><td>1.04</td><td>30.9%</td><td class="loss-cell">&minus;$693</td><td class="gain-cell" style="text-align:left">Good — tax-favorable, only 2 contracts</td></tr>
+        <tr><td class="sym">UBER</td><td>$80</td><td>$257</td><td>31%</td><td>0.96</td><td>26.8%</td><td>+$116</td><td style="text-align:left">Fine — small tax exposure, well covered</td></tr>
+        <tr><td class="sym">NKE</td><td>$47.5</td><td>$119</td><td>28%</td><td>0.94</td><td>21.0%</td><td>&minus;$1</td><td style="text-align:left">Fine — no earnings found in window</td></tr>
+        <tr><td class="sym">TSM</td><td>$460</td><td>$2,508</td><td>36%</td><td>0.88</td><td>44.9%</td><td class="loss-cell">+$11,006</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 4.4x the premium</td></tr>
+        <tr><td class="sym">SPG</td><td>$240</td><td>$288</td><td>24%</td><td>1.07</td><td>9.9%</td><td class="loss-cell">+$2,323</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 8x the premium</td></tr>
+        <tr><td class="sym">O</td><td>$67.5</td><td>$38</td><td>18%</td><td>0.74</td><td>4.6%</td><td>+$124</td><td style="text-align:left">Skip — premium too thin to justify</td></tr>
+        <tr><td class="sym">SLG</td><td>$57.5</td><td>$183</td><td>30%</td><td>1.14</td><td>26.5%</td><td>+$387</td><td style="text-align:left">Marginal — tax exposure ~2.1x premium</td></tr>
+        <tr><td class="sym">SOFI</td><td>$20</td><td>$114</td><td>32%</td><td>1.27</td><td>48.3%</td><td>+$178</td><td style="text-align:left">Marginal — tax exposure ~1.6x premium</td></tr>
+        <tr><td class="sym">BRK.B</td><td>$530</td><td>$433</td><td>25%</td><td>1.10</td><td>6.6%</td><td>+$652</td><td style="text-align:left">Marginal — tax exposure ~1.5x premium</td></tr>
+        <tr><td class="sym">RC</td><td>$2</td><td>$7.50</td><td>12%</td><td>0.40</td><td>32.5%</td><td>&minus;$2</td><td style="text-align:left">Trivial dollar amounts either way</td></tr>
+        <tr><td class="sym">BULL</td><td>$7.5 / $10</td><td>$60 / $13.50</td><td>39% / 10%</td><td>0.85 / 0.94</td><td>65% / 14.6%</td><td>~$0</td><td style="text-align:left">Optional — IV not rich vs. realized vol</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lede" style="margin-top:1rem"><strong>Headline lesson:</strong> TSM and SPG have the flashiest raw annualized returns and are exactly the ones the tax-adjusted view says to avoid — their embedded gains are large enough that expected forced-gain recognition swamps the premium collected.</p>
+  <p class="lede">Caveats: RC's earnings date wasn't checked this pass; BULL and RC have coarse strike increments so delta-targeting is less precise; BRK.B's option chain symbol is <code class="mono">BRKB</code> (no period) — now noted in the skill.</p>
+
   <footer>
     Generated from live Robinhood data via the <code class="mono">portfolio-report</code> skill. Analysis and suggestions only — no trades were placed. Not tax or investment advice.
   </footer>
