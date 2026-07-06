@@ -149,7 +149,8 @@ interest in).
 Use `get_option_chains` for the underlying's expirations, then
 `get_option_instruments` filtered by `expiration_dates` and `type` to pull
 strike candidates. Apply `playbooks/covered-calls.md` and
-`playbooks/cash-secured-puts.md` for strike/expiration selection logic.
+`playbooks/cash-secured-puts.md` for the quick heuristic screen (delta
+range, DTE window) that keeps the daily run fast.
 
 Before suggesting a **new** covered call against a position that already
 has open short calls, or against a position flagged in the tax section for
@@ -158,6 +159,14 @@ a strike that would tip an already-close-to-the-money position further ITM.
 
 Check `get_earnings_calendar` for the underlying over the suggestion's
 expiration window; flag any suggestion that spans an earnings date.
+
+For a full quantitative workup of any single candidate that survives this
+screen (Black-Scholes assignment probability rather than raw delta,
+tax-adjusted expected value, concentration-checked sizing) — or when the
+user directly asks to evaluate a specific trade or a new stock they're
+considering buying — use the `option-trade-model` skill instead of
+re-deriving that math here. The daily report's screen stays lightweight on
+purpose; that skill is the deep-dive version.
 
 ## 7. Output
 
