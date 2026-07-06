@@ -26,6 +26,14 @@ rank is elevated) are used as a sanity check, not the primary output — the
 primary output is the actual math below, computed from this account's live
 data.
 
+## 0.5 Ticker quirks worth knowing
+
+`BRK.B`'s option chain symbol is `BRKB` (no period) — `get_option_chains`/
+`get_option_instruments` with `chain_symbol: "BRK.B"` silently returns empty,
+not an error. If a chain lookup comes back empty for a symbol that
+obviously has listed options, retry without punctuation before concluding
+there are none.
+
 ## 1. Inputs (gather live, never assume)
 
 - `S`: current stock price — `get_equity_quotes`.
