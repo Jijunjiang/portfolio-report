@@ -396,7 +396,20 @@
       </tbody>
     </table>
   </div>
-  <p class="lede">Options dominate the YTD realized loss — consistent with an active premium-selling strategy where losses show up as short positions bought back above the credit received, or shares called away below a level that would've been better to just hold.</p>
+  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
+    <div class="tag" style="color:var(--accent)">That −$37,948 is misleading — almost all of it is two INTC rolls, not real losses</div>
+    <div class="table-scroll" style="margin: 0.6rem 0; box-shadow:none">
+      <table style="min-width:560px">
+        <thead><tr><th>Date</th><th>What happened</th><th>Shows as "loss"</th><th>New premium</th><th>True net</th></tr></thead>
+        <tbody class="mono">
+          <tr><td>5/14</td><td style="text-align:left">Closed INTC $95c (exp 5/15) paying $35,700; opened $105c (exp 7/17) for $37,400</td><td class="loss-cell">&minus;$34,884</td><td class="gain-cell">+$37,400</td><td class="gain-cell">+$1,700</td></tr>
+          <tr><td>7/1</td><td style="text-align:left">Rolled $105c (exp 7/17) &rarr; $120c (exp 9/18) in one order</td><td class="loss-cell">&minus;$16,864</td><td class="gain-cell">+$51,374</td><td class="loss-cell">&minus;$2,890</td></tr>
+          <tr><td><strong>Combined</strong></td><td></td><td class="loss-cell"><strong>&minus;$51,748</strong></td><td></td><td class="loss-cell"><strong>&minus;$1,190</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Neither contract was closed out — both were rolled forward (strike $95&rarr;$105&rarr;$120, expiration pushed to 9/18, the same position flagged above as an assignment risk). The real net cash cost of this rolling strategy so far this year is about <strong>$1,190</strong>, not $51,748. Backing that out, every other option trade YTD was net <strong>+$13,800</strong> — the non-INTC option activity has been solidly profitable.</p>
+  </div>
 
   <div class="callout" style="background:var(--surface); border-color:var(--border); border-left-color: var(--ink-faint)">
     <div class="tag" style="color:var(--ink-muted)">Two hard data gaps — not estimates, genuinely unavailable here</div>
@@ -404,7 +417,42 @@
     <p><strong>Margin interest paid:</strong> no tool here returns interest, fees, or statement data. Check Statements &amp; History in the app for the actual figure — anything shown here would be a fabricated estimate.</p>
   </div>
 
-  <h2><span class="idx">03</span> Holdings — main account</h2>
+  <h2><span class="idx">03</span> Dividend income</h2>
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">YTD dividends received</div>
+      <div class="num mono gain">$8,424.39</div>
+      <div class="sub">via DRIP reinvestment &middot; 2026-01-01 &rarr; today</div>
+    </div>
+    <div class="tile">
+      <div class="label">Forward annualized estimate</div>
+      <div class="num mono">≈$23,439/yr</div>
+      <div class="sub">current holdings &times; current declared rate</div>
+    </div>
+  </div>
+  <div class="table-scroll" style="margin:1rem 0">
+    <table style="min-width:380px">
+      <thead><tr><th>Symbol</th><th>YTD dividends (DRIP)</th></tr></thead>
+      <tbody class="mono">
+        <tr><td class="sym">O</td><td>$4,446.73</td></tr>
+        <tr><td class="sym">SPG</td><td>$1,342.94</td></tr>
+        <tr><td class="sym">GOOG</td><td>$613.41</td></tr>
+        <tr><td class="sym">MSFT</td><td>$410.21</td></tr>
+        <tr><td class="sym">TSM</td><td>$283.50</td></tr>
+        <tr><td class="sym">SLG</td><td>$308.75</td></tr>
+        <tr><td class="sym">ASML</td><td>$224.47</td></tr>
+        <tr><td class="sym">ORCL</td><td>$205.46</td></tr>
+        <tr><td class="sym">BX</td><td>$174.00</td></tr>
+        <tr><td class="sym">NKE</td><td>$147.60</td></tr>
+        <tr><td class="sym">META</td><td>$96.68</td></tr>
+        <tr><td class="sym">JNJ<span style="color:var(--ink-faint)"> (sold)</span></td><td>$131.08</td></tr>
+        <tr><td class="sym">AAPL<span style="color:var(--ink-faint)"> (sold)</span></td><td>$39.56</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lede">YTD figure only captures dividends that were reinvested (DRIP) — cash-paid dividends wouldn't appear here; the 1099-DIV is authoritative. The $23,439/yr forward estimate is led by O alone (≈$11,128/yr, monthly payer). INTC's fundamentals still list a stale $0.125/share rate from a 2024 payment — its yield field is null, meaning it isn't currently paying, so it's excluded rather than trusted at face value.</p>
+
+  <h2><span class="idx">04</span> Holdings — main account</h2>
   <div class="table-scroll">
     <table>
       <thead>
@@ -433,7 +481,7 @@
     </table>
   </div>
 
-  <h2><span class="idx">04</span> Margin</h2>
+  <h2><span class="idx">05</span> Margin</h2>
   <p class="lede">Approximation only — no maintenance-requirement tool exists here; check the app for the authoritative figure.</p>
   <div class="tiles">
     <div class="tile">
@@ -453,7 +501,7 @@
   </div>
   <p class="lede" style="margin-top:1rem">Concentration watch: GOOG + INTC are ~46% of equity value, and INTC already carries a short call — a sharp drop in either name compresses margin cushion and option risk at the same time.</p>
 
-  <h2><span class="idx">05</span> Open option positions</h2>
+  <h2><span class="idx">06</span> Open option positions</h2>
   <div class="table-scroll">
     <table>
       <thead>
@@ -477,7 +525,7 @@
     </table>
   </div>
 
-  <h2><span class="idx">06</span> Option-selling suggestion</h2>
+  <h2><span class="idx">07</span> Option-selling suggestion</h2>
   <div class="suggestion-card">
     <h3>No option suggestion this run</h3>
     <p class="lede" style="margin-top:0.2rem">GOOG is now excluded from all option suggestions per your request — no calls or puts on this name, regardless of embedded gain or capacity. This is encoded in the skill going forward, so every future run will honor it automatically. (Earlier today this section suggested a GOOG $410 covered call; that idea is withdrawn — see the full write-up in <code class="mono">reports/2026-07-05.md</code> for the record.)</p>

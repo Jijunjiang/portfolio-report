@@ -58,6 +58,45 @@ on an account running a heavy options-selling strategy, the option-class
 total is usually where most of the realized activity actually is, and
 blending it with equity hides that.
 
+## Rolled options are not realized losses — net them, don't report the close leg alone
+
+A "roll" (buy-to-close an existing short option, sell-to-open a new one on
+the same underlying to extend and/or adjust the strike) shows up in
+`get_pnl_trade_history` as a lone closing trade with a `realized_gain` that
+compares the *original* opening credit against *today's* buy-back cost. On
+a stock that's rallied hard since the original contract was opened, this
+can print a large negative number that reads like a loss — it isn't one in
+any actionable sense, because the position wasn't closed out, it was
+extended. Reporting that number alone, without the new contract's credit
+next to it, is the single easiest way for this report to be misleading
+about an active covered-call/wheel strategy.
+
+**Detecting a roll**, verified against `get_option_orders` on this account:
+- **Atomic roll** (one order, both legs): `opening_strategy` and
+  `closing_strategy` are both non-null on the same order. Its own `premium`
+  /`processed_premium`/`direction` already give the net credit or debit of
+  the whole roll directly — use those, don't decompose further.
+- **Manual roll** (two orders): a `closing_strategy`-only order and a
+  separate `opening_strategy`-only order on the *same* `chain_id`, same
+  `option_type`, close together in time (same day, in practice within
+  seconds-to-minutes on this account). Net economics = the new order's
+  `processed_premium` (credit) minus the closing order's `processed_premium`
+  (debit) — compute and report that net figure, not either leg alone.
+
+**What to report:** for any short option whose close is part of a detected
+roll, replace "realized a loss of $X" with something like: "rolled
+[old strike/exp] → [new strike/exp]; the close alone shows as a $X
+realized loss because the original credit was small relative to today's
+buy-back cost, but the new contract collected $Y, for a net
+[credit/debit] of $Z on the roll itself." When summarizing YTD option P&L,
+call out the portion attributable to roll closes separately from
+everything else, since roll-close "losses" are usually the majority of
+any large negative option total on an actively-managed covered-call
+account and materially change how the headline number should be read.
+Genuinely closed-out positions (bought back or expired with **no** new
+same-underlying position opened nearby) are real realized gains/losses —
+report those at face value.
+
 ## Wash sales
 
 Not computable from these tools (would need a full transaction ledger with

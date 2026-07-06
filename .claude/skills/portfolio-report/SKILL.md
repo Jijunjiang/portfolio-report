@@ -105,7 +105,26 @@ big embedded gain" check, which is the single highest-value insight this
 report can surface. See that playbook also for what's and isn't possible on
 short-term vs. long-term gain detail, and for margin interest/fees.
 
-## 5. Option-selling suggestions
+**Before presenting the option-class YTD total, check it for rolls.** A
+large negative option realized total on this account is usually not a real
+loss — it's typically the close leg of a covered call being rolled forward
+to a higher strike/later expiration as the underlying rallies. Apply
+`playbooks/tax-basics.md`'s roll-detection method (via `get_option_orders`,
+matching `opening_strategy`/`closing_strategy` or paired close+open orders
+on the same `chain_id`) before writing up the tax section, and report the
+net roll economics alongside the raw realized-loss figure — never present
+a roll's close leg as a standalone loss without it.
+
+## 5. Dividend income
+
+Every run, compute both figures in `playbooks/dividends.md`: YTD dividends
+received (via `get_equity_orders` with `placed_agent: "drip"`, summed by
+symbol) and a forward-looking annualized estimate from current holdings ×
+`get_equity_fundamentals` rates. Report them side by side, clearly labeled
+as different things (trailing actual vs. forward estimate), with the
+DRIP-only caveat from that playbook.
+
+## 6. Option-selling suggestions
 
 **Excluded symbols — never suggest an option trade on these, in either
 direction, regardless of embedded gain, capacity, or how attractive the
@@ -134,16 +153,16 @@ a strike that would tip an already-close-to-the-money position further ITM.
 Check `get_earnings_calendar` for the underlying over the suggestion's
 expiration window; flag any suggestion that spans an earnings date.
 
-## 6. Output
+## 7. Output
 
 Write two artifacts each run:
 
 1. `reports/YYYY-MM-DD.md` in this repo — the full report, in this order:
    consolidated net worth across accounts, per-account breakdown, margin
-   section, tax section, option suggestions, and a "changes since
-   yesterday" diff against the most recent prior file in `reports/` (compare
-   total_value and flag any option position that appeared/disappeared/moved
-   materially ITM).
+   section, tax section (including the roll-netting analysis), dividend
+   income, option suggestions, and a "changes since yesterday" diff against
+   the most recent prior file in `reports/` (compare total_value and flag
+   any option position that appeared/disappeared/moved materially ITM).
 2. Refresh the Artifact dashboard (same underlying numbers, dashboard
    layout) by calling Artifact on the same file path/URL used previously —
    check `reports/.artifact-url` for the URL from the last run, or create a
