@@ -169,6 +169,14 @@ a strike that would tip an already-close-to-the-money position further ITM.
 Check `get_earnings_calendar` for the underlying over the suggestion's
 expiration window; flag any suggestion that spans an earnings date.
 
+Every suggestion table gets a **Suggested operation** column — concrete
+contract count, capital required, and premium collected at that size (e.g.
+"Sell 2 contracts ($26,000, collects $1,456)"), not just metrics; "Skip"
+plus a one-line reason for names that don't clear the bar. Close a
+multi-candidate table with the aggregate: total capital committed and
+total premium if every "Sell" row were taken, and that capital's share of
+total buying power.
+
 For a full quantitative workup of any single candidate that survives this
 screen (Black-Scholes assignment probability rather than raw delta,
 tax-adjusted expected value, concentration-checked sizing) — or when the

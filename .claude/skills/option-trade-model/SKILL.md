@@ -156,6 +156,18 @@ a recommendation. Before suggesting a size:
   say so, and suggest starting below max capacity for a first tranche on
   any name not already established in the option book.
 
+**Every table of candidates gets a "Suggested operation" column** — a
+concrete instruction, not just metrics: contract count, dollar capital
+required (`strike * 100 * contracts` for a put, or share-capacity-derived
+for a call), and dollar premium collected at that size. "Sell 2 contracts
+($26,000, collects $1,456)" is the expected form, not "favorable" or a
+bare yield number. For names to avoid, say "Skip" plus the one-line reason
+(low yield, broken/illiquid quote, already covered, concentration cap).
+When multiple candidates are shown together, close with the aggregate:
+total capital committed and total premium collected if every "Sell" row
+were taken, plus that capital's share of total buying power — so the user
+sees the portfolio-level commitment, not just row-by-row numbers.
+
 ## 7. New-buy candidates: three ways in, compared side by side
 
 When the candidate is a stock **not currently held**, evaluate all three
