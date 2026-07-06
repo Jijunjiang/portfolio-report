@@ -578,30 +578,53 @@
   <p class="lede" style="margin-top:1rem"><strong>The honest split:</strong> ORCL, MSFT, NKE, and BX are genuine value entries (at/below the 52-week low, with dividend support on BX/NKE). SOFI and BULL are at their lows for momentum/story reasons, not fundamentals. SLG's case rests on income, not price. TSM is the one candidate where you'd be paying up — reinforcing why it's capped at 1 contract.</p>
   <p class="lede"><strong>If every "Sell" row above were taken: $156,500 of buying power committed (24% of the $660,231 available), $6,467 total premium collected.</strong> A starter tranche, not a max-out.</p>
 
-  <p class="lede" style="margin-top:1.5rem; color:var(--ink-faint)">Covered-call candidates below are kept for the record — screened at standard 20–35 delta, so none clear the new far-OTM bar. Not the current recommendation.</p>
+  <p class="lede" style="margin-top:1.5rem">Covered-call candidates, recomputed to "almost impossible to settle" — matching the reference point set by the existing TSM $600c (N(d2) ≈ 4–6%, not the standard 25–35% the original scan used):</p>
   <div class="table-scroll">
     <table>
       <thead>
-        <tr><th>Symbol</th><th>Strike</th><th>Prem/ctr</th><th>N(d2)</th><th>IV/HV</th><th>Ann. return</th><th>Tax-adj. EV/ctr</th><th>Read</th></tr>
+        <tr><th>Symbol</th><th>Strike</th><th>N(d2)</th><th>Premium/ctr</th><th>Why this strike</th><th>Suggested operation</th></tr>
       </thead>
       <tbody class="mono">
-        <tr><td class="sym">ORCL</td><td>$150</td><td>$832</td><td>35%</td><td>1.12</td><td>46.1%</td><td class="loss-cell">&minus;$684</td><td class="gain-cell" style="text-align:left">Best pick — rich premium, tax-favorable</td></tr>
-        <tr><td class="sym">BX</td><td>$130</td><td>$635</td><td>34%</td><td>0.84</td><td>40.2%</td><td>+$72</td><td class="gain-cell" style="text-align:left">Good — premium covers tax risk 8.8x</td></tr>
-        <tr><td class="sym">MSFT</td><td>$410</td><td>$1,555</td><td>36%</td><td>1.04</td><td>30.9%</td><td class="loss-cell">&minus;$693</td><td class="gain-cell" style="text-align:left">Good — tax-favorable, only 2 contracts</td></tr>
-        <tr><td class="sym">UBER</td><td>$80</td><td>$257</td><td>31%</td><td>0.96</td><td>26.8%</td><td>+$116</td><td style="text-align:left">Fine — small tax exposure, well covered</td></tr>
-        <tr><td class="sym">NKE</td><td>$47.5</td><td>$119</td><td>28%</td><td>0.94</td><td>21.0%</td><td>&minus;$1</td><td style="text-align:left">Fine — no earnings found in window</td></tr>
-        <tr><td class="sym">TSM</td><td>$460</td><td>$2,508</td><td>36%</td><td>0.88</td><td>44.9%</td><td class="loss-cell">+$11,006</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 4.4x the premium</td></tr>
-        <tr><td class="sym">SPG</td><td>$240</td><td>$288</td><td>24%</td><td>1.07</td><td>9.9%</td><td class="loss-cell">+$2,323</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 8x the premium</td></tr>
-        <tr><td class="sym">O</td><td>$67.5</td><td>$38</td><td>18%</td><td>0.74</td><td>4.6%</td><td>+$124</td><td style="text-align:left">Skip — premium too thin to justify</td></tr>
-        <tr><td class="sym">SLG</td><td>$57.5</td><td>$183</td><td>30%</td><td>1.14</td><td>26.5%</td><td>+$387</td><td style="text-align:left">Marginal — tax exposure ~2.1x premium</td></tr>
-        <tr><td class="sym">SOFI</td><td>$20</td><td>$114</td><td>32%</td><td>1.27</td><td>48.3%</td><td>+$178</td><td style="text-align:left">Marginal — tax exposure ~1.6x premium</td></tr>
-        <tr><td class="sym">BRK.B</td><td>$530</td><td>$433</td><td>25%</td><td>1.10</td><td>6.6%</td><td>+$652</td><td style="text-align:left">Marginal — tax exposure ~1.5x premium</td></tr>
-        <tr><td class="sym">RC</td><td>$2</td><td>$7.50</td><td>12%</td><td>0.40</td><td>32.5%</td><td>&minus;$2</td><td style="text-align:left">Trivial dollar amounts either way</td></tr>
-        <tr><td class="sym">BULL</td><td>$7.5 / $10</td><td>$60 / $13.50</td><td>39% / 10%</td><td>0.85 / 0.94</td><td>65% / 14.6%</td><td>~$0</td><td style="text-align:left">Optional — IV not rich vs. realized vol</td></tr>
+        <tr><td class="sym">BX</td><td>$165</td><td class="gain-cell">2.0%</td><td>$18</td><td style="text-align:left">Deepest OTM of the batch — basically free money on shares already held</td><td style="text-align:left">Sell 1 contract (max), collects $18</td></tr>
+        <tr><td class="sym">NKE</td><td>$60</td><td class="gain-cell">2.7%</td><td>$10</td><td style="text-align:left">Matches the TSM $600c reference almost exactly</td><td style="text-align:left">Sell 10 contracts (max), collects $100</td></tr>
+        <tr><td class="sym">UBER</td><td>$100</td><td class="gain-cell">3.6%</td><td>$24.50</td><td style="text-align:left">34% above current price — tax-neutral</td><td style="text-align:left">Sell 6 contracts (max), collects $147</td></tr>
+        <tr><td class="sym">MSFT</td><td>$525</td><td class="gain-cell">3.8%</td><td>$135</td><td style="text-align:left">Tax-favorable (loss position) — pure upside</td><td style="text-align:left">Sell 2 contracts (max), collects $270</td></tr>
+        <tr><td class="sym">TSM</td><td>$590</td><td>6.0%</td><td>$332.50</td><td style="text-align:left">Very safe, but embedded gain is so large the tax-adjusted risk is still ≈$1,829 at 6% odds</td><td style="text-align:left">Sell 1 contract only (capacity-capped)</td></tr>
+        <tr><td class="sym">ORCL</td><td>$190</td><td>7.7%</td><td>$161</td><td style="text-align:left">Tax-favorable (loss position)</td><td style="text-align:left">Sell 3 contracts (max), collects $483</td></tr>
+        <tr><td class="sym">SOFI</td><td>$25</td><td>9.0%</td><td>$29</td><td style="text-align:left">Fine, tax-neutral</td><td style="text-align:left">Sell 15 of 45 max, collects $435</td></tr>
+        <tr><td class="sym">BULL</td><td>$10</td><td>9.7%</td><td>$13.50</td><td style="text-align:left">Tax-neutral, small name</td><td style="text-align:left">Sell 20 of 100 max, collects $270</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="lede" style="margin-top:1rem">Caveats: RC's earnings date wasn't checked this pass; BULL and RC have coarse strike increments so delta-targeting is less precise; BRK.B's option chain symbol is <code class="mono">BRKB</code> (no period) — now noted in the skill.</p>
+  <p class="lede" style="margin-top:1rem"><strong>If every row were taken: ~$2,055.50 total premium</strong> — deliberately small at strikes this far out. <strong>O, SPG, BRK.B, SLG, and RC come back with a broken quote (bid $0)</strong> at this distance — no real liquidity that far OTM at 47 days; skipped rather than show a fake price.</p>
+
+  <details style="margin-top:1.25rem; color:var(--ink-faint)">
+    <summary style="cursor:pointer; color:var(--ink-muted)">Original scan (standard 20–35 delta, superseded)</summary>
+    <div class="table-scroll" style="margin-top:0.75rem">
+      <table>
+        <thead>
+          <tr><th>Symbol</th><th>Strike</th><th>Prem/ctr</th><th>N(d2)</th><th>IV/HV</th><th>Ann. return</th><th>Tax-adj. EV/ctr</th><th>Read</th></tr>
+        </thead>
+        <tbody class="mono">
+          <tr><td class="sym">ORCL</td><td>$150</td><td>$832</td><td>35%</td><td>1.12</td><td>46.1%</td><td class="loss-cell">&minus;$684</td><td class="gain-cell" style="text-align:left">Best pick by yield — rich premium, tax-favorable</td></tr>
+          <tr><td class="sym">BX</td><td>$130</td><td>$635</td><td>34%</td><td>0.84</td><td>40.2%</td><td>+$72</td><td class="gain-cell" style="text-align:left">Good — premium covers tax risk 8.8x</td></tr>
+          <tr><td class="sym">MSFT</td><td>$410</td><td>$1,555</td><td>36%</td><td>1.04</td><td>30.9%</td><td class="loss-cell">&minus;$693</td><td class="gain-cell" style="text-align:left">Good — tax-favorable, only 2 contracts</td></tr>
+          <tr><td class="sym">UBER</td><td>$80</td><td>$257</td><td>31%</td><td>0.96</td><td>26.8%</td><td>+$116</td><td style="text-align:left">Fine — small tax exposure, well covered</td></tr>
+          <tr><td class="sym">NKE</td><td>$47.5</td><td>$119</td><td>28%</td><td>0.94</td><td>21.0%</td><td>&minus;$1</td><td style="text-align:left">Fine — no earnings found in window</td></tr>
+          <tr><td class="sym">TSM</td><td>$460</td><td>$2,508</td><td>36%</td><td>0.88</td><td>44.9%</td><td class="loss-cell">+$11,006</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 4.4x the premium</td></tr>
+          <tr><td class="sym">SPG</td><td>$240</td><td>$288</td><td>24%</td><td>1.07</td><td>9.9%</td><td class="loss-cell">+$2,323</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 8x the premium</td></tr>
+          <tr><td class="sym">O</td><td>$67.5</td><td>$38</td><td>18%</td><td>0.74</td><td>4.6%</td><td>+$124</td><td style="text-align:left">Skip — premium too thin</td></tr>
+          <tr><td class="sym">SLG</td><td>$57.5</td><td>$183</td><td>30%</td><td>1.14</td><td>26.5%</td><td>+$387</td><td style="text-align:left">Marginal — tax exposure ~2.1x premium</td></tr>
+          <tr><td class="sym">SOFI</td><td>$20</td><td>$114</td><td>32%</td><td>1.27</td><td>48.3%</td><td>+$178</td><td style="text-align:left">Marginal — tax exposure ~1.6x premium</td></tr>
+          <tr><td class="sym">BRK.B</td><td>$530</td><td>$433</td><td>25%</td><td>1.10</td><td>6.6%</td><td>+$652</td><td style="text-align:left">Marginal — tax exposure ~1.5x premium</td></tr>
+          <tr><td class="sym">RC</td><td>$2</td><td>$7.50</td><td>12%</td><td>0.40</td><td>32.5%</td><td>&minus;$2</td><td style="text-align:left">Trivial dollar amounts either way</td></tr>
+          <tr><td class="sym">BULL</td><td>$7.5 / $10</td><td>$60 / $13.50</td><td>39% / 10%</td><td>0.85 / 0.94</td><td>65% / 14.6%</td><td>~$0</td><td style="text-align:left">IV not rich vs. realized vol</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <p class="lede" style="margin-top:1rem">Caveats: RC's earnings date wasn't checked this pass; BRK.B's option chain symbol is <code class="mono">BRKB</code> (no period) — now noted in the skill.</p>
 
   <footer>
     Generated from live Robinhood data via the <code class="mono">portfolio-report</code> skill. Analysis and suggestions only — no trades were placed. Not tax or investment advice.
