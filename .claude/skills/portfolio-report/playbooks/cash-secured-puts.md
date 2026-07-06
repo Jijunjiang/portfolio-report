@@ -1,5 +1,14 @@
 # Playbook: cash-secured puts
 
+**User preference (stated directly, applies to every run): this is the
+default option-selling strategy, ahead of covered calls.** The user views
+covered calls as riskier on this account specifically, since assignment
+forces a sale of an already-owned, often appreciated position (see the tax
+section's embedded-gain flags), whereas a put's assignment just acquires
+stock at a fresh cost basis. When both a covered call and a CSP are
+plausible on a name, lead with the put here and only add a covered call
+alongside it if it clears the much-further-OTM bar in `covered-calls.md`.
+
 When to suggest one: there's meaningful idle buying power
 (`buying_power.unleveraged_buying_power`) sitting uninvested in a taxable or
 margin account, and the user already holds or watches the underlying — don't

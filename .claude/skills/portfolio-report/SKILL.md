@@ -140,11 +140,20 @@ premium looks:**
 Check this list before generating any suggestion, not after — don't compute
 a candidate strike for an excluded symbol and then discard it.
 
+**Cash-secured puts are the default; covered calls are secondary** (user
+preference — a covered call's assignment forces a sale of an already-owned,
+often-appreciated position, while a put's assignment just acquires stock at
+a fresh cost basis). For each candidate underlying, check CSP eligibility
+first (idle `buying_power.unleveraged_buying_power`, per
+`playbooks/cash-secured-puts.md`) before considering a covered call on it.
 Only suggest against symbols already held (covered calls, using
 `shares_available_for_sells` / 100 for contract capacity) or against cash
 available (`buying_power.unleveraged_buying_power`, cash-secured puts on
 watchlist/held names — don't invent new tickers the user hasn't shown
-interest in).
+interest in). When a covered call is still worth mentioning alongside a
+put, push the strike well past the standard 0.20–0.30 delta screen toward
+"almost impossible to settle," per `playbooks/covered-calls.md` — don't
+default to the textbook delta range.
 
 Use `get_option_chains` for the underlying's expirations, then
 `get_option_instruments` filtered by `expiration_dates` and `type` to pull

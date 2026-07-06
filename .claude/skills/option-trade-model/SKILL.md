@@ -26,6 +26,19 @@ rank is elevated) are used as a sanity check, not the primary output — the
 primary output is the actual math below, computed from this account's live
 data.
 
+**User's stated strategy preference (applies to every evaluation):**
+cash-secured puts are the default; covered calls are secondary. The user
+considers a covered call riskier here specifically — assignment forces a
+sale of an already-owned, often-appreciated position (see step 5's
+tax-adjusted EV), while a put's assignment just acquires stock at a fresh
+cost basis. When a covered call is evaluated anyway, the user wants strikes
+pushed **well past** the standard 0.20–0.30 delta zone, toward "almost
+impossible to settle" — low-single-digit-delta, deep OTM, more like the
+account's existing TSM $600c than a textbook 30-delta write. Smaller
+premium is an accepted tradeoff for that low a probability; don't recommend
+moving the strike closer just because the annualized yield looks better —
+that's optimizing for the wrong thing given the stated preference.
+
 ## 0.5 Ticker quirks worth knowing
 
 `BRK.B`'s option chain symbol is `BRKB` (no period) — `get_option_chains`/
@@ -159,6 +172,9 @@ Compute the standard return metrics (step 4) and assignment probability
 columns, and present the comparison table rather than just answering with
 one recommendation — this is a decision with a real behavioral tradeoff
 (patience vs. immediacy vs. uncapped upside), not a single right answer.
+That said, given the user's stated preference for puts over covered calls,
+lead with the cash-secured put column's numbers in the interpretation
+text even though all three are shown.
 
 ## 8. Output format
 
