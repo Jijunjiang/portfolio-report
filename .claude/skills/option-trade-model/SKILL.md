@@ -115,6 +115,13 @@ the stock's own historical IV range.
   fall before the covered position is worse off than today's entry.
 - CSP, effective cost basis if assigned: `K − premium`; express the
   discount to current price as `(S − (K − premium)) / S`.
+- CSP, why assignment itself is a good outcome: locate the effective cost
+  basis against `get_equity_fundamentals`'s 52-week range and check
+  `dividend_yield`/`pe_ratio` — see `playbooks/cash-secured-puts.md` for
+  the exact method and how to phrase a candidate that doesn't clear the
+  bar. Don't present the premium without this; a thin premium on a name
+  trading near its highs and a thin premium on a name at its 52-week low
+  are different trades that happen to look similar on yield alone.
 
 ## 5. Tax-adjusted expected value (the part generic guides skip)
 

@@ -556,26 +556,27 @@
   <div class="table-scroll">
     <table>
       <thead>
-        <tr><th>Symbol</th><th>Strike</th><th>Premium</th><th>Ann. return</th><th>Discount if assigned</th><th>Suggested operation</th></tr>
+        <tr><th>Symbol</th><th>Strike</th><th>Eff. cost</th><th>Why good if assigned</th><th>Suggested operation</th></tr>
       </thead>
       <tbody class="mono">
-        <tr><td class="sym">ORCL</td><td>$130</td><td>$728</td><td>43.5%</td><td>12.5%</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($26,000, collects $1,456)</td></tr>
-        <tr><td class="sym">SOFI</td><td>$16</td><td>$77</td><td>37.4%</td><td>16.5%</td><td class="gain-cell" style="text-align:left">Sell 5 contracts ($8,000, collects $385)</td></tr>
-        <tr><td class="sym">SLG</td><td>$50</td><td>$223</td><td>34.6%</td><td>10.6%</td><td class="gain-cell" style="text-align:left">Sell 3 contracts ($15,000, collects $669)</td></tr>
-        <tr><td class="sym">TSM</td><td>$400</td><td>$1,868</td><td>36.3%</td><td>12.2%</td><td style="text-align:left">Sell 1 contract only ($40,000) — capped for concentration</td></tr>
-        <tr><td class="sym">BX</td><td>$115</td><td>$460</td><td>31.1%</td><td>10.1%</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($23,000, collects $920)</td></tr>
-        <tr><td class="sym">NKE</td><td>$42.5</td><td>$154</td><td>28.0%</td><td>7.1%</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($8,500, collects $308)</td></tr>
-        <tr><td class="sym">BULL</td><td>$5</td><td>$16</td><td>24.9%</td><td>32.5%</td><td style="text-align:left">Sell 1 contract ($500) — optional, trivial size</td></tr>
-        <tr><td class="sym">MSFT</td><td>$360</td><td>$980</td><td>21.1%</td><td>10.3%</td><td style="text-align:left">Sell 1 contract ($36,000) — optional</td></tr>
-        <tr><td class="sym">UBER</td><td>$65</td><td>$118</td><td>14.1%</td><td>14.3%</td><td style="text-align:left">Skip — already have a closer put at $68</td></tr>
-        <tr><td class="sym">SPG</td><td>$210</td><td>$255</td><td>9.4%</td><td>8.2%</td><td style="text-align:left">Skip — low yield</td></tr>
-        <tr><td class="sym">O</td><td>$60</td><td>$50</td><td>6.5%</td><td>6.8%</td><td style="text-align:left">Skip — low yield</td></tr>
-        <tr><td class="sym">BRK.B</td><td>$480</td><td>$338</td><td>5.5%</td><td>6.1%</td><td style="text-align:left">Skip — low yield</td></tr>
-        <tr><td class="sym">RC</td><td>$1.5</td><td>$37.50</td><td>—</td><td>—</td><td class="loss-cell" style="text-align:left">Skip — quote is broken (bid $0), not tradable</td></tr>
+        <tr><td class="sym">ORCL</td><td>$130</td><td>$122.72</td><td class="gain-cell" style="text-align:left">Below the 52-wk low ($134.57) — rare entry after the selloff</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($26,000, collects $1,456)</td></tr>
+        <tr><td class="sym">MSFT</td><td>$360</td><td>$350.20</td><td class="gain-cell" style="text-align:left">Lands almost exactly at the 52-wk low ($349.20) after the $460 pullback</td><td style="text-align:left">Sell 1 contract ($36,000) — optional</td></tr>
+        <tr><td class="sym">SOFI</td><td>$16</td><td>$15.23</td><td style="text-align:left">Near the 52-wk low ($14.92) — but P/E 41x, a growth bet not value</td><td class="gain-cell" style="text-align:left">Sell 5 contracts ($8,000, collects $385)</td></tr>
+        <tr><td class="sym">NKE</td><td>$42.5</td><td>$40.97</td><td class="gain-cell" style="text-align:left">Effectively at the 52-wk low ($40.00); 3.7% dividend while you wait</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($8,500, collects $308)</td></tr>
+        <tr><td class="sym">BX</td><td>$115</td><td>$110.40</td><td class="gain-cell" style="text-align:left">Close to the 52-wk low ($101.73); 4.0% dividend supports it</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($23,000, collects $920)</td></tr>
+        <tr><td class="sym">BULL</td><td>$5</td><td>$4.84</td><td style="text-align:left">Right at the 52-wk low ($4.50) — but loss-making, no fundamental floor</td><td style="text-align:left">Sell 1 contract ($500) — optional</td></tr>
+        <tr><td class="sym">SLG</td><td>$50</td><td>$47.77</td><td style="text-align:left">Mid-range, not a bargain — appeal is the 4.7% dividend + income</td><td class="gain-cell" style="text-align:left">Sell 3 contracts ($15,000, collects $669)</td></tr>
+        <tr><td class="sym">TSM</td><td>$400</td><td>$381.32</td><td class="loss-cell" style="text-align:left">Well above the 52-wk low (62% up) — paying up, not a dip</td><td style="text-align:left">Sell 1 contract only ($40,000) — capped</td></tr>
+        <tr><td class="sym">UBER</td><td>$65</td><td>$63.82</td><td style="text-align:left">Below the 52-wk low ($67.19), genuinely attractive</td><td style="text-align:left">Skip — avoid stacking near the existing $68 put</td></tr>
+        <tr><td class="sym">SPG</td><td>$210</td><td>$207.45</td><td class="loss-cell" style="text-align:left">Near the 52-wk high — paying up</td><td style="text-align:left">Skip — low yield</td></tr>
+        <tr><td class="sym">O</td><td>$60</td><td>$59.50</td><td style="text-align:left">Mid-upper range, not a discount</td><td style="text-align:left">Skip — low yield</td></tr>
+        <tr><td class="sym">BRK.B</td><td>$480</td><td>$476.62</td><td style="text-align:left">Reasonable price, but low yield reflects low IV</td><td style="text-align:left">Skip — low yield</td></tr>
+        <tr><td class="sym">RC</td><td>$1.5</td><td>—</td><td class="loss-cell" style="text-align:left">Quote is broken (bid $0)</td><td class="loss-cell" style="text-align:left">Skip — not tradable</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="lede" style="margin-top:1rem"><strong>If every "Sell" row above were taken: $157,000 of buying power committed (24% of the $660,231 available), $6,602 total premium collected.</strong> A starter tranche, not a max-out.</p>
+  <p class="lede" style="margin-top:1rem"><strong>The honest split:</strong> ORCL, MSFT, NKE, and BX are genuine value entries (at/below the 52-week low, with dividend support on BX/NKE). SOFI and BULL are at their lows for momentum/story reasons, not fundamentals. SLG's case rests on income, not price. TSM is the one candidate where you'd be paying up — reinforcing why it's capped at 1 contract.</p>
+  <p class="lede"><strong>If every "Sell" row above were taken: $157,000 of buying power committed (24% of the $660,231 available), $6,602 total premium collected.</strong> A starter tranche, not a max-out.</p>
 
   <p class="lede" style="margin-top:1.5rem; color:var(--ink-faint)">Covered-call candidates below are kept for the record — screened at standard 20–35 delta, so none clear the new far-OTM bar. Not the current recommendation.</p>
   <div class="table-scroll">

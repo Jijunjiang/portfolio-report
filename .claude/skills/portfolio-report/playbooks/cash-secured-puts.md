@@ -34,3 +34,24 @@ Strike selection:
 If idle cash is sitting in a Roth IRA or other tax-advantaged account, note
 that assignment there has no wash-sale/tax-lot complications — worth
 mentioning as a plus, not a requirement.
+
+## Every suggestion needs a "why it's a good deal if assigned" reason
+
+A CSP's premium is only half the pitch — the other half is that assignment
+itself has to be a price you'd genuinely want. Ground this in real data,
+not vibes:
+- `effective_cost = strike - premium`, then locate it against
+  `get_equity_fundamentals`'s `high_52_weeks`/`low_52_weeks`: `position_pct
+  = (effective_cost - low) / (high - low)`. Below 0% (under the 52-week
+  low) or near it is the strongest case; mid-range or higher means the
+  pitch has to rest on something else (dividend yield, income, "still like
+  this name at any reasonable price").
+- Pull `dividend_yield` and `pe_ratio` too — a high P/E name near its low
+  is a growth/momentum bet, not a value entry, and a loss-making name
+  (negative P/E) with no dividend has no fundamental floor under the
+  price at all. Say which of these situations applies rather than
+  presenting every "near the low" case as equally sound.
+- Be honest when a candidate doesn't clear this bar — "still well above
+  the 52-week low, you'd be paying up" is a real, useful finding,
+  especially when it's also the highest-premium name on the list (premium
+  and price attractiveness don't move together).
