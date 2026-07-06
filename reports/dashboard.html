@@ -412,9 +412,8 @@
   </div>
 
   <div class="callout" style="background:var(--surface); border-color:var(--border); border-left-color: var(--ink-faint)">
-    <div class="tag" style="color:var(--ink-muted)">Two hard data gaps — not estimates, genuinely unavailable here</div>
+    <div class="tag" style="color:var(--ink-muted)">Hard data gap — not an estimate, genuinely unavailable here</div>
     <p><strong>Short-term vs. long-term gain split:</strong> not computable for unrealized or realized gains. Checked directly — trade history has a closing timestamp but no lot acquisition date, and positions carry one blended average cost per symbol. No tool in this connection returns holding period. The real source is Robinhood's 1099-B / tax documents, or the per-position "tax lots" view in the app.</p>
-    <p><strong>Margin interest paid:</strong> no tool here returns interest, fees, or statement data. Check Statements &amp; History in the app for the actual figure — anything shown here would be a fabricated estimate.</p>
   </div>
 
   <h2><span class="idx">03</span> Dividend income</h2>
@@ -498,8 +497,14 @@
       <div class="num mono">$660,231</div>
       <div class="sub">gap ≈ margin cushion in dollars</div>
     </div>
+    <div class="tile">
+      <div class="label">Margin interest, estimated</div>
+      <div class="num mono">$61.01/day</div>
+      <div class="sub">4.5%/yr &times; today's balance &middot; tracking started today</div>
+    </div>
   </div>
   <p class="lede" style="margin-top:1rem">Concentration watch: GOOG + INTC are ~46% of equity value, and INTC already carries a short call — a sharp drop in either name compresses margin cushion and option risk at the same time.</p>
+  <p class="lede">No tool here returns actual margin interest charged, so this account now tracks it daily instead: today's loan balance ($494,860.89) &times; your confirmed 4.5% annual rate &divide; 365, logged to <code class="mono">reports/margin-balance-history.csv</code>. A YTD total will build up as daily entries accumulate — there's nothing to sum yet since tracking starts today. This is an estimate (Robinhood's actual day-count/tiering may differ), not the broker's own number; if a real statement figure ever comes in, it gets logged to <code class="mono">reports/margin-interest.csv</code> as a ground-truth check.</p>
 
   <h2><span class="idx">06</span> Open option positions</h2>
   <div class="table-scroll">

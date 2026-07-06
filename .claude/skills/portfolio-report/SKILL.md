@@ -71,6 +71,12 @@ collateralizing the loan is the actual risk (margin call), not a fixed
 percentage. See `playbooks/margin-risk.md` for how to phrase this and what
 thresholds are worth flagging.
 
+**Every run, also append today's margin balance** to
+`reports/margin-balance-history.csv` and report the estimated YTD margin
+interest computed from it — see `playbooks/margin-risk.md` for the exact
+method (this is how margin interest, otherwise unavailable from any tool
+here, gets tracked over time).
+
 ## 4. Tax section (taxable accounts only)
 
 Per position: `unrealized_gain = quantity * (current_price -
