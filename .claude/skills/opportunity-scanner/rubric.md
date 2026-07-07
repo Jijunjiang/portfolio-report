@@ -6,6 +6,17 @@ from a tool) or **[J]** judgment (requires reading/context, not a pure
 number) — roughly two-thirds mechanical, one-third judgment. Don't present
 a [J] criterion's score as more precise than it is.
 
+**Before scoring a criterion, check `reports/rubric-data-sources.csv`** —
+the verified fetch method for each of the 32 criteria, including which
+scanner filters are confirmed working, which are server-side broken
+(Stochastic, Bollinger, Support — don't retry these), which are unreliable
+(Relative Volume returns a constant 1.0 in some scan combinations), and
+which have no direct fetch at all (`b17_leverage_judgment`,
+`e32_fitstyle_judgment` are judgment-only by design; `c23_rsirecross`
+needs a manual historicals-based calc that isn't implemented yet). Don't
+re-derive this from scratch each run — it was researched and tested live
+against the API on 2026-07-07.
+
 **Guide score, not a verdict:** ≥70 = strong candidate worth deep research.
 50–69 = watchlist, revisit next quarter. <50 = discard for now. These
 bands are a starting point, not calibrated against a large sample —
