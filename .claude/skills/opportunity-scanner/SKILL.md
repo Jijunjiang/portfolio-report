@@ -36,17 +36,38 @@ like HOOD or INTC's setup. This is why step 2 below is mandatory, not
 optional — RSI alone produces false positives that look nothing like the
 user's actual winners.
 
-## 1. Two saved scans (already created on the account) — this is the Stage 0 prefilter
+## 0. Four archetypes across the risk/return spectrum
 
-These two scans *are* a rubric themselves — a hard-cutoff, binary
-pass/fail prefilter that runs before `rubric.md`'s weighted 100-point
-scoring ever starts (see `../../../RUBRICS.md`'s lifecycle: this is Stage
-0, not a separate ad hoc thing). Tuned on 2026-07-07 to bring the combined
-daily universe down to ~100 names — tight enough to fully score and log
-every survivor daily (see step 6), loose enough not to miss real
-candidates. Changes to these filters get logged to
+Two archetypes (Turnaround, Quality Inflection) existed originally; two
+more (Moonshot Growth, Steady Value) were added 2026-07-07 because they
+are structurally different opportunities that the original two scans
+conflated. Each has its own Stage 0 prefilter scan and gets scored/logged
+with `archetype` set to the tag below in `reports/opportunity-scanner-log.csv`.
+
+| Archetype | Risk / Reward | Pattern | Scan ID | ~Daily matches |
+|---|---|---|---|---|
+| `turnaround` | High risk, 5-10x | Distressed, established company recovers (HOOD, INTC) | `38edc26c-8b66-4235-9f3b-40275bb6cb7f` | 32 raw, ~3 pass the 40%-off-high gate |
+| `moonshot_growth` | High risk, 10x+ | Small/mid-cap, no distress — explosive momentum/growth, not mean-reversion | `fd3c2707-3c1c-4283-9223-d5e447ae8425` | 76 |
+| `compounder` (Quality Inflection) | Medium risk, 2-5x | Quality business, secular tailwind, "buy NVDA/TSM early" | `2a31c406-2b3f-4552-bcb4-6e78ceaba979` | 71 |
+| `steady_value` | Low risk, ~30-50% | Traditional blue-chip, undervalued not distressed | `95b3655e-8750-46ec-b835-c933ae316999` | 91 |
+
+`moonshot_growth` and `steady_value` are read-only-scoring at this point
+(no dedicated playbook subsections yet) — they reuse `rubric.md`'s
+Category B/D/E and skip Category A the same way `compounder` does; see
+each scan's filter set below for what's mechanically enforced at Stage 0
+versus what step 6 scores afterward.
+
+## 1. The saved scans — this is the Stage 0 prefilter
+
+Each scan *is* a rubric itself — a hard-cutoff, binary pass/fail prefilter
+that runs before `rubric.md`'s weighted 100-point scoring ever starts (see
+`../../../RUBRICS.md`'s lifecycle: this is Stage 0, not a separate ad hoc
+thing). Tuned so each archetype's daily universe is small enough to fully
+score and log every survivor (see step 6), loose enough not to miss real
+candidates. Changes to any of these filters get logged to
 `reports/rubric-changelog.csv` (`rubric=opportunity-scanner,
-category=prefilter`) exactly like a weighted-criterion change would.
+category=prefilter-<archetype>`) exactly like a weighted-criterion change
+would.
 
 - **`38edc26c-8b66-4235-9f3b-40275bb6cb7f`** — "Deep Value Turnaround
   Candidates": `Market cap > $2B`, `RSI(14) < 30`, `Williams %R(14) < -80`
@@ -61,23 +82,55 @@ category=prefilter`) exactly like a weighted-criterion change would.
   filter was tried and rejected — the scanner backend has a template bug
   on that specific filter type (`%!s(MISSING)Stochastic(...)`) regardless
   of parameters; don't retry it until Robinhood fixes it server-side.
-- **`2a31c406-2b3f-4552-bcb4-6e78ceaba979`** — Growth Compounder screen:
-  `Market cap > $1B`, `PEG < 0.35`, `Return on equity > 25%`,
-  `Operating margin > 0`, `Net profit margin > 0`, sorted by PEG
-  ascending. Tightened from the original `PEG < 1.5, ROE > 15%` (394
-  matches — far too broad for a daily full-evaluation pass) by both
-  raising the valuation/quality bar and adding explicit profitability
-  filters (the "not a value trap" quality-factor logic from `RUBRICS.md`'s
-  Quality Minus Junk citation, now enforced at the scan level instead of
-  only in step 4's manual read). **~71 matches as of 2026-07-07.**
+- **`2a31c406-2b3f-4552-bcb4-6e78ceaba979`** — Growth Compounder screen
+  (feeds `compounder`/Quality Inflection): `Market cap > $1B`,
+  `PEG < 0.35`, `Return on equity > 25%`, `Operating margin > 0`,
+  `Net profit margin > 0`, sorted by PEG ascending. Tightened from the
+  original `PEG < 1.5, ROE > 15%` (394 matches — far too broad for a daily
+  full-evaluation pass) by both raising the valuation/quality bar and
+  adding explicit profitability filters (the "not a value trap"
+  quality-factor logic from `RUBRICS.md`'s Quality Minus Junk citation,
+  now enforced at the scan level instead of only in step 4's manual read).
+  **~71 matches as of 2026-07-07.** Includes margin/ROE as visible
+  columns, so those criteria are computable from the scan result alone —
+  no extra fundamentals fetch needed for Category B.
+- **`fd3c2707-3c1c-4283-9223-d5e447ae8425`** — "Moonshot Growth
+  Candidates": `Market cap BETWEEN $300M-$15B`, `RSI(14) > 75`,
+  `Aroon Oscillator > 70`, `ADX > 25` — confirmed strong uptrend (not a
+  one-day spike) in small/mid-cap names, the inverse screen of the
+  turnaround archetype. **~76 matches as of 2026-07-07.** No fundamental
+  filters, so this scan's columns give momentum data only — Category B
+  (margin/ROE) is **not computable from this scan** without a separate
+  `get_equity_fundamentals` pull, and even that tool doesn't return
+  margin/ROE fields at all (see the data-availability note below). A
+  `FILTER_TYPE_RELATIVE_VOLUME` filter was tried first and returned 0
+  matches when combined with RSI — dropped in favor of Aroon+ADX for
+  trend confirmation instead.
+- **`95b3655e-8750-46ec-b835-c933ae316999`** — "Steady Value Compounders"
+  (feeds `steady_value`): `Market cap > $10B`, `P/E BETWEEN 0-18`,
+  `Return on equity > 15%`, `Operating margin > 10%`. **~91 matches as of
+  2026-07-07.** No dividend-yield filter exists in the scanner's filter
+  spec at all (checked `trading://scanner-filter-specs` directly) — can't
+  prefilter on it, only check individually.
 
-Re-run either with `run_scan` any time; both are visible in the Robinhood
-app's screener section too, not just here. `update_scan_filters` /
-`update_scan_config` can retune them (full reference:
+**Data-availability note, found while scoring 2026-07-07:**
+`get_equity_fundamentals` does **not** return margin/ROE/ROA fields under
+any circumstance — those only appear when a *scan's own columns* include
+them (because that scan applied a matching filter). This means Category B
+scoring is only as complete as each archetype's scan filters make it:
+`compounder` and `steady_value` get real margin/ROE from their scan
+columns; `turnaround` and `moonshot_growth` don't have those filters, so
+Category B is scored on market cap/dividend/liquidity alone for those two
+archetypes unless a future run adds a separate fundamentals-based lookup.
+
+Re-run any scan with `run_scan` any time; all are visible in the
+Robinhood app's screener section too, not just here. `update_scan_filters`
+/ `update_scan_config` can retune them (full reference:
 `trading://scanner-filter-specs` resource lists every available filter —
-fundamental, price/volume, technical, and options). Re-check the combined
-match count after any retune — if it drifts materially outside ~50–100,
-that's the signal to tune again, logging the change either way.
+fundamental, price/volume, technical, and options). Re-check each
+archetype's match count after any retune — if it drifts materially
+outside ~50–100, that's the signal to tune again, logging the change
+either way.
 
 ## 2. Mandatory secondary filter: distance from the high (the scanner can't do this natively)
 
