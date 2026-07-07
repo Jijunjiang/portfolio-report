@@ -1,7 +1,8 @@
 # Rubric engine: system design
 
-`RUBRICS.md` describes the five-stage *process*. This doc is the system
-design for the thing that actually runs it — components, data flow, and
+One level below `SYSTEM-DESIGN.md` (the whole system) and one level above
+`RUBRICS.md` (the five-stage *process*) — this doc is the system design
+for the thing that actually runs that process: components, data flow, and
 the concrete engine (`.claude/skills/rubric-engine/`) that turns the
 "hill-climb" stage from prose into something invokable.
 
@@ -26,6 +27,7 @@ is no autonomous trading and no autonomous rubric-editing here.
 | Outcome resolver | Fills in what actually happened, once enough time has passed | `rubric-engine` skill, step 1 |
 | Correlation analyzer | Buckets resolved rows by score, checks which categories discriminate | `rubric-engine` skill, step 2 |
 | Proposal drafter | Turns a discriminating pattern into a specific, cited rubric diff | `rubric-engine` skill, step 3 |
+| Proposal log | Timestamped record of every proposal and its eventual status | `reports/rubric-changelog.csv` |
 | Human approval gate | Nothing changes without explicit sign-off | `rubric-engine` skill, step 4 |
 | Rubric editor | Applies an approved diff + changelog entry | `rubric-engine` skill, step 5 |
 

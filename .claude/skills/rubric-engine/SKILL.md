@@ -74,14 +74,27 @@ Never propose changing more than one category at a time from a single
 review unless the evidence independently supports each — bundling changes
 makes it impossible to tell later which change actually helped.
 
+**Immediately log every drafted proposal** to
+`reports/rubric-changelog.csv` (columns: `timestamp, rubric_target,
+category, change_type, old_value, new_value, reason, evidence_rows,
+status`) with a full ISO 8601 timestamp (date *and* time — a review can
+draft several proposals in one sitting, date-only would collide) and
+`status = proposed`. Log it before presenting to the user, not after —
+the proposal itself is a data point worth keeping even if it's later
+rejected.
+
 ## Step 4 — Human approval gate
 
 Present the proposal(s) from Step 3 to the user with the supporting
 evidence. Do not edit the rubric file yet. Wait for explicit approval,
-rejection, or a request for more evidence before proceeding. If rejected
-or deferred, note that in the rubric's changelog anyway (a rejected
-proposal with its reasoning is still useful history) — see Step 5's
-format, just mark it "proposed, not applied."
+rejection, or a request for more evidence before proceeding.
+
+Update that proposal's row in `reports/rubric-changelog.csv` in place —
+find it by its timestamp — setting `status` to `approved` or `rejected`
+(never delete the row either way; a rejected proposal with its reasoning
+is still useful history). If the user asks for more evidence instead of a
+yes/no, leave `status = proposed` and revisit next cycle rather than
+guessing.
 
 ## Step 5 — Apply (only after approval)
 
@@ -90,11 +103,15 @@ change) and append one line to its `## Changelog` section:
 
 ```
 - YYYY-MM-DD: <what changed> — <why, citing the specific resolved rows>
+  (full record: reports/rubric-changelog.csv)
 ```
 
-Then stop — don't retroactively rescore historical log rows under the
-changed rubric (`RUBRICS.md` Stage 5: old rows keep their original
-scores).
+The prose changelog entry and the CSV row are deliberately redundant —
+the prose is for a human reading the rubric file inline, the CSV is the
+structured, queryable, timestamped record of the same fact (see
+`SYSTEM-DESIGN.md` for why both forms are kept). Then stop — don't
+retroactively rescore historical log rows under the changed rubric
+(`RUBRICS.md` Stage 5: old rows keep their original scores).
 
 ## Cadence
 
