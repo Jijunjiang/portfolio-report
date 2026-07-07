@@ -57,6 +57,20 @@ Report the bucket comparison **and the N in each bucket** — a category
 that "looks" discriminating on 3 resolved rows is not evidence, it's
 noise; say so plainly rather than presenting it as a finding.
 
+## Step 2b — Literature refresh
+
+Before drafting proposals from internal evidence alone, spend one pass
+checking whether new academic or practitioner research has come out since
+the last review that bears on a category under consideration (per
+`RUBRICS.md`'s "research is ongoing, not a one-time pass"). Use `WebSearch`
+for this — don't rely on memory for anything published after the last
+review. This is a second, independent input into Step 3's proposals, not
+a replacement for the logged-outcome evidence: a criterion can get
+proposed for revision because the internal log shows it isn't
+discriminating, because new external research undercuts its premise, or
+both — cite whichever actually applies, and don't manufacture a citation
+to justify a change the log evidence alone already supports.
+
 ## Step 3 — Draft a proposal (only where evidence supports it)
 
 For any category with **≥5 resolved cases** where the bucket comparison

@@ -12,9 +12,12 @@ bands are a starting point, not calibrated against a large sample —
 HOOD's setup would have scored high on category A alone; treat the bands
 as directional.
 
-Run this on candidates that already passed the two saved scans (see
-SKILL.md step 1) — this rubric is for scoring/ranking a shortlist, not for
-scanning the whole market from scratch.
+Run this on candidates that already passed the two saved scans — see
+SKILL.md step 1, which is Stage 0 of this rubric (a hard-cutoff prefilter,
+tuned to ~100 combined daily matches so every survivor can get the full
+score below, not just a subset). This 100-point rubric is Stage 1 of the
+same lifecycle (`../../../RUBRICS.md`) — for scoring/ranking the
+prefiltered set, not for scanning the whole market from scratch.
 
 ## Category A — Value / drawdown depth (30 pts)
 

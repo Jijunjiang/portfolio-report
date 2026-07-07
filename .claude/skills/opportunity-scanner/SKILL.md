@@ -36,21 +36,48 @@ like HOOD or INTC's setup. This is why step 2 below is mandatory, not
 optional — RSI alone produces false positives that look nothing like the
 user's actual winners.
 
-## 1. Two saved scans (already created on the account)
+## 1. Two saved scans (already created on the account) — this is the Stage 0 prefilter
+
+These two scans *are* a rubric themselves — a hard-cutoff, binary
+pass/fail prefilter that runs before `rubric.md`'s weighted 100-point
+scoring ever starts (see `../../../RUBRICS.md`'s lifecycle: this is Stage
+0, not a separate ad hoc thing). Tuned on 2026-07-07 to bring the combined
+daily universe down to ~100 names — tight enough to fully score and log
+every survivor daily (see step 6), loose enough not to miss real
+candidates. Changes to these filters get logged to
+`reports/rubric-changelog.csv` (`rubric=opportunity-scanner,
+category=prefilter`) exactly like a weighted-criterion change would.
 
 - **`38edc26c-8b66-4235-9f3b-40275bb6cb7f`** — "Deep Value Turnaround
-  Candidates": `Market cap > $2B`, `RSI(14) < 30`, sorted by RSI ascending.
-  This is the mechanical first pass for the HOOD/INTC archetype.
+  Candidates": `Market cap > $2B`, `RSI(14) < 30`, `Williams %R(14) < -80`
+  — the RSI+Williams combination requires two independent oversold
+  signals to agree, sorted by RSI ascending. **~32 matches as of
+  2026-07-07.** Note: this combination still does *not* filter out a
+  short-term dip inside an uptrend (CRWD clears both RSI<30 and
+  Williams<-80 while being only 2.5% off its 52-week high) — that's a
+  structural limit of technical oscillators, not something more scan
+  filters fix. Step 2 below (the 52-week-high distance check) remains
+  mandatory for exactly this reason. A `FILTER_TYPE_STOCHASTIC_OSCILLATOR`
+  filter was tried and rejected — the scanner backend has a template bug
+  on that specific filter type (`%!s(MISSING)Stochastic(...)`) regardless
+  of parameters; don't retry it until Robinhood fixes it server-side.
 - **`2a31c406-2b3f-4552-bcb4-6e78ceaba979`** — Growth Compounder screen:
-  `Market cap > $1B`, `PEG < 1.5`, `Return on equity > 15%`, sorted by PEG
-  ascending. First pass for quality-growth-at-reasonable-price names (the
-  TSM archetype — TSM itself clears these filters today).
+  `Market cap > $1B`, `PEG < 0.35`, `Return on equity > 25%`,
+  `Operating margin > 0`, `Net profit margin > 0`, sorted by PEG
+  ascending. Tightened from the original `PEG < 1.5, ROE > 15%` (394
+  matches — far too broad for a daily full-evaluation pass) by both
+  raising the valuation/quality bar and adding explicit profitability
+  filters (the "not a value trap" quality-factor logic from `RUBRICS.md`'s
+  Quality Minus Junk citation, now enforced at the scan level instead of
+  only in step 4's manual read). **~71 matches as of 2026-07-07.**
 
 Re-run either with `run_scan` any time; both are visible in the Robinhood
 app's screener section too, not just here. `update_scan_filters` /
 `update_scan_config` can retune them (full reference:
 `trading://scanner-filter-specs` resource lists every available filter —
-fundamental, price/volume, technical, and options).
+fundamental, price/volume, technical, and options). Re-check the combined
+match count after any retune — if it drifts materially outside ~50–100,
+that's the signal to tune again, logging the change either way.
 
 ## 2. Mandatory secondary filter: distance from the high (the scanner can't do this natively)
 
@@ -120,31 +147,49 @@ company) doesn't always resolve upward. Treat this as a research
 shortlist for the user's own few-times-a-quarter, high-conviction
 decisions, not a signal to act on directly.**
 
-## 6. Cadence — daily mechanical monitoring, quarterly deep review
+## 6. Cadence — daily full evaluation of the prefiltered set, quarterly outcome review
 
-Full 32-criterion scoring (including the judgment-based categories B and
-D) stays quarterly by design — that depth of research doesn't belong in
-a daily automated job, and this account only acts a few times a quarter
-anyway. But *watching for something new to look at* is cheap enough to
-run daily, so it does:
+The Stage 0 prefilter (step 1) is what makes this affordable: at ~100
+combined matches/day, the full 32-criterion rubric can run on **every**
+survivor, every day, not just a cheap mechanical subscore on a few
+hundred. This replaced an earlier "mechanical-only daily, full rubric
+only for high scorers" design once the prefilter itself was tightened
+enough to make full daily evaluation practical — see
+`reports/rubric-changelog.csv` for that change.
 
-**Daily confidence score (mechanical only):** every day, as part of
-`portfolio-report`, run both saved scans and compute the **mechanical
-subscore** — category A + category C only (50 points total, no judgment
-calls) — for every result. Map it to a confidence band:
-- **≥35/50 (70%+): High** — a new candidate crossed into territory worth
-  the full rubric. Run categories B/D/E for it same-day and surface it in
-  that day's report, don't wait for the quarterly cycle.
-- **25–34/50 (50–69%): Moderate** — note in the report, no deep-dive yet.
-- **<25/50: Low** — don't surface it; this is most results, most days.
+**Every day, as part of `portfolio-report`:**
+1. Run both saved scans (step 1) — ~100 combined matches.
+2. Batch-pull `get_equity_fundamentals` (10 symbols per call, ~10-11
+   calls total) for every match. This one batched pull covers most of
+   what the rubric needs directly: `high_52_weeks`/`low_52_weeks` (step
+   2's gate), margins/ROE/market cap (Category B), and — usefully — each
+   company's `description`/`sector`/`industry`, which is enough raw
+   material to make Category B/D's judgment calls (cyclical vs.
+   structural, sector tailwind, catalyst) without a separate research
+   pass per stock.
+3. **Score one candidate at a time, not all ~100 in a single pass.** Loop:
+   pick the next match → apply the full `rubric.md` to it (all 5
+   categories) using the scan's own columns plus the batched fundamentals
+   pull → apply step 2's ≥40%-off-high gate if it's a turnaround candidate
+   → append its row to the log → move to the next match. Scoring is
+   inherently a per-candidate judgment call (especially the [J] criteria);
+   cramming all ~100 into one combined reasoning pass risks shallow,
+   rushed scoring on the later names in the batch. One call's worth of
+   fetched data (the batched fundamentals) can feed many sequential
+   per-candidate scoring steps — it's the *scoring*, not the *data
+   fetch*, that stays one-at-a-time.
+4. **Log every single one to `reports/opportunity-scanner-log.csv`** as
+   it's scored — full category breakdown, not just a subtotal, sell-worthy
+   or not. This is the "log everything" the account holder wants: every
+   survivor of the prefilter gets a complete, resolvable data point, every
+   day.
+5. Surface in that day's report only what's actually report-worthy
+   (≥70 = full callout, 50–69 = one-line mention, <50 = not listed
+   individually) — the log has everything regardless of what's shown.
 
-This keeps the daily job cheap (pure scanner filters + arithmetic, no
-manual research) while still catching a genuine new setup the day it
-appears rather than up to three months later. A quiet day just means "no
-new signals," which is the common case and fine to state briefly.
-
-**Quarterly deep review:** unchanged — full rubric on the accumulated
-watchlist, paired with the `refinement.md` outcome review.
+**Quarterly outcome review:** unchanged — the `rubric-engine` skill reads
+this same log, resolves `outcome_1q`/`outcome_1y`, and proposes evidence-
+cited changes to either the weighted rubric or this Stage 0 prefilter.
 
 ## 7. Files in this skill
 

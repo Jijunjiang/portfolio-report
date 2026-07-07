@@ -21,6 +21,7 @@ is no autonomous trading and no autonomous rubric-editing here.
 |---|---|---|
 | Research intake | Papers/books/practitioner research, curated by hand | `RUBRICS.md` § Literature backing today's rubrics |
 | Rubric definition | Versioned criteria + weights + changelog | `rubric.md` / `option-suggestion-rubric.md` |
+| Prefilter (Stage 0) | Hard-cutoff pass/fail rubric that narrows the raw universe to a size the full rubric can completely evaluate | Saved-scan filters (`opportunity-scanner/SKILL.md` step 1); ~100 combined daily matches as of 2026-07-07 |
 | Candidate generator | Produces raw candidates to score | `run_scan` (saved scanners) / `get_option_chains` + `get_option_instruments` |
 | Scorer | Applies a rubric to a candidate → category subscores + total | Executed inline by `opportunity-scanner`/`portfolio-report` SKILL.md steps |
 | Decision log | Append-only fact table: candidate + score + decision + (later) outcome | `reports/opportunity-scanner-log.csv`, `reports/option-suggestion-log.csv` |

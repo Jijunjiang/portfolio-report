@@ -7,6 +7,32 @@ process both follow, so a new rubric doesn't have to reinvent it, and so
 "is the strategy actually working" stays answerable from a log instead of
 a feeling.
 
+## Stage 0 — Prefilter (a rubric before the rubric)
+
+When the raw candidate universe is too large to fully evaluate (2,000+
+tickers, hundreds of scan matches), a hard-cutoff, binary pass/fail
+prefilter comes first — this is a rubric too, just with pass/fail
+thresholds instead of weighted points. Its job is narrowing the universe
+to a size the full weighted rubric can actually be run against
+*completely*, not partially — the target is "log everything that
+survives," never "log a further arbitrary top-N cut of the survivors."
+
+- Implemented as the saved-scan filters themselves (see
+  `opportunity-scanner/SKILL.md` step 1) — tuned to bring the combined
+  daily universe to roughly 50–100 matches, small enough for a full daily
+  evaluation-and-log pass, large enough not to miss real candidates.
+- Tunable the same way as any rubric criterion: tighten/loosen a
+  threshold, check the resulting count, log the change (see 2026-07-07's
+  entries in `reports/rubric-changelog.csv`, `category = prefilter-*`).
+- **A tighter prefilter is not a substitute for a real rubric criterion.**
+  E.g., adding more technical-oscillator filters (RSI + Williams %R) at
+  Stage 0 does *not* replace the mandatory 52-week-high-distance check in
+  `opportunity-scanner/SKILL.md` step 2 — oscillators and drawdown depth
+  measure different things, and the CRWD false-positive (oversold on both
+  RSI and Williams %R, but only 2.5% off its 52-week high) is the
+  concrete case proving it. Know what a prefilter criterion actually
+  screens for before assuming it subsumes a later check.
+
 ## Stage 1 — Generate the initial rubric
 
 - Start from the informal heuristics already stated and used in a skill's
@@ -23,6 +49,21 @@ a feeling.
   (recovered) vs. PTON (didn't), see `.claude/skills/opportunity-scanner/validation.md`.
   An unvalidated rubric is a hypothesis, not a tool — say so plainly until
   it's been checked against at least a few known-outcome cases.
+
+### Research is ongoing, not a one-time pass
+
+The literature search that grounded today's two rubrics (see below) isn't
+a closed chapter — new academic and practitioner research on factor
+investing, drawdown/reversal effects, and options-premium harvesting
+keeps getting published, and some of it will sharpen a criterion or
+threshold here. Fold a fresh literature check into the same quarterly
+cadence as the evidence-based hill-climb (`rubric-engine`'s quarterly
+run): before proposing changes from the logged-outcome evidence alone,
+also check whether anything new has been published that bears on a
+criterion under review, and cite it the same way as the existing sources
+below if it changes the proposal. Two independent update paths — internal
+logged evidence and external research — should both feed Stage 4, not
+just the first one.
 
 ### How to research a new or revised criterion
 
