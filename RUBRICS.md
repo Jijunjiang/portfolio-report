@@ -199,3 +199,11 @@ that would corrupt the very evidence used to justify changing it.
 
 When a new strategy needs a rubric, follow the five stages above and add a
 row to this table.
+
+## System design and the engine
+
+Stages 3–4 (resolve outcomes, hill-climb) are implemented as an invokable
+skill, `.claude/skills/rubric-engine/`, rather than left as prose to
+re-derive each quarter. See `RUBRIC-ENGINE.md` for the full system design
+— component breakdown and workflow diagrams — and that skill's `SKILL.md`
+for the exact steps it runs.
