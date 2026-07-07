@@ -177,6 +177,13 @@ multi-candidate table with the aggregate: total capital committed and
 total premium if every "Sell" row were taken, and that capital's share of
 total buying power.
 
+**Log every candidate to `reports/option-suggestion-log.csv`, sell or
+skip, scored against `playbooks/option-suggestion-rubric.md`.** This is
+what makes it possible to check later whether the strategy is actually
+working rather than just narrating it — see
+`playbooks/option-suggestion-refinement.md` for the quarterly review
+process that reads this log back.
+
 For a full quantitative workup of any single candidate that survives this
 screen (Black-Scholes assignment probability rather than raw delta,
 tax-adjusted expected value, concentration-checked sizing) — or when the
@@ -201,7 +208,7 @@ and map to a confidence band (≥70%: High, 50–69%: Moderate, <50%: Low).
 
 ## 8. Output
 
-Write two artifacts each run:
+Write three artifacts each run:
 
 1. `reports/YYYY-MM-DD.md` in this repo — the full report, in this order:
    consolidated net worth across accounts, per-account breakdown, margin
@@ -214,6 +221,10 @@ Write two artifacts each run:
    layout) by calling Artifact on the same file path/URL used previously —
    check `reports/.artifact-url` for the URL from the last run, or create a
    fresh one if this is the first run and save the returned URL there.
+3. Append one row to `reports/net-worth-history.csv` (schema:
+   `date,total_net_worth,main_account_value,unrealized_gain,ytd_realized_pnl,open_option_premium,loan_to_value_pct`)
+   — structured trend data, same idea as `margin-balance-history.csv`. Pull
+   each value from that day's report computations rather than recomputing.
 
 ## Playbooks
 
