@@ -58,3 +58,10 @@ suggestion time. The score is descriptive, not predictive yet — there
 isn't enough resolved history to know which categories actually correlate
 with good outcomes. That correlation is exactly what
 `option-suggestion-refinement.md`'s quarterly review is for.
+
+## Changelog
+
+Every reweight/add/retire gets one line here: date, what changed, why, and
+which logged rows in `reports/option-suggestion-log.csv` justified it. See
+`../../../../RUBRICS.md` for the full lifecycle this follows. Empty so far
+— scoring only started 2026-07-06, no resolved cases yet.

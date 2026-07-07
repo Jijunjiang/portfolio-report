@@ -1,5 +1,10 @@
 # Refining the rubric over time
 
+This is one instance of the shared lifecycle in `../../../RUBRICS.md`
+(generate → log → resolve → hill-climb → repeat) — this doc covers the
+specifics for this rubric; see that doc for the general process and for
+how the option-suggestion rubric follows the same pattern.
+
 There's no automated gradient descent here — not enough data volume for
 that, and no formal loss function to optimize. What's actually practical
 at this account's cadence (a few decisions a quarter) is **evidence-based

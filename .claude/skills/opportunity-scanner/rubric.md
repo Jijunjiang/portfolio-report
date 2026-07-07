@@ -76,3 +76,11 @@ differently than 60 from strong momentum + no real discount, and the user
 should see which. List which specific criteria drove the score down, not
 just the criteria that drove it up — the discarded points are often the
 most decision-relevant part.
+
+## Changelog
+
+Every reweight/add/retire gets one line here: date, what changed, why, and
+which logged rows in `reports/opportunity-scanner-log.csv` justified it.
+See `../../../RUBRICS.md` for the full lifecycle this follows. Empty so
+far — no criterion has been changed yet since this rubric was first
+written and validated (see `validation.md`).

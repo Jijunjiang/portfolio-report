@@ -1,6 +1,9 @@
 # Refining the option-selling strategy over time
 
-Same philosophy as the opportunity-scanner's `refinement.md`: evidence-based
+This is one instance of the shared lifecycle in `../../../../RUBRICS.md`
+(generate → log → resolve → hill-climb → repeat) — this doc covers the
+specifics for this rubric; see that doc for the general process. Same
+philosophy as the opportunity-scanner's `refinement.md`: evidence-based
 manual tuning at this account's cadence, not automated optimization. Log
 every suggestion, check back on what actually happened, adjust the
 playbooks when the evidence supports it — not before.
