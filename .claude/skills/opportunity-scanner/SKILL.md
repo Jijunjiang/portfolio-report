@@ -46,10 +46,21 @@ with `archetype` set to the tag below in `reports/opportunity-scanner-log.csv`.
 
 | Archetype | Risk / Reward | Pattern | Scan ID | ~Daily matches |
 |---|---|---|---|---|
-| `turnaround` | High risk, 5-10x | Distressed, established company recovers (HOOD, INTC) | `38edc26c-8b66-4235-9f3b-40275bb6cb7f` | 32 raw, ~3 pass the 40%-off-high gate |
-| `moonshot_growth` | High risk, 10x+ | Small/mid-cap, no distress — explosive momentum/growth, not mean-reversion | `fd3c2707-3c1c-4283-9223-d5e447ae8425` | 76 |
-| `compounder` (Quality Inflection) | Medium risk, 2-5x | Quality business, secular tailwind, "buy NVDA/TSM early" | `2a31c406-2b3f-4552-bcb4-6e78ceaba979` | 71 |
-| `steady_value` | Low risk, ~30-50% | Traditional blue-chip, undervalued not distressed | `95b3655e-8750-46ec-b835-c933ae316999` | 91 |
+| `turnaround` | High risk, 5-10x | Distressed, established company recovers (HOOD, INTC) | `38edc26c-8b66-4235-9f3b-40275bb6cb7f` | 20 raw (was 32 pre-profitability filter), ~3 pass the 40%-off-high gate |
+| `moonshot_growth` | High risk, 10x+ | Small/mid-cap, no distress — explosive momentum/growth, not mean-reversion | `fd3c2707-3c1c-4283-9223-d5e447ae8425` | 61 (was 76) |
+| `compounder` (Quality Inflection) | Medium risk, 2-5x | Quality business, secular tailwind, "buy NVDA/TSM early" | `2a31c406-2b3f-4552-bcb4-6e78ceaba979` | 71 (already required positive profit) |
+| `steady_value` | Low risk, ~30-50% | Traditional blue-chip, undervalued not distressed | `95b3655e-8750-46ec-b835-c933ae316999` | ~94 (was ~91; op-margin>10% already implied positive profit for most) |
+
+**All four archetypes now require `Net profit margin > 0` (added
+2026-07-07)** — a deliberate, user-directed narrowing to currently-
+profitable companies only. Worth naming the tradeoff explicitly for
+`turnaround` specifically: HOOD and INTC were not reliably profitable at
+their actual beaten-down entry points (per `validation.md`), so this
+filter could exclude a real future HOOD/INTC-style setup in exchange for
+screening out the higher-risk still-unprofitable distressed names. That's
+the deliberate choice made here, not an oversight — revisit via
+`rubric-engine` once enough turnaround rows resolve to show whether this
+filter is costing good picks or correctly avoiding bad ones.
 
 `moonshot_growth` and `steady_value` are read-only-scoring at this point
 (no dedicated playbook subsections yet) — they reuse `rubric.md`'s
@@ -70,10 +81,11 @@ category=prefilter-<archetype>`) exactly like a weighted-criterion change
 would.
 
 - **`38edc26c-8b66-4235-9f3b-40275bb6cb7f`** — "Deep Value Turnaround
-  Candidates": `Market cap > $2B`, `RSI(14) < 30`, `Williams %R(14) < -80`
-  — the RSI+Williams combination requires two independent oversold
-  signals to agree, sorted by RSI ascending. **~32 matches as of
-  2026-07-07.** Note: this combination still does *not* filter out a
+  Candidates": `Market cap > $2B`, `RSI(14) < 30`, `Williams %R(14) < -80`,
+  `Net profit margin > 0` — the RSI+Williams combination requires two
+  independent oversold signals to agree, sorted by RSI ascending. **20
+  matches as of 2026-07-07** (32 before the profitability filter was
+  added). Note: this combination still does *not* filter out a
   short-term dip inside an uptrend (CRWD clears both RSI<30 and
   Williams<-80 while being only 2.5% off its 52-week high) — that's a
   structural limit of technical oscillators, not something more scan
@@ -96,22 +108,24 @@ would.
   no extra fundamentals fetch needed for Category B.
 - **`fd3c2707-3c1c-4283-9223-d5e447ae8425`** — "Moonshot Growth
   Candidates": `Market cap BETWEEN $300M-$15B`, `RSI(14) > 75`,
-  `Aroon Oscillator > 70`, `ADX > 25` — confirmed strong uptrend (not a
-  one-day spike) in small/mid-cap names, the inverse screen of the
-  turnaround archetype. **~76 matches as of 2026-07-07.** No fundamental
-  filters, so this scan's columns give momentum data only — Category B
-  (margin/ROE) is **not computable from this scan** without a separate
-  `get_equity_fundamentals` pull, and even that tool doesn't return
-  margin/ROE fields at all (see the data-availability note below). A
-  `FILTER_TYPE_RELATIVE_VOLUME` filter was tried first and returned 0
-  matches when combined with RSI — dropped in favor of Aroon+ADX for
-  trend confirmation instead.
+  `Aroon Oscillator > 70`, `ADX > 25`, `Net profit margin > 0` — confirmed
+  strong uptrend (not a one-day spike) in small/mid-cap names, the inverse
+  screen of the turnaround archetype. **61 matches as of 2026-07-07** (76
+  before the profitability filter; that scan's own Net profit margin
+  column is now usable directly for Category B, unlike before when it had
+  no fundamental columns at all). A `FILTER_TYPE_RELATIVE_VOLUME` filter
+  was tried first and returned 0 matches when combined with RSI — dropped
+  in favor of Aroon+ADX for trend confirmation instead.
 - **`95b3655e-8750-46ec-b835-c933ae316999`** — "Steady Value Compounders"
   (feeds `steady_value`): `Market cap > $10B`, `P/E BETWEEN 0-18`,
-  `Return on equity > 15%`, `Operating margin > 10%`. **~91 matches as of
-  2026-07-07.** No dividend-yield filter exists in the scanner's filter
-  spec at all (checked `trading://scanner-filter-specs` directly) — can't
-  prefilter on it, only check individually.
+  `Return on equity > 15%`, `Operating margin > 10%`,
+  `Net profit margin > 0`. **~94 matches as of 2026-07-07** — the added
+  profitability filter barely moved the count since `Operating margin >
+  10%` already implied positive profit for nearly every match; also now
+  gives a real Net profit margin column for Category B instead of relying
+  on Operating margin as a proxy. No dividend-yield filter exists in the
+  scanner's filter spec at all (checked `trading://scanner-filter-specs`
+  directly) — can't prefilter on it, only check individually.
 
 **Data-availability note, found while scoring 2026-07-07:**
 `get_equity_fundamentals` does **not** return margin/ROE/ROA fields under
