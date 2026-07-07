@@ -1,1 +1,1 @@
-timestamp,rubric_target,category,change_type,old_value,new_value,reason,evidence_rows,status
+id,timestamp,rubric,category,change,status

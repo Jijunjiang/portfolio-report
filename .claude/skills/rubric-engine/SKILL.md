@@ -75,13 +75,25 @@ review unless the evidence independently supports each — bundling changes
 makes it impossible to tell later which change actually helped.
 
 **Immediately log every drafted proposal** to
-`reports/rubric-changelog.csv` (columns: `timestamp, rubric_target,
-category, change_type, old_value, new_value, reason, evidence_rows,
-status`) with a full ISO 8601 timestamp (date *and* time — a review can
-draft several proposals in one sitting, date-only would collide) and
-`status = proposed`. Log it before presenting to the user, not after —
-the proposal itself is a data point worth keeping even if it's later
-rejected.
+`reports/rubric-changelog.csv` — columns: `id, timestamp, rubric,
+category, change, status`. One row per proposal:
+- `id`: next sequential integer (check the last row in the file).
+- `timestamp`: full ISO 8601 date+time (a review can draft several
+  proposals in one sitting, date-only would collide).
+- `rubric`: which rubric this is (`opportunity-scanner` or
+  `option-suggestion`).
+- `category`: the category tag it touches (e.g. `A`, `D`) — just the tag,
+  not a paragraph.
+- `change`: one free-text field covering what's changing and why,
+  including the cited evidence rows (e.g. `"Category A weight 8pt->5pt —
+  didn't discriminate across HOOD/CVNA/PTON (opportunity-scanner-log rows
+  12,15,19)"`). Everything that used to be separate change_type/old_value/
+  new_value/reason/evidence_rows columns lives in this one field now —
+  keep it terse but self-contained.
+- `status`: `proposed`.
+
+Log it before presenting to the user, not after — the proposal itself is
+a data point worth keeping even if it's later rejected.
 
 ## Step 4 — Human approval gate
 
@@ -90,9 +102,9 @@ evidence. Do not edit the rubric file yet. Wait for explicit approval,
 rejection, or a request for more evidence before proceeding.
 
 Update that proposal's row in `reports/rubric-changelog.csv` in place —
-find it by its timestamp — setting `status` to `approved` or `rejected`
-(never delete the row either way; a rejected proposal with its reasoning
-is still useful history). If the user asks for more evidence instead of a
+find it by `id` — setting `status` to `approved` or `rejected` (never
+delete the row either way; a rejected proposal with its reasoning is
+still useful history). If the user asks for more evidence instead of a
 yes/no, leave `status = proposed` and revisit next cycle rather than
 guessing.
 
