@@ -17,11 +17,27 @@ review loop, run quarterly, not a continuously-optimizing system.
 
 `reports/opportunity-scanner-log.csv` — one row per candidate scored,
 ever. Columns: `date_scanned, ticker, archetype, total_score,
-category_a, category_b, category_c, category_d, category_e,
-price_at_scan, pct_off_high_at_scan`. Append a row every time step 3 of
-`SKILL.md` produces a scored candidate — including ones that don't make
-the shortlist, not just the winners, otherwise there's no way to tell
-whether low scores were actually avoided for good reason later.
+category_a..category_e` (subtotals), `price_at_scan,
+pct_off_high_at_scan`, then **one column per individual rubric
+criterion** — `a1_pctoffhigh` through `e32_fitstyle_judgment`, matching
+`rubric.md`'s 32 numbered criteria exactly — followed by `outcome_1q,
+outcome_1y`.
+
+**Every criterion cell is either a real score or the literal string
+`N/A`** — never a silent 0. `N/A` means the criterion genuinely wasn't
+computed this run (missing data, a tool gap, or a `[J]` judgment call that
+wasn't actually made); a `0` means it was computed and failed. Conflating
+the two would misrepresent gaps as failures and corrupt the very evidence
+`rubric-engine` reads later — see the 2026-07-07 rebuild for why this
+matters: several criteria previously carried a flat placeholder value
+(e.g. leverage/catalyst/fit-style judgment defaulted to a fixed +1 for
+every row) that looked like real per-candidate assessment but wasn't;
+those are now honestly `N/A`.
+
+Append a row every time step 6 of `SKILL.md` produces a scored candidate
+— including ones that don't make the shortlist, not just the winners,
+otherwise there's no way to tell whether low scores were actually avoided
+for good reason later.
 
 ## The quarterly review
 

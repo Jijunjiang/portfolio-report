@@ -44,18 +44,32 @@ judgment calls yet, that's step 3.
 
 ## Step 2 — Correlation analysis
 
-For each rubric category (A, B, C… per the target rubric), bucket the
-*resolved* rows by that category's subscore (high/medium/low, using the
-category's own point bands) and compare outcomes across buckets:
+For the opportunity-scanner log, the per-criterion columns
+(`a1_pctoffhigh` through `e32_fitstyle_judgment`) let this run at the
+individual-criterion level, not just the category subtotal — do it at
+**both** levels:
 
-- opportunity-scanner: average `outcome_1q`/`outcome_1y` return per bucket.
+- **Per-criterion**: for each of the 32 columns, split resolved rows into
+  those where the criterion scored well vs. poorly (skip any row where
+  that cell is `N/A` — it wasn't computed, it's not evidence either way)
+  and compare `outcome_1q`/`outcome_1y`. This is what actually answers
+  "does this specific criterion predict anything," not just "does
+  Category A as a whole."
+- **Per-category**: bucket resolved rows by category subscore
+  (high/medium/low) and compare outcomes, same as before — useful for
+  spotting a category-level pattern even when no single criterion inside
+  it is individually decisive.
 - option-suggestion: rate of `verdict = good_call` per bucket (apply the
   CSP/covered-call asymmetric verdict logic from
   `option-suggestion-refinement.md` — assignment isn't automatically bad).
 
-Report the bucket comparison **and the N in each bucket** — a category
-that "looks" discriminating on 3 resolved rows is not evidence, it's
-noise; say so plainly rather than presenting it as a finding.
+Report the bucket/criterion comparison **and the N in each bucket,
+excluding `N/A` rows from that N** — a criterion that "looks"
+discriminating on 3 non-`N/A` resolved rows is not evidence, it's noise;
+say so plainly rather than presenting it as a finding. A criterion that's
+`N/A` on most rows (e.g. Category C right now, or `a4_stochastic` given
+the broken scanner filter) isn't ready for correlation analysis at all —
+report it as "insufficient real data," not as a weak finding.
 
 ## Step 2b — Literature refresh
 
