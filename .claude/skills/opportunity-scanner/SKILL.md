@@ -123,6 +123,17 @@ columns; `turnaround` and `moonshot_growth` don't have those filters, so
 Category B is scored on market cap/dividend/liquidity alone for those two
 archetypes unless a future run adds a separate fundamentals-based lookup.
 
+**Category C is not a hard gap — see `reports/rubric-data-sources.csv`.**
+Three of its six criteria's scanner filters are permanently broken
+server-side (Stochastic, Bollinger, Support all share the same backend
+bug), but `get_equity_historicals`/`get_option_historicals` are confirmed
+working with real daily OHLCV data for both equities and options — every
+Category C criterion (and the trend-vs-snapshot gap on MACD/Aroon/ADX) is
+computable client-side from that data. No external connector needed. The
+calculation code (RSI, MACD, Bollinger, Stochastic, a support-level
+heuristic) just hasn't been written yet — that's the next real piece of
+engineering here, not a data-availability wall.
+
 Re-run any scan with `run_scan` any time; all are visible in the
 Robinhood app's screener section too, not just here. `update_scan_filters`
 / `update_scan_config` can retune them (full reference:
