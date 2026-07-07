@@ -1,10 +1,11 @@
 # Opportunity scoring rubric
 
-A composite score out of 100, built from 32 individual criteria across 5
-categories. Each criterion is tagged **[M]** mechanical (computed directly
-from a tool) or **[J]** judgment (requires reading/context, not a pure
-number) — roughly two-thirds mechanical, one-third judgment. Don't present
-a [J] criterion's score as more precise than it is.
+A composite score built from 33 individual criteria across 5 categories
+(32 original + criterion 33, added 2026-07-07 — see below). Each criterion
+is tagged **[M]** mechanical (computed directly from a tool) or **[J]**
+judgment (requires reading/context, not a pure number) — roughly
+two-thirds mechanical, one-third judgment. Don't present a [J] criterion's
+score as more precise than it is.
 
 **Before scoring a criterion, check `reports/rubric-data-sources.csv`** —
 the verified fetch method for each of the 32 criteria, including which
@@ -82,6 +83,37 @@ compounders (go to Category D instead for their equivalent).
 31. **[M]** Historical/implied volatility elevated but not at "distressed debt" extremes (i.e. the market is pricing real risk, not a going-concern doubt) → 2, else 0.
 32. **[J]** Position would fit the account's stated few-trades-per-quarter, high-conviction style rather than needing active monitoring → 2, else 0.
 
+## Criterion 33 — Domain leadership (added 2026-07-07)
+
+User-directed addition: "I hate risk — judge whether this is a company I
+could buy and hold for 10 years, top-tier in its domain." Logically part
+of Category B (financial quality / not a value trap) but numbered 33
+rather than inserted as B's own #10 — inserting mid-sequence would have
+renumbered every criterion after it and broken the column mapping in the
+251 rows already logged before this date. Applies to **all archetypes**,
+not just turnaround — a risk-averse durability filter belongs everywhere
+this account puts money, not only in the distressed-value screen.
+
+33. **[J]** Company is a top-tier / dominant leader in its specific market
+    domain — clear #1 or #2 position, with a durable moat (scale, brand,
+    network effects, switching costs, regulatory barrier, or a
+    technological lead a competitor can't quickly close) that would make
+    it reasonable to hold through a full 10-year cycle regardless of
+    near-term volatility → **5**. Solid leader in a narrower niche, or a
+    clear #3–4 in a larger domain, real but not airtight moat → **2**.
+    Sub-scale, commoditized, easily disrupted, or not a business worth
+    holding through a decade → **0**.
+
+    This is a judgment call about the *business*, not the *stock price* —
+    don't conflate it with Category A's drawdown-depth criteria (a cheap,
+    deeply-oversold stock can still fail this if it's a weak player in its
+    domain) or Category D's tailwind criterion (a strong sector tailwind
+    can lift a mediocre #4 player too, which is exactly the distinction
+    this criterion is for). Ground the call in the company description,
+    market cap relative to known competitors, and — when genuinely
+    uncertain — a `WebSearch` for the company's actual competitive
+    position, rather than guessing from the sector label alone.
+
 ## Presenting a scored candidate
 
 Show the category subtotals (A–E out of their max), not just the final
@@ -95,6 +127,12 @@ most decision-relevant part.
 
 Every reweight/add/retire gets one line here: date, what changed, why, and
 which logged rows in `reports/opportunity-scanner-log.csv` justified it.
-See `../../../RUBRICS.md` for the full lifecycle this follows. Empty so
-far — no criterion has been changed yet since this rubric was first
-written and validated (see `validation.md`).
+See `../../../RUBRICS.md` for the full lifecycle this follows.
+
+- **2026-07-07**: Added criterion 33 (domain leadership / 10-year-hold
+  quality), 5 pts, applies to all archetypes. User-directed, not
+  evidence-driven (no resolved rows exist yet to justify it either way —
+  this is a Stage 1 addition from stated risk preference, not a Stage
+  4 hill-climb). Numbered 33 rather than inserted into Category B's
+  sequence to avoid breaking the column mapping already logged for 251
+  prior rows.

@@ -180,12 +180,16 @@ score it with the full rubric next.
 
 ## 3. Score every candidate that passes the gate with `rubric.md`
 
-`rubric.md` has the full 32-criterion, 100-point scoring rubric across
-five categories (value/drawdown depth, financial quality, momentum
+`rubric.md` has the full 33-criterion scoring rubric across five
+categories (value/drawdown depth, financial quality, momentum
 confirmation, catalyst/story, risk & portfolio fit) — this is what turns
 "passed the mechanical filters" into a ranked, explainable score rather
 than a pass/fail list. Score every candidate that cleared step 2 against
-it; don't shortlist on the 52-week-high filter alone. ≥70 = strong
+it; don't shortlist on the 52-week-high filter alone. Criterion 33
+(domain leadership — added 2026-07-07, applies to every archetype) is the
+slowest one to score honestly: it needs a real competitive-position read,
+not a sector-label guess, so budget a `WebSearch` per candidate when the
+description alone doesn't make the answer obvious. ≥70 = strong
 candidate, 50–69 = watchlist, <50 = discard — see that file for the exact
 per-criterion scoring and the mechanical-vs-judgment split.
 
