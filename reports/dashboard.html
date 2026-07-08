@@ -1,4 +1,4 @@
-<title>Portfolio Report — 2026-07-06</title>
+<title>Portfolio Report — 2026-07-07</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root {
@@ -247,22 +247,6 @@
   .gain-cell { color: var(--gain); }
   .loss-cell { color: var(--loss); }
 
-  .bar-cell { width: 130px; }
-  .bar-track {
-    position: relative;
-    height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    position: absolute;
-    top: 0; bottom: 0;
-    border-radius: 4px;
-  }
-  .bar-fill.gain { background: var(--gain); left: 50%; }
-  .bar-fill.loss { background: var(--loss); right: 50%; }
-
   .pill {
     display: inline-block;
     padding: 0.15rem 0.55rem;
@@ -279,41 +263,6 @@
   .flag.yes { color: var(--caution); font-weight: 600; }
   .flag.tight { color: var(--loss); font-weight: 700; }
   .flag.no { color: var(--ink-faint); }
-
-  .suggestion-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.3rem 1.4rem;
-    box-shadow: var(--shadow);
-  }
-  .suggestion-card h3 {
-    margin: 0 0 0.3rem;
-    font-size: 1.05rem;
-  }
-  .suggestion-card .metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.9rem;
-    margin: 1rem 0;
-  }
-  .suggestion-card .metrics div .m-label {
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ink-muted);
-  }
-  .suggestion-card .metrics div .m-val {
-    font-weight: 600;
-    font-size: 1.05rem;
-  }
-  .suggestion-card .note {
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    border-top: 1px dashed var(--border);
-    padding-top: 0.8rem;
-    margin-top: 0.6rem;
-  }
 
   footer {
     margin-top: 3rem;
@@ -334,90 +283,93 @@
   <header class="top">
     <div>
       <div class="eyebrow">Daily portfolio report · Robinhood</div>
-      <h1>2026&#8202;-&#8202;07&#8202;-&#8202;06</h1>
+      <h1>2026&#8202;-&#8202;07&#8202;-&#8202;07</h1>
     </div>
     <div class="netnum">
       <div class="label">Total net worth</div>
-      <div class="value mono">$2,249,906</div>
+      <div class="value mono">$2,234,318</div>
     </div>
   </header>
 
   <h2><span class="idx">01</span> Overview</h2>
-  <p class="lede">Up $29,107 since 7/5, driven mostly by GOOG and INTC continuing to rally. Note: the scheduled cloud routine failed today on an expired GitHub authorization (now fixed); this report was generated manually while working through that.</p>
+  <p class="lede">Down $15,588 since 7/6 — HOOD gave back ~4%, INTC/MSFT/ORCL softer, partially offset by GOOG/TSM/ASML. Heavy real option trading today (2 rolls, 3 new opens, 1 new directional long call) — see sections 02 and 06. Note: the scheduled cloud routine fired today but never committed/pushed the dated report — only the Artifact got refreshed. Fixed going forward; this report was generated manually to close the gap.</p>
   <div class="tiles">
     <div class="tile">
       <div class="label">Main account value</div>
-      <div class="num mono">$2,203,279</div>
+      <div class="num mono">$2,188,206</div>
       <div class="sub">margin, individual · ••••2213</div>
     </div>
     <div class="tile">
       <div class="label">Unrealized gain</div>
-      <div class="num mono gain">+$1,186,963</div>
-      <div class="sub">60% GOOG, 15% INTC</div>
+      <div class="num mono gain">+$1,148,045</div>
+      <div class="sub">62% GOOG, 14% INTC</div>
     </div>
     <div class="tile">
       <div class="label">Margin loan-to-value</div>
-      <div class="num mono">18.3%</div>
-      <div class="sub">$496,709 borrowed / $2,721,252 equity</div>
+      <div class="num mono">18.4%</div>
+      <div class="sub">$496,039 borrowed / $2,695,687 equity</div>
     </div>
     <div class="tile">
       <div class="label">Open option premium</div>
-      <div class="num mono">$55,377</div>
-      <div class="sub">92.8% concentrated in one INTC position</div>
+      <div class="num mono">$54,899</div>
+      <div class="sub">~93.5% concentrated in one INTC position</div>
     </div>
     <div class="tile">
       <div class="label">Crypto value</div>
-      <div class="num mono">$16,936</div>
-      <div class="sub">new since 7/5 — not yet in this skill's position pipeline</div>
+      <div class="num mono">$16,844</div>
+      <div class="sub">not yet in this skill's position pipeline</div>
     </div>
     <div class="tile">
       <div class="label">Realized P&amp;L, YTD</div>
-      <div class="num mono loss">&minus;$40,008</div>
-      <div class="sub">options &minus;$37,798 &middot; equity &minus;$2,210 &middot; crypto $0</div>
+      <div class="num mono loss">&minus;$39,658</div>
+      <div class="sub">options &minus;$37,448 &middot; equity &minus;$2,210 &middot; crypto $0</div>
     </div>
   </div>
 
   <h2><span class="idx">02</span> Tax exposure</h2>
-  <div class="callout">
-    <div class="tag">Standout finding</div>
-    <p><strong>The INTC covered call is further ITM than yesterday.</strong> Short 17&nbsp;contracts of the $120 call expiring 9/18, and INTC closed at <strong>$122.20</strong> (up from $120.41). The 1,756 shares behind it were bought at $20.98 — assignment would realize roughly <strong>+$177,700</strong> of gain in one transaction, and this call spans INTC's 7/23 earnings report, which could push it further ITM before September.</p>
-    <p>Worth a deliberate decision — roll up/out to cut the odds, or accept the assignment — rather than letting it happen by default. No action taken on this since yesterday.</p>
+  <div class="callout" style="border-color: var(--gain); background: var(--gain-soft)">
+    <div class="tag" style="color:var(--gain)">Update: INTC covered call is back out-of-the-money</div>
+    <p>Short 17&nbsp;contracts of the $120 call expiring 9/18; INTC closed today at <strong>$110.39</strong>, down from $122.20 yesterday — <strong>now OTM</strong> for the first time in several reports. The 1,756 shares behind it (cost basis $20.98) would still realize roughly <strong>+$174,000</strong> of gain if it ever gets assigned, and this call still spans INTC's 7/23 earnings report, so this could reverse quickly. Still worth a deliberate roll-or-hold decision before that date, not a "problem solved" signal.</p>
   </div>
-  <p class="lede">Other large embedded gains, for context on what's most tax-sensitive to touch: GOOG +$709,326 &middot; HOOD +$93,615 &middot; TSM +$67,165 &middot; ASML +$57,483 &middot; SOFI +$26,955.</p>
+
+  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
+    <div class="tag" style="color:var(--accent)">Today's real option activity — 2 rolls, 3 new opens, 1 new long call (all placed directly by the account holder)</div>
+    <p><strong>HOOD covered call rolled:</strong> closed $200c/7-17 (15 ctr) for $15, opened $290c/9-18 (15 ctr) for $300 credit — net <strong>+$285</strong>. New expiry now spans HOOD's 7/29 earnings (the old one didn't).</p>
+    <p><strong>MSFT put rolled:</strong> closed $350p/7-17 for $48, opened $345p/8-14 for $460 credit — net <strong>+$412</strong>. Also now spans MSFT's 7/29 earnings (the old one didn't).</p>
+    <p><strong>New SPG covered call:</strong> 3 contracts, $250 strike, exp 8/21, <strong>+$465</strong> credit — well OTM, no earnings overlap.</p>
+    <p><strong>New BX cash-secured put:</strong> 1 contract, $113 strike, exp 8/14, <strong>+$350</strong> credit — spans BX's 7/23 earnings; would add to an already-held 151-share BX position if assigned.</p>
+    <p><strong>New AVGO cash-secured put:</strong> 1 contract, $330 strike, exp 8/21, <strong>+$1,060</strong> credit — new name for this account, no earnings overlap (next report 9/3).</p>
+    <p><strong>New UBER long call (directional, not covered-call/CSP style):</strong> 10 contracts, $115 strike, exp <strong>2027-03-19</strong>, <strong>&minus;$1,900</strong> debit — a departure from this account's usual income-focused option style. Spans every earnings between now and expiry.</p>
+    <p>Net cash flow from today's option activity: <strong class="gain-cell">+$672</strong> (($285+$412+$465+$350+$1,060) credit &minus; $1,900 debit).</p>
+  </div>
+
+  <p class="lede">Other large embedded gains, for context: GOOG +$705,584 &middot; HOOD +$86,640 &middot; TSM +$63,177 &middot; ASML +$53,438 &middot; SOFI +$23,085.</p>
 
   <div class="table-scroll" style="margin-bottom:1rem">
     <table style="min-width:420px">
       <thead><tr><th>Realized P&amp;L YTD (2026-01-01 &rarr; today)</th><th>Amount</th></tr></thead>
       <tbody class="mono">
-        <tr><td>Options</td><td class="loss-cell">&minus;$37,798.00</td></tr>
+        <tr><td>Options</td><td class="loss-cell">&minus;$37,448.00</td></tr>
         <tr><td>Equity</td><td class="loss-cell">&minus;$2,209.69</td></tr>
         <tr><td>Crypto</td><td>$0.00</td></tr>
-        <tr><td><strong>Combined</strong></td><td class="loss-cell"><strong>&minus;$40,007.69</strong></td></tr>
+        <tr><td><strong>Combined</strong></td><td class="loss-cell"><strong>&minus;$39,657.69</strong></td></tr>
       </tbody>
     </table>
   </div>
+
   <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">Today: closed NKE put (+$150 real gain), opened new SLG put</div>
-    <p>Bought back the NKE $40 put (10 contracts, exp 8/21) for $1,170 against the original $1,320 credit — a genuine close, real gain of <strong>+$150</strong>. Separately opened a new SLG $40 put (5 contracts, exp 8/21) for $250 credit. Neither changes the INTC-roll analysis below.</p>
+    <div class="tag" style="color:var(--accent)">Today's two rolls were real gains on the closed leg, not losses</div>
+    <p>HOOD's close cost $15 against an original $225 credit (<strong class="gain-cell">+$210</strong> realized); MSFT's cost $48 against an original $188 credit (<strong class="gain-cell">+$140</strong> realized). Combined <strong class="gain-cell">+$350</strong> — exactly the improvement in the YTD options total above vs. yesterday.</p>
   </div>
-  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">That −$37,798 is misleading — almost all of it is two INTC rolls, not real losses</div>
-    <div class="table-scroll" style="margin: 0.6rem 0; box-shadow:none">
-      <table style="min-width:560px">
-        <thead><tr><th>Date</th><th>What happened</th><th>Shows as "loss"</th><th>New premium</th><th>True net</th></tr></thead>
-        <tbody class="mono">
-          <tr><td>5/14</td><td style="text-align:left">Closed INTC $95c (exp 5/15) paying $35,700; opened $105c (exp 7/17) for $37,400</td><td class="loss-cell">&minus;$34,884</td><td class="gain-cell">+$37,400</td><td class="gain-cell">+$1,700</td></tr>
-          <tr><td>7/1</td><td style="text-align:left">Rolled $105c (exp 7/17) &rarr; $120c (exp 9/18) in one order</td><td class="loss-cell">&minus;$16,864</td><td class="gain-cell">+$51,374</td><td class="loss-cell">&minus;$2,890</td></tr>
-          <tr><td><strong>Combined</strong></td><td></td><td class="loss-cell"><strong>&minus;$51,748</strong></td><td></td><td class="loss-cell"><strong>&minus;$1,190</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p>Neither contract was closed out — both were rolled forward (strike $95&rarr;$105&rarr;$120, expiration pushed to 9/18, the same position flagged above as an assignment risk). The real net cash cost of this rolling strategy so far this year is about <strong>$1,190</strong>, not $51,748. Backing that out, every other option trade YTD (including today's NKE close) was net <strong>+$13,950</strong> — the non-INTC option activity has been solidly profitable.</p>
+
+  <div class="callout" style="border-color: var(--ink-faint); background: var(--surface); border-left-color: var(--ink-faint)">
+    <div class="tag" style="color:var(--ink-muted)">That &minus;$37,448 is still mostly two INTC rolls, not real losses</div>
+    <p>Combined <strong class="loss-cell">&minus;$51,748</strong> in apparent realized losses on paper (5/14 and 7/1 INTC rolls), true net cash cost only <strong class="loss-cell">≈&minus;$1,190</strong> — the position was extended, not closed. Backing that out plus today's +$350: every other option trade YTD nets to <strong class="gain-cell">+$14,300</strong> — solidly profitable non-INTC option activity, continuing to improve.</p>
   </div>
 
   <div class="callout" style="background:var(--surface); border-color:var(--border); border-left-color: var(--ink-faint)">
     <div class="tag" style="color:var(--ink-muted)">Hard data gap — not an estimate, genuinely unavailable here</div>
-    <p><strong>Short-term vs. long-term gain split:</strong> not computable for unrealized or realized gains. Checked directly — trade history has a closing timestamp but no lot acquisition date, and positions carry one blended average cost per symbol. No tool in this connection returns holding period. The real source is Robinhood's 1099-B / tax documents, or the per-position "tax lots" view in the app.</p>
+    <p><strong>Short-term vs. long-term gain split:</strong> not computable — no lot acquisition dates anywhere in this API. See Robinhood's 1099-B / tax-lot view in the app for the real answer.</p>
   </div>
 
   <h2><span class="idx">03</span> Dividend income</h2>
@@ -430,37 +382,36 @@
     <div class="tile">
       <div class="label">Forward annualized estimate</div>
       <div class="num mono">≈$23,486/yr</div>
-      <div class="sub">current holdings &times; current declared rate</div>
+      <div class="sub">carried forward — no new equity purchases today</div>
     </div>
   </div>
-  <p class="lede">Per-symbol YTD DRIP breakdown unchanged since yesterday's report — see <code class="mono">reports/2026-07-05.md</code> for the full table. No new reinvestment posted today.</p>
-  <p class="lede">The $23,486/yr forward estimate is led by O alone (≈$11,174/yr, monthly payer), up slightly from $23,439 as O's share count ticked up from ongoing reinvestment. INTC's fundamentals still list a stale $0.125/share rate from a 2024 payment — its yield field is null, meaning it isn't currently paying, so it's excluded rather than trusted at face value.</p>
+  <p class="lede">No new DRIP reinvestment posted today (verified against the full 2026 order history, not just yesterday's cached figure). Forward estimate unchanged since only option activity happened today, not equity share purchases.</p>
 
   <h2><span class="idx">04</span> Holdings — main account</h2>
   <div class="table-scroll">
     <table>
       <thead>
-        <tr><th>Symbol</th><th>Qty</th><th>Avg cost</th><th>Price</th><th>Value</th><th>Unrealized gain</th><th class="bar-cell">Relative</th></tr>
+        <tr><th>Symbol</th><th>Qty</th><th>Avg cost</th><th>Price</th><th>Value</th><th>Unrealized gain</th></tr>
       </thead>
       <tbody class="mono">
-        <tr><td class="sym">GOOG</td><td>2,923.00</td><td>$122.23</td><td>$364.90</td><td>$1,066,605</td><td class="gain-cell">+$709,326</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:50%"></div></div></td></tr>
-        <tr><td class="sym">INTC</td><td>1,756.00</td><td>$20.98</td><td>$122.20</td><td>$214,583</td><td class="gain-cell">+$177,742</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:12.8%"></div></div></td></tr>
-        <tr><td class="sym">HOOD</td><td>1,500.00</td><td>$55.14</td><td>$117.55</td><td>$176,325</td><td class="gain-cell">+$93,615</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:6.3%"></div></div></td></tr>
-        <tr><td class="sym">BRK.B</td><td>537.52</td><td>$481.65</td><td>$506.58</td><td>$272,300</td><td class="gain-cell">+$13,401</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:1.0%"></div></div></td></tr>
-        <tr><td class="sym">ASML</td><td>52.00</td><td>$719.62</td><td>$1,825.07</td><td>$94,904</td><td class="gain-cell">+$57,483</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:4.0%"></div></div></td></tr>
-        <tr><td class="sym">TSM</td><td>207.50</td><td>$128.11</td><td>$451.79</td><td>$93,748</td><td class="gain-cell">+$67,165</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:4.7%"></div></div></td></tr>
-        <tr><td class="sym">SOFI</td><td>4,500.00</td><td>$12.62</td><td>$18.61</td><td>$83,745</td><td class="gain-cell">+$26,955</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:1.9%"></div></div></td></tr>
-        <tr><td class="sym">O</td><td>3,436.08</td><td>$57.12</td><td>$63.19</td><td>$217,126</td><td class="gain-cell">+$20,857</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:1.7%"></div></div></td></tr>
-        <tr><td class="sym">SPG</td><td>306.67</td><td>$130.54</td><td>$225.00</td><td>$69,000</td><td class="gain-cell">+$28,968</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:2.1%"></div></div></td></tr>
-        <tr><td class="sym">MSFT</td><td>281.33</td><td>$409.82</td><td>$386.74</td><td>$108,842</td><td class="loss-cell">&minus;$6,453</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.4%"></div></div></td></tr>
-        <tr><td class="sym">META</td><td>120.22</td><td>$611.38</td><td>$600.29</td><td>$72,169</td><td class="loss-cell">&minus;$1,333</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.3%"></div></div></td></tr>
-        <tr><td class="sym">ORCL</td><td>360.20</td><td>$159.97</td><td>$143.76</td><td>$51,782</td><td class="loss-cell">&minus;$5,839</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.5%"></div></div></td></tr>
-        <tr><td class="sym">UBER</td><td>620.00</td><td>$70.64</td><td>$72.42</td><td>$44,900</td><td class="gain-cell">+$1,104</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.2%"></div></div></td></tr>
-        <tr><td class="sym">NKE</td><td>1,000.00</td><td>$44.13</td><td>$43.34</td><td>$43,340</td><td class="loss-cell">&minus;$790</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.1%"></div></div></td></tr>
-        <tr><td class="sym">BULL</td><td>10,000.00</td><td>$7.19</td><td>$7.21</td><td>$72,100</td><td class="gain-cell">+$200</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.2%"></div></div></td></tr>
-        <tr><td class="sym">SLG</td><td>507.40</td><td>$40.62</td><td>$51.54</td><td>$26,151</td><td class="gain-cell">+$5,541</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.5%"></div></div></td></tr>
-        <tr><td class="sym">BX</td><td>151.40</td><td>$120.63</td><td>$123.42</td><td>$18,685</td><td class="gain-cell">+$422</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill gain" style="width:0.1%"></div></div></td></tr>
-        <tr><td class="sym">RC</td><td>5,000.00</td><td>$1.94</td><td>$1.66</td><td>$8,300</td><td class="loss-cell">&minus;$1,400</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill loss" style="width:0.6%"></div></div></td></tr>
+        <tr><td class="sym">GOOG</td><td>2,923.00</td><td>$122.23</td><td>$363.62</td><td>$1,062,863</td><td class="gain-cell">+$705,584</td></tr>
+        <tr><td class="sym">INTC</td><td>1,756.00</td><td>$20.98</td><td>$110.39</td><td>$193,845</td><td class="gain-cell">+$157,004</td></tr>
+        <tr><td class="sym">HOOD</td><td>1,500.00</td><td>$55.14</td><td>$112.90</td><td>$169,350</td><td class="gain-cell">+$86,640</td></tr>
+        <tr><td class="sym">BRK.B</td><td>537.52</td><td>$481.65</td><td>$504.00</td><td>$270,913</td><td class="gain-cell">+$12,014</td></tr>
+        <tr><td class="sym">ASML</td><td>52.00</td><td>$719.62</td><td>$1,747.28</td><td>$90,859</td><td class="gain-cell">+$53,438</td></tr>
+        <tr><td class="sym">TSM</td><td>207.50</td><td>$128.11</td><td>$432.57</td><td>$89,760</td><td class="gain-cell">+$63,177</td></tr>
+        <tr><td class="sym">SOFI</td><td>4,500.00</td><td>$12.62</td><td>$17.75</td><td>$79,875</td><td class="gain-cell">+$23,085</td></tr>
+        <tr><td class="sym">O</td><td>3,436.08</td><td>$57.12</td><td>$64.01</td><td>$219,944</td><td class="gain-cell">+$23,675</td></tr>
+        <tr><td class="sym">SPG</td><td>306.67</td><td>$130.54</td><td>$227.19</td><td>$69,672</td><td class="gain-cell">+$29,639</td></tr>
+        <tr><td class="sym">MSFT</td><td>281.33</td><td>$409.82</td><td>$388.84</td><td>$109,393</td><td class="loss-cell">&minus;$5,902</td></tr>
+        <tr><td class="sym">META</td><td>120.22</td><td>$611.38</td><td>$615.58</td><td>$74,007</td><td class="gain-cell">+$505</td></tr>
+        <tr><td class="sym">ORCL</td><td>360.20</td><td>$159.97</td><td>$141.60</td><td>$51,004</td><td class="loss-cell">&minus;$6,617</td></tr>
+        <tr><td class="sym">UBER</td><td>620.00</td><td>$70.64</td><td>$74.33</td><td>$46,085</td><td class="gain-cell">+$2,288</td></tr>
+        <tr><td class="sym">NKE</td><td>1,000.00</td><td>$44.13</td><td>$43.21</td><td>$43,210</td><td class="loss-cell">&minus;$920</td></tr>
+        <tr><td class="sym">BULL</td><td>10,000.00</td><td>$7.19</td><td>$7.27</td><td>$72,700</td><td class="gain-cell">+$800</td></tr>
+        <tr><td class="sym">SLG</td><td>507.40</td><td>$40.62</td><td>$50.27</td><td>$25,507</td><td class="gain-cell">+$4,896</td></tr>
+        <tr><td class="sym">BX</td><td>151.40</td><td>$120.63</td><td>$120.89</td><td>$18,302</td><td class="gain-cell">+$39</td></tr>
+        <tr><td class="sym">RC</td><td>5,000.00</td><td>$1.94</td><td>$1.68</td><td>$8,400</td><td class="loss-cell">&minus;$1,300</td></tr>
       </tbody>
     </table>
   </div>
@@ -470,26 +421,23 @@
   <div class="tiles">
     <div class="tile">
       <div class="label">Loan-to-value</div>
-      <div class="num mono">18.3%</div>
+      <div class="num mono">18.4%</div>
       <div class="sub">conservative — well under typical call territory</div>
     </div>
     <div class="tile">
       <div class="label">Buying power (margined)</div>
-      <div class="num mono">$1,358,622</div>
+      <div class="num mono">$1,272,366</div>
     </div>
     <div class="tile">
       <div class="label">Buying power (unleveraged)</div>
-      <div class="num mono">$679,311</div>
-      <div class="sub">gap ≈ margin cushion in dollars</div>
+      <div class="num mono">$636,183</div>
     </div>
     <div class="tile">
       <div class="label">Margin interest, estimated</div>
-      <div class="num mono">$61.24/day</div>
-      <div class="sub">4.5%/yr &times; today's balance &middot; $122.25 tracked since 7/5</div>
+      <div class="num mono">$61.16/day</div>
+      <div class="sub">4.5%/yr &times; today's balance &middot; $183.40 tracked since 7/5</div>
     </div>
   </div>
-  <p class="lede" style="margin-top:1rem">Concentration watch: GOOG + INTC unchanged — INTC already carries a short call, a sharp drop compresses margin cushion and option risk at the same time.</p>
-  <p class="lede">No tool here returns actual margin interest charged, so this account tracks it daily instead: today's loan balance ($496,708.74) &times; your confirmed 4.5% annual rate &divide; 365, logged to <code class="mono">reports/margin-balance-history.csv</code>. YTD-tracked total is $122.25 across two days (7/5–7/6) — not yet a meaningful trend. This is an estimate (Robinhood's actual day-count/tiering may differ), not the broker's own number; if a real statement figure ever comes in, it gets logged to <code class="mono">reports/margin-interest.csv</code> as a ground-truth check.</p>
 
   <h2><span class="idx">06</span> Open option positions</h2>
   <div class="table-scroll">
@@ -498,124 +446,39 @@
         <tr><th>Underlying</th><th>Type</th><th>Strike</th><th>Exp</th><th>Qty</th><th>Premium</th><th>Price</th><th>Status</th><th>Earnings overlap</th></tr>
       </thead>
       <tbody class="mono">
-        <tr><td class="sym">INTC</td><td>call</td><td>$120</td><td>9/18</td><td>17</td><td>$51,374</td><td>$122.20</td><td><span class="pill risk">ITM</span></td><td class="flag yes">yes — 7/23</td></tr>
-        <tr><td class="sym">TSM</td><td>put</td><td>$310</td><td>7/17</td><td>2</td><td>$160</td><td>$451.79</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
-        <tr><td class="sym">TSM</td><td>call</td><td>$600</td><td>7/17</td><td>1</td><td>$300</td><td>$451.79</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
-        <tr><td class="sym">META</td><td>put</td><td>$440</td><td>10/16</td><td>1</td><td>$740</td><td>$600.29</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29</td></tr>
-        <tr><td class="sym">O</td><td>put</td><td>$55</td><td>8/21</td><td>20</td><td>$600</td><td>$63.19</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 8/5</td></tr>
-        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>9/18</td><td>5</td><td>$350</td><td>$225.00</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 8/10</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">SLG</td><td>put</td><td>$40</td><td>8/21</td><td>5</td><td>$250</td><td>$51.54</td><td><span class="pill safe">OTM — new today</span></td><td class="flag yes">yes — 7/22</td></tr>
-        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>7/17</td><td>1</td><td>$260</td><td>$225.00</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">MSFT</td><td>put</td><td>$350</td><td>7/17</td><td>1</td><td>$188</td><td>$386.74</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">HOOD</td><td>call</td><td>$200</td><td>7/17</td><td>15</td><td>$225</td><td>$117.55</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">UBER</td><td>put</td><td>$68</td><td>7/24</td><td>3</td><td>$390</td><td>$72.42</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">SOFI</td><td>put</td><td>$14</td><td>7/24</td><td>20</td><td>$280</td><td>$18.61</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">ORCL</td><td>put</td><td>$120</td><td>7/31</td><td>2</td><td>$260</td><td>$143.76</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">INTC</td><td>call</td><td>$120</td><td>9/18</td><td>17</td><td>$51,374</td><td>$110.39</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/23</td></tr>
+        <tr style="background:var(--accent-soft)"><td class="sym">HOOD</td><td>call</td><td>$290</td><td>9/18</td><td>15</td><td>$300 — rolled</td><td>$112.90</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29 (new)</td></tr>
+        <tr style="background:var(--accent-soft)"><td class="sym">MSFT</td><td>put</td><td>$345</td><td>8/14</td><td>1</td><td>$460 — rolled</td><td>$388.84</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29 (new)</td></tr>
+        <tr style="background:var(--accent-soft)"><td class="sym">SPG</td><td>call</td><td>$250</td><td>8/21</td><td>3</td><td>$465 — new</td><td>$227.19</td><td><span class="pill safe">OTM</span></td><td class="flag no">no</td></tr>
+        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>9/18</td><td>5</td><td>$350</td><td>$227.19</td><td><span class="pill safe">OTM</span></td><td class="flag no">no</td></tr>
+        <tr style="background:var(--accent-soft)"><td class="sym">BX</td><td>put</td><td>$113</td><td>8/14</td><td>1</td><td>$350 — new</td><td>$120.89</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/23</td></tr>
+        <tr style="background:var(--accent-soft)"><td class="sym">AVGO</td><td>put</td><td>$330</td><td>8/21</td><td>1</td><td>$1,060 — new</td><td>—</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — next report 9/3</td></tr>
+        <tr><td class="sym">O</td><td>put</td><td>$55</td><td>8/21</td><td>20</td><td>$600</td><td>$64.01</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 8/5</td></tr>
+        <tr><td class="sym">SLG</td><td>put</td><td>$40</td><td>8/21</td><td>5</td><td>$250</td><td>$50.27</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/22</td></tr>
+        <tr><td class="sym">META</td><td>put</td><td>$440</td><td>10/16</td><td>1</td><td>$740</td><td>$615.58</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29</td></tr>
+        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>7/17</td><td>1</td><td>$260</td><td>$227.19</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">TSM</td><td>put</td><td>$310</td><td>7/17</td><td>2</td><td>$160</td><td>$432.57</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
+        <tr><td class="sym">TSM</td><td>call</td><td>$600</td><td>7/17</td><td>1</td><td>$300</td><td>$432.57</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
+        <tr><td class="sym">UBER</td><td>put</td><td>$68</td><td>7/24</td><td>3</td><td>$390</td><td>$74.33</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">SOFI</td><td>put</td><td>$14</td><td>7/24</td><td>20</td><td>$280</td><td>$17.75</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr><td class="sym">ORCL</td><td>put</td><td>$120</td><td>7/31</td><td>2</td><td>$260</td><td>$141.60</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
+        <tr style="background:var(--accent-soft)"><td class="sym">UBER</td><td>call (long)</td><td>$115</td><td>2027-03-19</td><td>10</td><td>&minus;$1,900 debit — new</td><td>$74.33</td><td><span class="pill watch">far OTM, long-dated</span></td><td class="flag yes">spans every earnings until expiry</td></tr>
       </tbody>
     </table>
   </div>
+  <p class="lede" style="margin-top:1rem">HOOD $200c/7-17 and MSFT $350p/7-17 both rolled forward today — see section 02 for the roll economics.</p>
 
   <h2><span class="idx">07</span> Option-selling suggestions</h2>
-  <div class="suggestion-card">
-    <h3>Mostly executed or unchanged since yesterday's screen</h3>
-    <p class="lede" style="margin-top:0.2rem">ORCL $120 put (filled 7/2) and the new SLG $40 put (filled today) both came from yesterday's idea list, at slightly different strikes than originally suggested. Still open/unexecuted: MSFT $360, SOFI $15, NKE $42.5, BX $115, BULL $5, TSM $400 puts — no new information changes those theses today.</p>
-    <p class="note">GOOG remains excluded from all option suggestions per standing preference, encoded in the skill. No new covered-call ideas this run.</p>
+  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
+    <div class="tag" style="color:var(--accent)">No fresh screen this cycle</div>
+    <p>Today's actual activity (2 rolls, 3 new opens, 1 new long call) already covers substantially more ground than a suggestion pass would. GOOG remains excluded from all option suggestions per standing preference (now encoded in <code class="mono">CLAUDE.md</code>).</p>
   </div>
 
   <h2><span class="idx">07b</span> Daily opportunity signal</h2>
-  <div class="suggestion-card">
-    <h3>No new signals today</h3>
-    <p class="lede" style="margin-top:0.2rem">Ran both saved scans: "Deep Value Turnaround Candidates" (RSI&lt;30, mkt cap&gt;$2B, 36 matches — CRWD, KLAC, LYB, T, BABA, mostly RSI-oversold large/mid-caps, not the deep multi-year drawdown pattern HOOD/INTC-style turnarounds need) and the compounder screen (PEG&lt;1.5, ROE&gt;15%, mkt cap&gt;$1B, 394 matches — too broad for a full rubric pass in a daily cycle).</p>
-    <p class="note">Neither scan surfaced a name with an extreme, story-driven drawdown that historically scored well. Reported at low confidence by default rather than guessed at — ask for a full <code class="mono">opportunity-scanner</code> run for a complete workup on any specific name.</p>
-  </div>
-
-  <h2><span class="idx">08</span> Deep-dive option scan</h2>
-  <p class="lede">Carried over from the 7/5 on-demand run via the <code class="mono">option-trade-model</code> skill — computed Black-Scholes assignment probability (N(d2)) instead of quoted delta, weighed against the tax cost of forced gain recognition. Not re-run today (not part of the daily screen); figures below are as of 7/2 prices.</p>
-
   <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">Existing positions — does anything need rolling?</div>
-    <p><strong>INTC is the only one, and the rigorous number reads better than raw delta suggested.</strong> Quoted delta is 59.3%, but INTC's IV is so high (92.8%) that the true computed assignment probability, N(d2), is <strong>42.8%</strong> — a 16.5-point gap. Tax-adjusted, the expected forced gain across all 17 contracts is <strong>≈$72,400</strong>, not the full $174,600 a naive delta read implies. Still a real, decision-worthy number — the roll-or-hold call from the tax section stands.</p>
-    <p>Everything else open (ORCL, O, SPG ×2, MSFT, SOFI, UBER, TSM put, HOOD, NKE, META) has |delta| ≤ 0.21 — comfortably safe, no roll needed today.</p>
+    <div class="tag" style="color:var(--accent)">Full 4-archetype gated run already completed today</div>
+    <p>235 Stage-0 survivors across turnaround/moonshot_growth/compounder/steady_value, 171 fully scored past the domain-leadership gate. Turnaround came back with <strong>zero survivors</strong> (legitimate — nothing was both severely oversold and genuinely 40%+ off its high and a real market leader today). Top names: <strong>MGNI</strong> (28, moonshot_growth), <strong>DUOL/CRDO</strong> (27, compounder), and a cluster of steady_value blue-chips (NVO, NOC, MPLX, OKE, AER) tied at 27. Full writeup: <code class="mono">reports/opportunity-scan-2026-07-07-full.md</code>.</p>
   </div>
-
-  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">Update: cash-secured puts are now the lead strategy</div>
-    <p><strong>User preference, encoded permanently in the skills:</strong> covered calls are secondary — assignment forces a sale of already-owned, often-appreciated stock, while a put's assignment just acquires shares at a fresh cost basis. When a covered call is still wanted, the strike needs to reach "almost impossible to settle" (low-single-digit delta, like the account's existing TSM $600c) — <strong>none of the covered-call candidates further down clear that bar.</strong> The put table below is the actual current recommendation.</p>
-  </div>
-
-  <p class="lede" style="margin-top:1.25rem">Cash-secured puts — same 13 symbols, screened for put strikes, same 2026-08-21 expiration:</p>
-  <div class="table-scroll">
-    <table>
-      <thead>
-        <tr><th>Symbol</th><th>Strike</th><th>Eff. cost</th><th>Why good if assigned</th><th>Suggested operation</th></tr>
-      </thead>
-      <tbody class="mono">
-        <tr><td class="sym">ORCL</td><td>$130</td><td>$122.72</td><td class="gain-cell" style="text-align:left">Below the 52-wk low ($134.57) — rare entry after the selloff</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($26,000, collects $1,456)</td></tr>
-        <tr><td class="sym">MSFT</td><td>$360</td><td>$350.20</td><td class="gain-cell" style="text-align:left">Lands almost exactly at the 52-wk low ($349.20) after the $460 pullback</td><td style="text-align:left">Sell 1 contract ($36,000) — optional</td></tr>
-        <tr><td class="sym">SOFI</td><td>$15</td><td>$14.50</td><td class="gain-cell" style="text-align:left">Below the 52-wk low ($14.92) — but P/E 41x, a growth bet not value</td><td class="gain-cell" style="text-align:left">Sell 5 contracts ($7,500, collects $250) — moved from $16 for lower risk (25% vs 34% assignment odds)</td></tr>
-        <tr><td class="sym">NKE</td><td>$42.5</td><td>$40.97</td><td class="gain-cell" style="text-align:left">Effectively at the 52-wk low ($40.00); 3.7% dividend while you wait</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($8,500, collects $308)</td></tr>
-        <tr><td class="sym">BX</td><td>$115</td><td>$110.40</td><td class="gain-cell" style="text-align:left">Close to the 52-wk low ($101.73); 4.0% dividend supports it</td><td class="gain-cell" style="text-align:left">Sell 2 contracts ($23,000, collects $920)</td></tr>
-        <tr><td class="sym">BULL</td><td>$5</td><td>$4.84</td><td style="text-align:left">Right at the 52-wk low ($4.50) — but loss-making, no fundamental floor</td><td style="text-align:left">Sell 1 contract ($500) — optional</td></tr>
-        <tr><td class="sym">SLG</td><td>$50</td><td>$47.77</td><td style="text-align:left">Mid-range, not a bargain — appeal is the 4.7% dividend + income</td><td class="gain-cell" style="text-align:left">Sell 3 contracts ($15,000, collects $669)</td></tr>
-        <tr><td class="sym">TSM</td><td>$400</td><td>$381.32</td><td class="loss-cell" style="text-align:left">Well above the 52-wk low (62% up) — paying up, not a dip</td><td style="text-align:left">Sell 1 contract only ($40,000) — capped</td></tr>
-        <tr><td class="sym">UBER</td><td>$65</td><td>$63.82</td><td style="text-align:left">Below the 52-wk low ($67.19), genuinely attractive</td><td style="text-align:left">Skip — avoid stacking near the existing $68 put</td></tr>
-        <tr><td class="sym">SPG</td><td>$210</td><td>$207.45</td><td class="loss-cell" style="text-align:left">Near the 52-wk high — paying up</td><td style="text-align:left">Skip — low yield</td></tr>
-        <tr><td class="sym">O</td><td>$60</td><td>$59.50</td><td style="text-align:left">Mid-upper range, not a discount</td><td style="text-align:left">Skip — low yield</td></tr>
-        <tr><td class="sym">BRK.B</td><td>$480</td><td>$476.62</td><td style="text-align:left">Reasonable price, but low yield reflects low IV</td><td style="text-align:left">Skip — low yield</td></tr>
-        <tr><td class="sym">RC</td><td>$1.5</td><td>—</td><td class="loss-cell" style="text-align:left">Quote is broken (bid $0)</td><td class="loss-cell" style="text-align:left">Skip — not tradable</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="lede" style="margin-top:1rem"><strong>The honest split:</strong> ORCL, MSFT, NKE, and BX are genuine value entries (at/below the 52-week low, with dividend support on BX/NKE). SOFI and BULL are at their lows for momentum/story reasons, not fundamentals. SLG's case rests on income, not price. TSM is the one candidate where you'd be paying up — reinforcing why it's capped at 1 contract.</p>
-  <p class="lede"><strong>If every "Sell" row above were taken: $156,500 of buying power committed (24% of the $660,231 available), $6,467 total premium collected.</strong> A starter tranche, not a max-out.</p>
-
-  <p class="lede" style="margin-top:1.5rem">Covered-call candidates, recomputed to "almost impossible to settle" — matching the reference point set by the existing TSM $600c (N(d2) ≈ 4–6%, not the standard 25–35% the original scan used):</p>
-  <div class="table-scroll">
-    <table>
-      <thead>
-        <tr><th>Symbol</th><th>Strike</th><th>N(d2)</th><th>Premium/ctr</th><th>Why this strike</th><th>Suggested operation</th></tr>
-      </thead>
-      <tbody class="mono">
-        <tr><td class="sym">BX</td><td>$165</td><td class="gain-cell">2.0%</td><td>$18</td><td style="text-align:left">Deepest OTM of the batch — basically free money on shares already held</td><td style="text-align:left">Sell 1 contract (max), collects $18</td></tr>
-        <tr><td class="sym">NKE</td><td>$60</td><td class="gain-cell">2.7%</td><td>$10</td><td style="text-align:left">Matches the TSM $600c reference almost exactly</td><td style="text-align:left">Sell 10 contracts (max), collects $100</td></tr>
-        <tr><td class="sym">UBER</td><td>$100</td><td class="gain-cell">3.6%</td><td>$24.50</td><td style="text-align:left">34% above current price — tax-neutral</td><td style="text-align:left">Sell 6 contracts (max), collects $147</td></tr>
-        <tr><td class="sym">MSFT</td><td>$525</td><td class="gain-cell">3.8%</td><td>$135</td><td style="text-align:left">Tax-favorable (loss position) — pure upside</td><td style="text-align:left">Sell 2 contracts (max), collects $270</td></tr>
-        <tr><td class="sym">TSM</td><td>$590</td><td>6.0%</td><td>$332.50</td><td style="text-align:left">Very safe, but embedded gain is so large the tax-adjusted risk is still ≈$1,829 at 6% odds</td><td style="text-align:left">Sell 1 contract only (capacity-capped)</td></tr>
-        <tr><td class="sym">ORCL</td><td>$190</td><td>7.7%</td><td>$161</td><td style="text-align:left">Tax-favorable (loss position)</td><td style="text-align:left">Sell 3 contracts (max), collects $483</td></tr>
-        <tr><td class="sym">SOFI</td><td>$25</td><td>9.0%</td><td>$29</td><td style="text-align:left">Fine, tax-neutral</td><td style="text-align:left">Sell 15 of 45 max, collects $435</td></tr>
-        <tr><td class="sym">BULL</td><td>$10</td><td>9.7%</td><td>$13.50</td><td style="text-align:left">Tax-neutral, small name</td><td style="text-align:left">Sell 20 of 100 max, collects $270</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="lede" style="margin-top:1rem"><strong>If every row were taken: ~$2,055.50 total premium</strong> — deliberately small at strikes this far out. <strong>O, SPG, BRK.B, SLG, and RC come back with a broken quote (bid $0)</strong> at this distance — no real liquidity that far OTM at 47 days; skipped rather than show a fake price.</p>
-
-  <details style="margin-top:1.25rem; color:var(--ink-faint)">
-    <summary style="cursor:pointer; color:var(--ink-muted)">Original scan (standard 20–35 delta, superseded)</summary>
-    <div class="table-scroll" style="margin-top:0.75rem">
-      <table>
-        <thead>
-          <tr><th>Symbol</th><th>Strike</th><th>Prem/ctr</th><th>N(d2)</th><th>IV/HV</th><th>Ann. return</th><th>Tax-adj. EV/ctr</th><th>Read</th></tr>
-        </thead>
-        <tbody class="mono">
-          <tr><td class="sym">ORCL</td><td>$150</td><td>$832</td><td>35%</td><td>1.12</td><td>46.1%</td><td class="loss-cell">&minus;$684</td><td class="gain-cell" style="text-align:left">Best pick by yield — rich premium, tax-favorable</td></tr>
-          <tr><td class="sym">BX</td><td>$130</td><td>$635</td><td>34%</td><td>0.84</td><td>40.2%</td><td>+$72</td><td class="gain-cell" style="text-align:left">Good — premium covers tax risk 8.8x</td></tr>
-          <tr><td class="sym">MSFT</td><td>$410</td><td>$1,555</td><td>36%</td><td>1.04</td><td>30.9%</td><td class="loss-cell">&minus;$693</td><td class="gain-cell" style="text-align:left">Good — tax-favorable, only 2 contracts</td></tr>
-          <tr><td class="sym">UBER</td><td>$80</td><td>$257</td><td>31%</td><td>0.96</td><td>26.8%</td><td>+$116</td><td style="text-align:left">Fine — small tax exposure, well covered</td></tr>
-          <tr><td class="sym">NKE</td><td>$47.5</td><td>$119</td><td>28%</td><td>0.94</td><td>21.0%</td><td>&minus;$1</td><td style="text-align:left">Fine — no earnings found in window</td></tr>
-          <tr><td class="sym">TSM</td><td>$460</td><td>$2,508</td><td>36%</td><td>0.88</td><td>44.9%</td><td class="loss-cell">+$11,006</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 4.4x the premium</td></tr>
-          <tr><td class="sym">SPG</td><td>$240</td><td>$288</td><td>24%</td><td>1.07</td><td>9.9%</td><td class="loss-cell">+$2,323</td><td class="loss-cell" style="text-align:left">Avoid — tax exposure 8x the premium</td></tr>
-          <tr><td class="sym">O</td><td>$67.5</td><td>$38</td><td>18%</td><td>0.74</td><td>4.6%</td><td>+$124</td><td style="text-align:left">Skip — premium too thin</td></tr>
-          <tr><td class="sym">SLG</td><td>$57.5</td><td>$183</td><td>30%</td><td>1.14</td><td>26.5%</td><td>+$387</td><td style="text-align:left">Marginal — tax exposure ~2.1x premium</td></tr>
-          <tr><td class="sym">SOFI</td><td>$20</td><td>$114</td><td>32%</td><td>1.27</td><td>48.3%</td><td>+$178</td><td style="text-align:left">Marginal — tax exposure ~1.6x premium</td></tr>
-          <tr><td class="sym">BRK.B</td><td>$530</td><td>$433</td><td>25%</td><td>1.10</td><td>6.6%</td><td>+$652</td><td style="text-align:left">Marginal — tax exposure ~1.5x premium</td></tr>
-          <tr><td class="sym">RC</td><td>$2</td><td>$7.50</td><td>12%</td><td>0.40</td><td>32.5%</td><td>&minus;$2</td><td style="text-align:left">Trivial dollar amounts either way</td></tr>
-          <tr><td class="sym">BULL</td><td>$7.5 / $10</td><td>$60 / $13.50</td><td>39% / 10%</td><td>0.85 / 0.94</td><td>65% / 14.6%</td><td>~$0</td><td style="text-align:left">IV not rich vs. realized vol</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </details>
-
-  <p class="lede" style="margin-top:1rem">Caveats: RC's earnings date wasn't checked this pass; BRK.B's option chain symbol is <code class="mono">BRKB</code> (no period) — now noted in the skill.</p>
 
   <footer>
     Generated from live Robinhood data via the <code class="mono">portfolio-report</code> skill. Analysis and suggestions only — no trades were placed. Not tax or investment advice.

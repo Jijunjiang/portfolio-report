@@ -1,0 +1,34 @@
+criterion_id,category,tag,question,pass_threshold
+a1_pctoffhigh,A,M,Is this stock deeply off its 52-week high (turnaround pattern)?,>=40% off high (graduated: 85/70/55/40%)
+a2_rsi,A,M,Is this stock's RSI(14) oversold?,RSI < 30 (stronger signal <20)
+a3_williams,A,M,Does Williams %R confirm the stock is oversold?,Williams %R(14) < -80
+a4_stochastic,A,M,Is the Stochastic oscillator showing oversold conditions?,Stochastic %K(14) < 20
+a5_bollinger,A,M,Is the price trading below its lower Bollinger Band?,Price < 20-day SMA - 2*stdev
+a6_support,A,M,Is the price at or below a computed support level?,Price <= trailing-20d low
+a7_peg_lt1,A,M,Is this stock still cheap on a growth-adjusted basis despite the drawdown?,PEG < 1
+a8_cyclical_judgment,A,J,Does the drawdown look cyclical/sentiment-driven rather than a structural business breakdown?,judgment call - no fixed threshold
+b9_mktcap,B,M,Is this an established company by market cap?,Market cap > $2B
+b10_grossmargin,B,M,Does this company have healthy gross margins?,Gross margin > 30%
+b11_opmargin,B,M,Is this company operating-profit positive?,Operating margin > 0%
+b12_netmargin,B,GATE,Is this company net-profit positive (already positive cashflow at the bottom line)?,Net profit margin > 0 - RETIRED AS A SCORE 2026-07-07; now enforced as a Stage-0 scan gate on every archetype before a candidate ever reaches this rubric
+b13_roe,B,M,Is this company generating a healthy return on equity?,ROE > 10% (partial credit >0%)
+b14_roa,B,M,Is this company generating a healthy return on assets?,ROA > 5% (partial credit >0%)
+b15_dividend,B,M,Is this company still paying a dividend through the drawdown?,dividend_yield is non-null
+b16_epstrend,B,M,Has this company's EPS trend been improving over the last 2-4 quarters?,most-recent actual EPS > earliest-of-window actual EPS
+b17_leverage_judgment,B,J,Does this company's balance sheet/leverage look reasonable for its sector?,judgment call - no direct debt filter exists
+c18_macd,C,M,Has momentum (MACD histogram) turned positive in the last ~2 weeks?,MACD histogram crosses from <=0 to >0 within trailing ~10 sessions
+c19_ema,C,M,Has the price reclaimed a key moving average?,Price > 50-day EMA
+c20_aroon,C,M,Has a new uptrend started forming (Aroon Oscillator turned positive)?,Aroon Oscillator(14) > 0
+c21_adx,C,M,Is the trend actually strengthening, not just already high?,ADX(14) > 25 (ideally rising, not just a snapshot)
+c22_relvol,C,M,Is there real buying accumulation (elevated volume specifically on up days)?,Relative volume(30d) > 1.3 AND close > open that day
+c23_rsirecross,C,M,Has RSI recovered back above the oversold line after dipping below it?,RSI(14) crosses from <30 to >=30 within the trailing window
+d24_epsbeat,D,M,Did the most recent reported quarter beat the EPS estimate?,actual EPS > estimate (in-line if equal)
+d25_noearnings2wk,D,M,Is the thesis safe from being re-priced by an earnings surprise in the next 2 weeks?,no earnings report within +/-14 days of today
+d26_tailwind_judgment,D,J,Does this company's sector/theme have a genuine multi-year tailwind (not just a bounce)?,judgment call - no fixed threshold
+d27_catalyst_judgment,D,J,Is there a real catalyst or inflection point (new leadership/restructuring/product cycle) rather than "waiting for the same thing to eventually work"?,judgment call - no fixed threshold
+d28_pegroe_combo,D,M,"(Growth compounders only) Does this stock clear both ""cheap growth"" and ""high quality"" together?",PEG < 1.5 AND ROE > 15% (partial credit if only one clears)
+e29_liquidity,E,M,Is this stock liquid enough to easily enter/exit a position of this account's typical size?,average_volume / float above an approximate turnover threshold
+e30_not_concentrated,E,M,Would buying this avoid adding to an already-large position in this name or sector?,ticker not already held in the account
+e31_iv_extreme,E,M,Is volatility elevated (real risk being priced) without being at distressed-debt extremes?,0.25 < historical/implied volatility < 1.5 (approximate band)
+e32_fitstyle_judgment,E,J,Would this position fit the account's few-trades-a-quarter high-conviction style without needing active monitoring?,holistic synthesis judgment - no data input at all
+b33_domainleadership_judgment,B (numbered 33),GATE,"Is this company the top-tier / dominant leader in its specific market domain - or at least a solid niche leader - durable enough to hold through a full 10-year cycle regardless of near-term volatility?",dominant #1/#2 or solid niche/#3-4 leader -> qualifies (proceeds to scoring); sub-scale/commoditized/easily-disrupted -> DISQUALIFIED outright, not just docked points
