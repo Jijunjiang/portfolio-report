@@ -189,6 +189,23 @@ def stochastic_k(bars, period=14):
     return (close - lowest_low) / (highest_high - lowest_low) * 100
 
 
+def williams_percent_range(bars, period=14):
+    """Williams %R(N): (Highest High(N) - Close) / (Highest High(N) - Lowest
+    Low(N)) * -100. Not used in the live daily pipeline (Williams %R comes
+    from the scanner's own filter there, confirmed reliable) — this exists
+    for experiments/backtest.py, which has no scan to pull a point-in-time
+    value from and has to compute everything from raw historicals."""
+    if len(bars) < period:
+        return None
+    window = bars[-period:]
+    highest_high = max(b["high"] for b in window)
+    lowest_low = min(b["low"] for b in window)
+    close = bars[-1]["close"]
+    if highest_high == lowest_low:
+        return None
+    return (highest_high - close) / (highest_high - lowest_low) * -100
+
+
 def support_level(bars, lookback=60):
     """Simple heuristic: lowest low over the trailing `lookback` days.
     Documented approximation, not a formal swing-low/pivot algorithm — see

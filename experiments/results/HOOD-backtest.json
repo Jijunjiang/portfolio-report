@@ -1,0 +1,26 @@
+{
+  "ticker": "HOOD",
+  "outcome_label": "recovered",
+  "note": "92% drawdown, 11x off the low as of 2026-07 (validation.md)",
+  "trough_window": [
+    "2022-04-01",
+    "2022-08-31"
+  ],
+  "screen_fired_on_n_days": 1,
+  "hits": [
+    {
+      "date": "2022-06-16",
+      "close": 6.89,
+      "rsi_14": 29.85,
+      "williams_pct_range_14": -97.86,
+      "forward_return_3mo_pct": 63.3,
+      "forward_return_6mo_pct": 25.8,
+      "forward_return_1yr_pct": 45.6,
+      "forward_return_2yr_pct": 222.9
+    }
+  ],
+  "data_range": [
+    "2022-01-03",
+    "2026-07-06"
+  ]
+}

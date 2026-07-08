@@ -1,0 +1,106 @@
+{
+  "ticker": "CVNA",
+  "outcome_label": "recovered",
+  "note": "99.2% drawdown, 96.6x off the low as of 2026-07 (validation.md, most extreme case)",
+  "trough_window": [
+    "2022-10-01",
+    "2023-02-28"
+  ],
+  "screen_fired_on_n_days": 9,
+  "hits": [
+    {
+      "date": "2022-10-19",
+      "close": 2.998,
+      "rsi_14": 29.73,
+      "williams_pct_range_14": -95.33,
+      "forward_return_3mo_pct": -53.4,
+      "forward_return_6mo_pct": -42.4,
+      "forward_return_1yr_pct": 110.7,
+      "forward_return_2yr_pct": 1176.3
+    },
+    {
+      "date": "2022-10-20",
+      "close": 2.896,
+      "rsi_14": 29.01,
+      "williams_pct_range_14": -97.63,
+      "forward_return_3mo_pct": -55.9,
+      "forward_return_6mo_pct": -44.8,
+      "forward_return_1yr_pct": 114.6,
+      "forward_return_2yr_pct": 1222.4
+    },
+    {
+      "date": "2022-10-21",
+      "close": 2.85,
+      "rsi_14": 28.68,
+      "williams_pct_range_14": -94.37,
+      "forward_return_3mo_pct": -54.5,
+      "forward_return_6mo_pct": -42.9,
+      "forward_return_1yr_pct": 122.8,
+      "forward_return_2yr_pct": 1243.8
+    },
+    {
+      "date": "2022-10-24",
+      "close": 2.676,
+      "rsi_14": 27.38,
+      "williams_pct_range_14": -95.08,
+      "forward_return_3mo_pct": -46.3,
+      "forward_return_6mo_pct": -37.4,
+      "forward_return_1yr_pct": 136.8,
+      "forward_return_2yr_pct": 1374.9
+    },
+    {
+      "date": "2022-11-04",
+      "close": 1.752,
+      "rsi_14": 27.77,
+      "williams_pct_range_14": -96.51,
+      "forward_return_3mo_pct": 65.0,
+      "forward_return_6mo_pct": 2.3,
+      "forward_return_1yr_pct": 279.3,
+      "forward_return_2yr_pct": 2480.8
+    },
+    {
+      "date": "2022-11-07",
+      "close": 1.478,
+      "rsi_14": 25.99,
+      "williams_pct_range_14": -93.55,
+      "forward_return_3mo_pct": 81.7,
+      "forward_return_6mo_pct": 52.9,
+      "forward_return_1yr_pct": 362.4,
+      "forward_return_2yr_pct": 3133.2
+    },
+    {
+      "date": "2022-11-08",
+      "close": 1.472,
+      "rsi_14": 25.95,
+      "williams_pct_range_14": -91.33,
+      "forward_return_3mo_pct": 79.2,
+      "forward_return_6mo_pct": 61.0,
+      "forward_return_1yr_pct": 361.8,
+      "forward_return_2yr_pct": 3180.3
+    },
+    {
+      "date": "2022-11-09",
+      "close": 1.518,
+      "rsi_14": 26.86,
+      "williams_pct_range_14": -89.01,
+      "forward_return_3mo_pct": 84.6,
+      "forward_return_6mo_pct": 73.3,
+      "forward_return_1yr_pct": 301.1,
+      "forward_return_2yr_pct": 3119.4
+    },
+    {
+      "date": "2022-12-07",
+      "close": 0.766,
+      "rsi_14": 27.35,
+      "williams_pct_range_14": -94.5,
+      "forward_return_3mo_pct": 131.1,
+      "forward_return_6mo_pct": 305.5,
+      "forward_return_1yr_pct": 889.6,
+      "forward_return_2yr_pct": 6459.0
+    }
+  ],
+  "data_range": [
+    "2022-01-03",
+    "2026-07-07"
+  ]
+}
