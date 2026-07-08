@@ -16,7 +16,11 @@
       "forward_return_3mo_pct": -53.4,
       "forward_return_6mo_pct": -42.4,
       "forward_return_1yr_pct": 110.7,
-      "forward_return_2yr_pct": 1176.3
+      "forward_return_2yr_pct": 1176.3,
+      "max_drawdown_6mo_pct": -75.2,
+      "days_to_5x": 496,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-10-20",
@@ -26,7 +30,11 @@
       "forward_return_3mo_pct": -55.9,
       "forward_return_6mo_pct": -44.8,
       "forward_return_1yr_pct": 114.6,
-      "forward_return_2yr_pct": 1222.4
+      "forward_return_2yr_pct": 1222.4,
+      "max_drawdown_6mo_pct": -74.3,
+      "days_to_5x": 495,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-10-21",
@@ -36,7 +44,11 @@
       "forward_return_3mo_pct": -54.5,
       "forward_return_6mo_pct": -42.9,
       "forward_return_1yr_pct": 122.8,
-      "forward_return_2yr_pct": 1243.8
+      "forward_return_2yr_pct": 1243.8,
+      "max_drawdown_6mo_pct": -73.9,
+      "days_to_5x": 494,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-10-24",
@@ -46,7 +58,11 @@
       "forward_return_3mo_pct": -46.3,
       "forward_return_6mo_pct": -37.4,
       "forward_return_1yr_pct": 136.8,
-      "forward_return_2yr_pct": 1374.9
+      "forward_return_2yr_pct": 1374.9,
+      "max_drawdown_6mo_pct": -72.2,
+      "days_to_5x": 487,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-11-04",
@@ -56,7 +72,11 @@
       "forward_return_3mo_pct": 65.0,
       "forward_return_6mo_pct": 2.3,
       "forward_return_1yr_pct": 279.3,
-      "forward_return_2yr_pct": 2480.8
+      "forward_return_2yr_pct": 2480.8,
+      "max_drawdown_6mo_pct": -57.5,
+      "days_to_5x": 257,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-11-07",
@@ -66,7 +86,11 @@
       "forward_return_3mo_pct": 81.7,
       "forward_return_6mo_pct": 52.9,
       "forward_return_1yr_pct": 362.4,
-      "forward_return_2yr_pct": 3133.2
+      "forward_return_2yr_pct": 3133.2,
+      "max_drawdown_6mo_pct": -49.7,
+      "days_to_5x": 247,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-11-08",
@@ -76,7 +100,11 @@
       "forward_return_3mo_pct": 79.2,
       "forward_return_6mo_pct": 61.0,
       "forward_return_1yr_pct": 361.8,
-      "forward_return_2yr_pct": 3180.3
+      "forward_return_2yr_pct": 3180.3,
+      "max_drawdown_6mo_pct": -49.5,
+      "days_to_5x": 246,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-11-09",
@@ -86,7 +114,11 @@
       "forward_return_3mo_pct": 84.6,
       "forward_return_6mo_pct": 73.3,
       "forward_return_1yr_pct": 301.1,
-      "forward_return_2yr_pct": 3119.4
+      "forward_return_2yr_pct": 3119.4,
+      "max_drawdown_6mo_pct": -51.0,
+      "days_to_5x": 245,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": false
     },
     {
       "date": "2022-12-07",
@@ -96,7 +128,11 @@
       "forward_return_3mo_pct": 131.1,
       "forward_return_6mo_pct": 305.5,
       "forward_return_1yr_pct": 889.6,
-      "forward_return_2yr_pct": 6459.0
+      "forward_return_2yr_pct": 6459.0,
+      "max_drawdown_6mo_pct": -2.9,
+      "days_to_5x": 183,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": true
     }
   ],
   "data_range": [

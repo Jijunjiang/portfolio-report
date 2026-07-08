@@ -44,6 +44,7 @@ CASE_FACTS = {
     "HOOD": {
         "as_of": "2022-06-16",
         "outcome": "recovered",
+        "company_label": "Robinhood Markets (HOOD)",
         "brief": (
             "Robinhood Markets (HOOD), retail brokerage app, IPO'd July 2021 near $38, "
             "now down ~92% from its August 2021 high of $85 to about $7. Trading volumes "
@@ -58,6 +59,7 @@ CASE_FACTS = {
     "INTC": {
         "as_of": "2024-08-07",
         "outcome": "recovered",
+        "company_label": "Intel Corp (INTC)",
         "brief": (
             "Intel Corp (INTC), longtime dominant x86 CPU maker, down ~72% from its "
             "2020-era high near $68 to about $19. Losing market share to AMD in consumer "
@@ -73,6 +75,7 @@ CASE_FACTS = {
     "CVNA": {
         "as_of": "2022-12-07",
         "outcome": "recovered",
+        "company_label": "Carvana (CVNA)",
         "brief": (
             "Carvana (CVNA), online used-car retailer known for its 'car vending "
             "machines,' down ~99% from its 2021 high near $85 to under $1. Heavily "
@@ -87,6 +90,7 @@ CASE_FACTS = {
     "PTON": {
         "as_of": "2024-04-24",
         "outcome": "did_not_recover",
+        "company_label": "Peloton Interactive (PTON)",
         "brief": (
             "Peloton Interactive (PTON), connected fitness hardware (bikes/treadmills) "
             "plus subscription app, down ~98% from its January 2021 high of $171 to "
@@ -102,40 +106,66 @@ CASE_FACTS = {
     },
 }
 
-SYSTEM_PROMPT = """You are scoring one criterion of a stock-picking rubric for a personal, \
-low-frequency, high-conviction investment account. You are given a company's situation as \
-of a specific past date, after a severe price drawdown, with no information about what \
-happened after that date. Answer only from the facts given plus general reasoning about \
-the business — do not guess or assume you know how the story turned out.
+def build_system_prompt(company_label, as_of):
+    """Embeds the as-of date directly into each criterion's question text
+    (not just the surrounding framing) — per direct feedback that the
+    question itself needs to be date-anchored ("at 2025-10-10, is HOOD a
+    leadership stock in brokerage") rather than relying on a generic
+    "answer as of X" instruction alone. This does not fully eliminate
+    hindsight-contamination risk for famous cases (see README.md/
+    DESIGN.md's honest limitation on that) but it's the strongest
+    practical mitigation available: an explicit, repeated, date-anchored
+    framing plus an instruction to consciously discard anything the model
+    knows about what happened after that date."""
+    return f"""You are scoring one criterion of a stock-picking rubric for a personal, \
+low-frequency, high-conviction investment account.
 
-Score two criteria, exactly matching this rubric:
+STRICT TIME BOUNDARY: today, for the purpose of this task, is {as_of}. You are simulating \
+the judgment call as it would have been made on that exact date, using only information \
+that was knowable then. You may recognize this company and may know things that happened \
+to it AFTER {as_of} — if so, you must deliberately set that knowledge aside and answer as \
+if {as_of} were the present moment with an unknown future. Do not let post-{as_of} outcomes \
+(recovery, continued decline, acquisition, bankruptcy, anything) leak into either score or \
+its reasoning. If your reasoning references anything dated after {as_of}, that's a failure \
+of this task.
 
-a8_cyclical_judgment: Does the drawdown look cyclical/sentiment-driven (a temporary, \
-external, or fixable problem — a demand cycle, a regulatory overhang, a leverage problem \
-fixable by refinancing/cost cuts, a manufacturing execution problem in an otherwise-viable \
-business) rather than a structural business breakdown (permanent demand destruction, the \
-core product/service becoming obsolete, an unfixable competitive position)? \
-Score 4 (clearly cyclical/fixable), 2 (unclear/mixed), or 0 (looks structural).
+Score two criteria, exactly matching this rubric. Both questions are phrased with the date \
+built in — answer them as asked, not as of today's real date:
 
-b33_domainleadership_judgment: Is this company a top-tier/dominant leader in its specific \
-market domain (clear #1 or #2, durable moat) or at least a solid niche leader (#3-4, real \
-but not airtight moat) — durable enough to be worth holding through a full 10-year cycle \
-regardless of near-term volatility? Or is it sub-scale/commoditized/easily disrupted? \
-Score 5 (dominant leader), 2 (solid niche leader), or 0 (sub-scale/commoditized/disrupted).
+a8_cyclical_judgment: As of {as_of}, does {company_label}'s drawdown look cyclical/ \
+sentiment-driven (a temporary, external, or fixable problem — a demand cycle, a regulatory \
+overhang, a leverage problem fixable by refinancing/cost cuts, a manufacturing execution \
+problem in an otherwise-viable business) rather than a structural business breakdown \
+(permanent demand destruction, the core product/service becoming obsolete, an unfixable \
+competitive position)? Score 4 (clearly cyclical/fixable), 2 (unclear/mixed), or 0 (looks \
+structural) — based only on what was true and knowable as of {as_of}.
+
+b33_domainleadership_judgment: As of {as_of}, is {company_label} a top-tier/dominant leader \
+in its specific market domain (clear #1 or #2, durable moat) or at least a solid niche \
+leader (#3-4, real but not airtight moat) — durable enough to be worth holding through a \
+full 10-year cycle regardless of near-term volatility? Or is it sub-scale/commoditized/ \
+easily disrupted? Score 5 (dominant leader), 2 (solid niche leader), or 0 (sub-scale/ \
+commoditized/disrupted) — based on {company_label}'s actual market position as of {as_of}, \
+not on anything that happened to its competitive standing afterward.
 
 Respond with ONLY a JSON object, no other text: \
-{"a8_cyclical_judgment": {"score": 0|2|4, "reasoning": "..."}, \
-"b33_domainleadership_judgment": {"score": 0|2|5, "reasoning": "..."}}"""
+{{"a8_cyclical_judgment": {{"score": 0|2|4, "reasoning": "..."}}, \
+"b33_domainleadership_judgment": {{"score": 0|2|5, "reasoning": "..."}}}}"""
 
 
-def call_claude(api_key, brief, as_of):
+def call_claude(api_key, company_label, brief, as_of):
+    system_prompt = build_system_prompt(company_label, as_of)
     payload = {
         "model": MODEL,
         "max_tokens": 600,
-        "system": SYSTEM_PROMPT,
+        "system": system_prompt,
         "messages": [{
             "role": "user",
-            "content": f"Situation as of {as_of} (no information after this date is available):\n\n{brief}",
+            "content": (
+                f"It is {as_of}. Here is {company_label}'s situation as of today "
+                f"({as_of}) — nothing below or in your own knowledge from after this "
+                f"date should factor into your answer:\n\n{brief}"
+            ),
         }],
     }
     resp = requests.post(
@@ -155,7 +185,7 @@ def call_claude(api_key, brief, as_of):
 
 def run_case(ticker, api_key):
     case = CASE_FACTS[ticker]
-    judgment = call_claude(api_key, case["brief"], case["as_of"])
+    judgment = call_claude(api_key, case["company_label"], case["brief"], case["as_of"])
     result = {
         "ticker": ticker,
         "as_of": case["as_of"],

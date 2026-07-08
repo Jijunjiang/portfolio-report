@@ -63,6 +63,36 @@ def forward_return(bars, from_idx, days_ahead):
     return None  # not enough forward data
 
 
+def max_drawdown_pct(bars, from_idx, days_ahead):
+    """Worst (most negative) % move from entry close to any subsequent
+    close within `days_ahead` calendar days — the "how much pain before
+    it worked out" number. None if there's no forward data at all yet
+    (distinct from 0, a real max drawdown of zero)."""
+    target = bars[from_idx]["_date"] + timedelta(days=days_ahead)
+    entry_price = bars[from_idx]["close"]
+    worst = None
+    for i in range(from_idx, len(bars)):
+        if bars[i]["_date"] > target:
+            break
+        drawdown = (bars[i]["close"] / entry_price - 1) * 100
+        if worst is None or drawdown < worst:
+            worst = drawdown
+    return round(worst, 1) if worst is not None else None
+
+
+def days_to_multiple(bars, from_idx, multiple):
+    """Calendar days from entry to the first close >= multiple * entry
+    price. None if never reached in the data available so far (which may
+    just mean "not yet," not "never" — see reached_multiple_so_far in the
+    caller)."""
+    entry_price = bars[from_idx]["close"]
+    target_price = entry_price * multiple
+    for i in range(from_idx, len(bars)):
+        if bars[i]["close"] >= target_price:
+            return (bars[i]["_date"] - bars[from_idx]["_date"]).days
+    return None
+
+
 def scan_window(ticker, bars, window_start, window_end):
     """For every trading day in [window_start, window_end], compute RSI(14)
     and Williams %R(14) using only bars up to that day, and check whether
@@ -83,6 +113,16 @@ def scan_window(ticker, bars, window_start, window_end):
             continue
         fired = rsi < 30 and williams < -80
         if fired:
+            max_dd_6mo = max_drawdown_pct(bars, i, 182)
+            days_5x = days_to_multiple(bars, i, 5.0)
+            has_6mo_data = forward_return(bars, i, 182) is not None
+            passes = None
+            if has_6mo_data:
+                # "Never > 30% down within 6mo, and eventually hits 5x" —
+                # the user's own bar for a genuinely low-risk/high-reward
+                # entry, stricter and more decision-relevant than a plain
+                # forward-return percentage.
+                passes = (max_dd_6mo is not None and max_dd_6mo > -30) and (days_5x is not None)
             hits.append({
                 "date": bar["begins_at"][:10],
                 "close": bar["close"],
@@ -92,6 +132,10 @@ def scan_window(ticker, bars, window_start, window_end):
                 "forward_return_6mo_pct": forward_return(bars, i, 182),
                 "forward_return_1yr_pct": forward_return(bars, i, 365),
                 "forward_return_2yr_pct": forward_return(bars, i, 730),
+                "max_drawdown_6mo_pct": max_dd_6mo,
+                "days_to_5x": days_5x,
+                "reached_5x_in_available_data": days_5x is not None,
+                "passes_low_risk_high_reward": passes,
             })
     return hits
 
@@ -135,14 +179,24 @@ def main():
             summary_lines.append(f"{case['note']}\n")
             summary_lines.append(f"Screen fired on **{result['screen_fired_on_n_days']}** day(s) in the trough window.\n")
             if result["hits"]:
-                summary_lines.append("| Date | Close | RSI(14) | Williams%R(14) | +3mo | +6mo | +1yr | +2yr |")
-                summary_lines.append("|---|---:|---:|---:|---:|---:|---:|---:|")
+                passing = sum(1 for h in result["hits"] if h["passes_low_risk_high_reward"])
+                unknown = sum(1 for h in result["hits"] if h["passes_low_risk_high_reward"] is None)
+                summary_lines.append(
+                    f"**Low-risk/high-reward bar** (never >30% down within 6mo, eventually hits 5x): "
+                    f"**{passing}/{len(result['hits']) - unknown}** evaluable entries pass"
+                    + (f" ({unknown} too recent to evaluate the 6mo window yet)" if unknown else "") + "\n"
+                )
+                summary_lines.append("| Date | Close | RSI(14) | Williams%R(14) | +3mo | +6mo | +1yr | +2yr | Max DD (6mo) | Days to 5x | Passes low-risk/high-reward? |")
+                summary_lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---:|")
                 for h in result["hits"]:
+                    passes = h["passes_low_risk_high_reward"]
+                    passes_str = "unknown (too recent)" if passes is None else ("✅ YES" if passes else "❌ no")
                     summary_lines.append(
                         f"| {h['date']} | ${h['close']:.2f} | {h['rsi_14']} | "
                         f"{h['williams_pct_range_14']} | "
                         f"{h['forward_return_3mo_pct']}% | {h['forward_return_6mo_pct']}% | "
-                        f"{h['forward_return_1yr_pct']}% | {h['forward_return_2yr_pct']}% |"
+                        f"{h['forward_return_1yr_pct']}% | {h['forward_return_2yr_pct']}% | "
+                        f"{h['max_drawdown_6mo_pct']}% | {h['days_to_5x']} | {passes_str} |"
                     )
             summary_lines.append("")
         summary_path = os.path.join(results_dir, "summary.md")

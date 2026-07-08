@@ -16,7 +16,11 @@
       "forward_return_3mo_pct": 63.3,
       "forward_return_6mo_pct": 25.8,
       "forward_return_1yr_pct": 45.6,
-      "forward_return_2yr_pct": 222.9
+      "forward_return_2yr_pct": 222.9,
+      "max_drawdown_6mo_pct": 0.0,
+      "days_to_5x": 886,
+      "reached_5x_in_available_data": true,
+      "passes_low_risk_high_reward": true
     }
   ],
   "data_range": [

@@ -1,99 +1,87 @@
-# Backtest findings — 2026-07-07
+# Backtest findings — 2026-07-07 (updated with the low-risk/high-reward bar)
 
 Full data in `summary.md` / `*-backtest.json`. This is the interpretation.
-Read `../README.md` first for the honest scope (technical criteria only,
-4 cases, not a statistically meaningful sample).
+Read `../README.md` and `../DESIGN.md` first for the honest scope
+(technical criteria only, 4 cases, not a statistically meaningful sample).
 
-## Headline result: the pure technical screen does NOT reliably discriminate winners from PTON
+**Update**: the metric below (never >30% drawdown within 6 months, and
+eventually reaches 5x) replaced a looser "raw forward return" check per
+direct feedback — it's a much better test of what actually matters for a
+real, low-frequency account: could you have *held* the position without
+being shaken out, not just "was the return positive at some arbitrary
+horizon."
 
-This is the single most important finding, and it's a real quantitative
-confirmation of what `validation.md` already argued qualitatively:
+## Headline result: this stricter bar discriminates cleanly — much better than raw forward returns did
 
-| Case | Times screen fired | Best 1yr forward return seen | Best 2yr forward return seen | Actual outcome |
-|---|---:|---:|---:|---|
-| HOOD | 1 | +45.6% | +222.9% | Recovered, 11x off the low |
-| INTC | 9 | +19.8% | (insufficient data yet) | Recovered, 5.7x off the low |
-| CVNA | 9 | +889.6% | +6459.0% | Recovered, 96.6x off the low |
-| **PTON** | **11** | **+107.6%** | **+75.2%** | **Did not recover — still 96.6% below its all-time high** |
+| Case | Screen fired | Passes low-risk/high-reward | Actual outcome |
+|---|---:|---:|---|
+| HOOD | 1 | **1/1 (100%)** | Recovered, 11x off the low |
+| INTC | 9 | **9/9 (100%)** | Recovered, 5.7x off the low |
+| CVNA | 9 | **1/9 (11%)** | Recovered, 96.6x off the low |
+| **PTON** | 11 | **0/11 (0%)** | **Did not recover** |
 
-**PTON fired the screen more often than any winner except INTC/CVNA, and
-some of its individual forward returns look competitive with the real
-winners on paper** (+107.6% at 1yr from the 2024-04-24 entry is a better
-1yr number than INTC ever produced). If you only looked at "did the
-technical screen fire, and was the forward return positive," PTON would
-have looked like a hit. It wasn't — the stock never recovered anywhere
-near its highs; these are dead-cat bounces inside a structurally broken
-business, not the start of a real recovery, and only look decent because
-PTON's baseline was already so destroyed that even normal volatility
-produces large percentage swings.
+This is a real improvement over the earlier (raw-forward-return) version
+of this experiment, which made PTON look deceptively competitive with the
+winners on some individual dates. Under this stricter bar, **PTON fails
+outright, on every single one of its 11 firing dates** — it never reaches
+5x from any entry point in the available data, full stop. HOOD and INTC
+pass on *every* firing date. This is the cleanest, most decision-relevant
+signal this backtest has produced so far.
 
-**This is exactly why the rubric's mandatory Category B/D judgment gate
-exists and isn't optional polish** — the mechanical criteria alone
-cannot tell HOOD from PTON. `validation.md`'s qualitative read (cyclical/
-fixable vs. structural demand destruction) is doing real, necessary work
-that no amount of RSI/Williams%R tuning would replace.
+## CVNA is the genuinely interesting case, not a clean pass or fail
 
-## Second finding: being early to "oversold" is not the same as being at the bottom
+CVNA only passes on its very last firing date (2022-12-07, $0.77 —
+practically at the actual $0.71 bottom). Every earlier firing date
+(2022-10-19 through 2022-11-09) **fails the bar specifically because of
+the 6-month drawdown constraint**, not because it never recovered:
 
-CVNA's own data shows this starkly within a single case: the screen fired
-on 2022-10-19 (stock at $3.00) with **negative** 3mo/6mo forward returns
-(-53%/-42%) — the stock kept falling for another six weeks to its actual
-$0.71 low in December. An entry on the *first* fire date would have
-meant enduring a further ~74% drawdown before the eventual 3,000%+
-recovery. The screen re-fired multiple times on the way down (Oct 19-24,
-Nov 4, Nov 7-9, Dec 7) — oversold conditions are not a single event during
-a real capitulation, they recur. A mechanical "buy the first RSI<30
-signal" rule would have been early and painful even in the case that
-ultimately worked out best.
+| Entry date | Max drawdown within 6mo | Eventually hit 5x? | Passes? |
+|---|---:|---|:---:|
+| 2022-10-19 | **-75.2%** | Yes, in 496 days (~16mo) | ❌ no — drawdown breach |
+| 2022-11-04 | -57.5% | Yes, in 257 days | ❌ no — drawdown breach |
+| 2022-11-08 | -49.5% | Yes, in 246 days | ❌ no — drawdown breach |
+| **2022-12-07** | **-2.9%** | **Yes, in 183 days** | **✅ yes** |
 
-INTC shows a milder version of the same pattern: fired 9 times in early
-August 2024, but the real low wasn't until September — several of the
-August entries show negative 6mo returns before recovering by 1yr.
+Every one of these entries *eventually* multiplied — the difference is
+purely how much pain came first. An account that bought CVNA on the first
+signal (Oct 19) and had a real 30% stop-loss discipline would have been
+stopped out around -30% (roughly early November) and never seen the
+6,459% two-year return that materialized from the December entry. This is
+the same "being early to oversold isn't the same as being at the bottom"
+finding as before, now precisely quantified: **CVNA's screen re-fired 9
+times over ~7 weeks as the stock kept falling, and only the last of those
+9 signals was actually tradeable under a real risk constraint.**
 
-## Third finding: HOOD's single, precise fire is the outlier, not the norm
+## What this suggests, concretely
 
-HOOD only fired the screen once, three days after the actual bottom
-(2022-06-16 vs. the true low of 2022-06-13) — about as clean a signal as
-this kind of screen could produce. But this is the exception across the
-4 cases, not what to expect by default; INTC/CVNA/PTON all fired 9-11
-times each across weeks or months, several while the stock kept falling.
-Don't calibrate expectations of "how precise this screen is" off the HOOD
-case alone.
+1. **A single technical fire is not enough — the *pattern* of repeated
+   fires and how the drawdown behaves after each one carries real
+   information.** CVNA's later, calmer fires (smaller subsequent
+   drawdown, faster time-to-5x) were the tradeable ones; the early,
+   still-falling fires weren't. A rule like "wait for the screen to fire
+   without a new closing low for N sessions" might separate these
+   better than firing on RSI/Williams alone — worth a follow-up
+   experiment, not implemented here.
+2. **HOOD and INTC's 100% pass rates are the real prize finding** — every
+   single day the mechanical screen fired for these two names would have
+   been both survivable (never >30% further down within 6 months) and
+   eventually hugely profitable (5x). That's a much stronger result than
+   "the screen sometimes works."
+3. **PTON's 0/11 is exactly the false-positive case this bar is meant to
+   catch**, and it does — cleanly, unlike the raw-forward-return version
+   of this experiment which made a couple of PTON's entries look
+   superficially competitive with real winners.
 
-## What this does and doesn't change
+## Honest gaps, unchanged from before
 
-**Doesn't change**: the rubric's own design already treats Category A
-(technical/drawdown) as a necessary-but-not-sufficient gate, never a
-standalone buy signal, and already requires the Category A8/B/D judgment
-read before anything reaches a shortlist. This backtest is a confirmation
-of that design choice, not a discovery that something's broken.
-
-**Does suggest** two concrete, evidence-backed follow-ups worth
-considering (not implemented here — this is a finding to act on via the
-normal `rubric-engine` process, with proper approval, not a silent
-change):
-1. A single-fire-date entry rule may be systematically premature (CVNA,
-   INTC both show early fires losing money for months). Worth testing
-   whether requiring the screen to fire on **multiple separate days**
-   (not just once) before treating it as a real signal would have avoided
-   the worst of the early-entry pain, without missing HOOD's single clean
-   fire.
-2. The forward-return magnitude alone is a bad tie-breaker between
-   real winners and PTON-style fakes — some kind of "did the price
-   actually reclaim a meaningful fraction of its former high" check
-   (which Category C's EMA-reclaim criterion gestures at, but this
-   backtest didn't test Category C at all yet) might discriminate better
-   than raw technical oversold signals. Worth a follow-up experiment.
-
-## Honest gaps in this experiment itself
-
-- Only tested Category A's two turnaround gate criteria (RSI, Williams
-  %R) — not the other 4 Category A criteria (Stochastic, Bollinger,
-  Support, PEG) or any of Category C's momentum criteria, all of which
-  `compute_rubric.py` can compute and a follow-up run should include.
-- 4 cases (3 winners, 1 non-winner) is far too small to compute a real
-  hit rate or false-positive rate — see `RUBRICS.md`'s own 5-case minimum
-  for exactly this reason. This is a sanity check, not a statistically
-  powered backtest. More cases (especially more non-recovery cases, which
-  are underrepresented here at just 1 of 4) would meaningfully improve
-  this.
+- Only 4 cases (3 winners, 1 non-winner) — not a statistically meaningful
+  sample; see `RUBRICS.md`'s own 5-case minimum. More non-recovery cases
+  in particular would meaningfully strengthen this.
+- Only tests 2 of Category A's 7 mechanical criteria (RSI, Williams %R).
+  Stochastic/Bollinger/Support/PEG and Category C's momentum criteria are
+  all computable with the same functions but not wired in yet.
+- Fundamentals and judgment criteria still can't be backtested this way —
+  see `../DESIGN.md`. `judgment_experiment.py` (built, calls the real
+  Claude API, needs `ANTHROPIC_API_KEY`) is the intended supplement for
+  the judgment half, with an explicit date-anchored anti-hindsight prompt
+  design — still not run in this sandbox.

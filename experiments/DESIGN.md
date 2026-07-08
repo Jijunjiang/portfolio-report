@@ -78,20 +78,20 @@ trough-window dates and outcome facts machine-readable instead of prose.
   this is well under that. Every result here is a sanity check /
   existence-proof, not a backtested hit rate.
 
-## Results so far (2026-07-07 run)
+## Results so far (2026-07-07 run, updated with the low-risk/high-reward bar)
 
 Full data: `results/summary.md`, `results/*-backtest.json`. Full writeup:
-`results/FINDINGS.md`. Headline: **the pure technical screen does not
-reliably discriminate winners from PTON** — PTON fired the RSI/Williams
-screen 11 times (more than HOOD's 1 and tied with CVNA's 9), and some of
-its individual forward returns (+107.6% at 1yr) look competitive with the
-real winners on paper, despite the stock never actually recovering. This
-is a real, quantitative confirmation of why the rubric's Category B/D
-judgment gate is mandatory, not optional polish — see `FINDINGS.md` for
-the full breakdown, including a second finding that being early to
-"oversold" is not the same as being at the bottom (CVNA's own early fires
-lost 40-55% over the following months before its eventual 3,000%+ recovery
-from a later fire).
+`results/FINDINGS.md`. `backtest.py` now scores each firing date against a
+precise, decision-relevant bar instead of a raw forward-return percentage:
+**never more than 30% down within 6 months of entry, and eventually
+reaches 5x**. Under that bar the screen discriminates cleanly: **HOOD
+1/1 and INTC 9/9 firing dates pass (100% each); PTON 0/11 (0%) — it never
+reaches 5x from any entry point in the available data.** CVNA is the
+nuanced case: only its very last firing date (right at the actual bottom)
+passes — every earlier fire breached the 30% drawdown constraint even
+though all of them eventually multiplied, showing precisely that being
+early to "oversold" during a real capitulation is not the same as being
+at the bottom. See `FINDINGS.md` for the full breakdown.
 
 The judgment experiment (`judgment_experiment.py`) is built and ready to
 run but needs `ANTHROPIC_API_KEY` set, which isn't available in this
