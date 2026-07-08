@@ -1,0 +1,13 @@
+ticker,archetype,date,a1_pctoffhigh,a2_rsi,a3_williams,a4_stochastic,a5_bollinger,a6_support,a7_peg_lt1,a8_cyclical_judgment,b9_mktcap,b10_grossmargin,b11_opmargin,b12_netmargin,b13_roe,b14_roa,b15_dividend,b16_epstrend,b17_leverage_judgment,c18_macd,c19_ema,c20_aroon,c21_adx,c22_relvol,c23_rsirecross,d24_epsbeat,d25_noearnings2wk,d26_tailwind_judgment,d27_catalyst_judgment,d28_pegroe_combo,e29_liquidity,e30_not_concentrated,e31_iv_extreme,e32_fitstyle_judgment,b33_domainleadership_judgment
+MLI,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,PASS,N/A,PASS,FAIL,PASS,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+KLAC,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,FAIL,N/A,PASS,PASS,PASS,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+AD,turnaround,2026-07-07,PASS,PASS,PASS,N/A,N/A,N/A,PASS,N/A,PASS,PASS,FAIL,N/A,PASS,PASS,FAIL,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+TU,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,FAIL,N/A,PASS,PASS,PASS,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+TDS,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,PASS,N/A,PASS,PASS,FAIL,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+HAS,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,FAIL,N/A,PASS,PASS,PASS,N/A,FAIL,FAIL,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+CRGY,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,N/A,N/A,PASS,PASS,PASS,N/A,FAIL,FAIL,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+SOLS,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,N/A,N/A,PASS,PASS,PASS,N/A,PASS,PASS,FAIL,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+HWKN,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,FAIL,N/A,PASS,FAIL,PASS,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+LBRT,turnaround,2026-07-07,FAIL,PASS,PASS,N/A,N/A,N/A,N/A,N/A,PASS,FAIL,PASS,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+ORCL,turnaround,2026-07-07,PASS,PASS,PASS,N/A,N/A,N/A,FAIL,N/A,PASS,PASS,PASS,N/A,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
+ALB,turnaround,2026-07-07,PASS,PASS,PASS,N/A,N/A,N/A,N/A,N/A,PASS,FAIL,PASS,N/A,FAIL,FAIL,PASS,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PASS,PASS,N/A,N/A,N/A
