@@ -100,6 +100,21 @@ shows a real gap (not just directionally different by a row or two):
 - Draft a specific, numeric change — a new weight, a new threshold, a new
   criterion to add, or a criterion to retire — not a vague "seems like
   this matters more."
+- **If the evidence points to a missing criterion (a real pattern in the
+  outcomes that nothing currently scored captures), check
+  `experiments/prompts/full-rubric-100.csv` before inventing one from
+  scratch** — it's a pre-researched pool of 65 candidate criteria (real
+  formulas/citations: Altman Z-score, Piotroski F-score, Morningstar's
+  moat framework, momentum-factor research, etc.) across categories not
+  yet live-scored (valuation, growth, balance-sheet, ownership/sentiment,
+  additional technical/momentum, catalyst/event, business-quality/moat,
+  macro). A pool criterion still needs the same evidence + human approval
+  as any other proposal — the pool only saves the "design a good
+  criterion from nothing" step, not the promotion gate. Before proposing
+  one, verify its `formula_or_data_needed` column doesn't say "HONEST
+  GAP" — several pool criteria (most of Category H, several of I/K) have
+  no confirmed data source in this project yet and can't be promoted
+  until that's solved.
 - Cite the exact rows (dates/tickers or dates/symbols) that justify it.
 - For every category with **<5 resolved cases**, explicitly report "not
   enough evidence yet" rather than staying silent — the absence of a

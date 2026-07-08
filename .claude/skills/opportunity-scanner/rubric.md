@@ -231,3 +231,14 @@ lifecycle this follows.
   can never discriminate (100% of rows reaching this rubric already pass
   it). Category B max reduced 25→23 pts. Full record:
   `reports/rubric-changelog.csv` ids 7-8.
+- **2026-07-07** (research pass, not applied here): designed 65 additional
+  candidate criteria across 8 new categories (valuation, growth,
+  balance-sheet health, ownership/sentiment, additional technical/
+  momentum, catalyst/event, business-quality/moat, macro/sector) —
+  `experiments/prompts/full-rubric-100.csv`, methodology in
+  `experiments/DESIGN.md`. **None of these 65 are scored by this file** —
+  this is the candidate pool `rubric-engine`'s Step 3 checks before
+  drafting a new-criterion proposal, not a live change. The 33 criteria
+  above remain the only ones actually applied to real candidates until a
+  specific pool criterion clears the same evidence + approval gate as any
+  other rubric change.

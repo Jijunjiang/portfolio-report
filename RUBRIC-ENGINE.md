@@ -20,6 +20,7 @@ is no autonomous trading and no autonomous rubric-editing here.
 | Component | What it is | Where it lives |
 |---|---|---|
 | Research intake | Papers/books/practitioner research, curated by hand | `RUBRICS.md` § Literature backing today's rubrics |
+| Candidate criteria pool | Researched-but-not-yet-live criteria — a larger pool than what's actually scored today, each with a real formula/citation or a persona-tailored LLM prompt, ready to promote into `rubric.md` if evidence ever supports it | `experiments/prompts/full-rubric-100.csv` (98 criteria as of 2026-07-07: the 33 live-scored ones plus 65 researched candidates across 8 new categories — valuation, growth, balance-sheet, ownership/sentiment, technical/momentum, catalyst/event, business-quality/moat, macro — see `experiments/DESIGN.md`) |
 | Rubric definition | Versioned criteria + weights + changelog | `rubric.md` / `option-suggestion-rubric.md` |
 | Prefilter (Stage 0) | Hard-cutoff pass/fail rubric that narrows the raw universe to a size the full rubric can completely evaluate | Saved-scan filters (`opportunity-scanner/SKILL.md` step 1); ~100 combined daily matches as of 2026-07-07 |
 | Candidate generator | Produces raw candidates to score | `run_scan` (saved scanners) / `get_option_chains` + `get_option_instruments` |
@@ -27,7 +28,7 @@ is no autonomous trading and no autonomous rubric-editing here.
 | Decision log | Fact table: candidate + score + decision + (later) outcome | `reports/opportunity-scanner-logs/*.csv` (one file per run), `reports/option-suggestion-log.csv` |
 | Outcome resolver | Fills in what actually happened, once enough time has passed | `rubric-engine` skill, step 1 |
 | Correlation analyzer | Buckets resolved rows by score, checks which categories discriminate | `rubric-engine` skill, step 2 |
-| Proposal drafter | Turns a discriminating pattern into a specific, cited rubric diff | `rubric-engine` skill, step 3 |
+| Proposal drafter | Turns a discriminating pattern into a specific, cited rubric diff — for a *new criterion* proposal specifically, checks the candidate criteria pool first rather than inventing one from scratch | `rubric-engine` skill, step 3 |
 | Proposal log | Timestamped record of every proposal and its eventual status | `reports/rubric-changelog.csv` |
 | Human approval gate | Nothing changes without explicit sign-off | `rubric-engine` skill, step 4 |
 | Rubric editor | Applies an approved diff + changelog entry | `rubric-engine` skill, step 5 |
@@ -133,6 +134,37 @@ generic across both live rubrics (and any future one registered in
 `RUBRICS.md`'s table), parameterized by which rubric/log pair to run
 against. See that skill for the exact steps; it is a direct
 implementation of `RUBRICS.md` Stages 3–4, not a separate methodology.
+
+## Research can move fast; promotion to the live rubric still can't
+
+The candidate criteria pool (`experiments/prompts/full-rubric-100.csv`)
+exists precisely so that *generating* well-researched candidate criteria
+and *scoring real candidates on the live rubric* can move at different
+speeds. Designing 65 new, properly-cited criteria (Altman Z-score,
+Piotroski F-score components, Morningstar's economic-moat framework,
+Jegadeesh & Titman momentum research, real S&P index-inclusion mechanics,
+etc.) took one research pass; none of them are live-scored yet, and none
+should become live-scored just because the research is good. The same
+Stage 3/4 gate in `RUBRICS.md` — draft a specific, cited proposal, get
+explicit human approval, never reweight on <5 resolved cases — applies to
+*promoting* a pool criterion into `rubric.md` exactly as it applies to any
+other rubric change. A well-researched formula is a necessary condition
+for a good criterion, not a sufficient one for it to matter for *this*
+account's actual candidates; that's what the live pipeline's resolved
+outcomes are for.
+
+Two honest gaps the pool's own research surfaced, worth calling out here
+rather than only in `experiments/`: a large fraction of the new Category H
+(balance sheet) and several Category I/K (ownership, catalyst) criteria
+have **no confirmed data source in this project's current toolset** —
+`get_equity_fundamentals` doesn't expose the balance-sheet line items
+Altman/Piotroski need, and nothing here fetches Form 4 insider
+transactions, 13F institutional-ownership changes, or SEC 13D activist
+filings. Each such row says so explicitly rather than pretending a fetch
+method exists — same "verify fetchability before trusting a criterion"
+rule as everywhere else in this project (`CLAUDE.md`). Promoting any of
+those specific criteria would need a new data source solved first, not
+just human sign-off.
 
 ## Why not more automated than this
 
