@@ -98,6 +98,14 @@ run but needs `ANTHROPIC_API_KEY` set, which isn't available in this
 sandboxed environment — run it separately with real API credentials to
 get that half of the picture.
 
+## Related: the 98-criterion candidate pool
+
+Separate from the backtest above, `experiments/prompts/full-rubric-100.csv`
+holds a much larger candidate criteria pool (33 live-scored + 65
+researched-but-not-yet-live) — see `RESEARCH-PLAN.md` for the category
+breakdown and citations, and `RUBRIC-ENGINE.md` for how a pool criterion
+is meant to get promoted (evidence + approval, same as any other change).
+
 ## Extending this
 
 - Add more cases, especially more `did_not_recover` ones (only 1 of 4
