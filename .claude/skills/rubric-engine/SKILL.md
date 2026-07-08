@@ -14,7 +14,7 @@ writing that's two:
 
 | Target | Rubric | Log | Resolution horizon |
 |---|---|---|---|
-| `opportunity-scanner` | `.claude/skills/opportunity-scanner/rubric.md` | `reports/opportunity-scanner-log.csv` | 1 quarter (`outcome_1q`), 1 year (`outcome_1y`) |
+| `opportunity-scanner` | `.claude/skills/opportunity-scanner/rubric.md` | `reports/opportunity-scanner-logs/*.csv` (one file per run, glob — changed 2026-07-07; the old single `reports/opportunity-scanner-log.csv` is a pre-change historical snapshot only) | 1 quarter (`outcome_1q`), 1 year (`outcome_1y`) |
 | `option-suggestion` | `.claude/skills/portfolio-report/playbooks/option-suggestion-rubric.md` | `reports/option-suggestion-log.csv` | option's own expiration date |
 
 If the user names a target ambiguously ("check the rubric"), ask which
@@ -23,8 +23,13 @@ different log schemas.
 
 ## Step 1 — Resolve outcomes
 
-Read the target's log CSV. For every row whose resolution horizon has
-passed and whose outcome columns are still blank:
+Read the target's log. For `opportunity-scanner`, that means every CSV in
+`reports/opportunity-scanner-logs/` (one file per run — glob the
+directory, don't assume a single path) plus the legacy
+`reports/opportunity-scanner-log.csv` snapshot if it still has unresolved
+rows from before the 2026-07-07 logging-convention change. For every row
+whose resolution horizon has passed and whose outcome columns are still
+blank:
 
 - **opportunity-scanner rows**: pull the current price
   (`get_equity_quotes`) and compute return since `price_at_scan`. Fill
@@ -39,8 +44,10 @@ passed and whose outcome columns are still blank:
   compute `realized_pnl` per `tax-basics.md`'s roll-netting method where
   relevant.
 
-Write the filled-in rows back to the CSV. This step is purely factual — no
-judgment calls yet, that's step 3.
+Write each filled-in row back to whichever run-file it came from (don't
+consolidate rows across files — each run's CSV stays that run's own
+record). This step is purely factual — no judgment calls yet, that's
+step 3.
 
 ## Step 2 — Correlation analysis
 

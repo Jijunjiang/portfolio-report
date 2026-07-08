@@ -45,7 +45,7 @@ flowchart LR
     subgraph Store["Data store (git-versioned flat files)"]
         MD["reports/YYYY-MM-DD.md\n(daily narrative)"]
         CSV1["net-worth-history.csv\nmargin-balance-history.csv\nmargin-interest.csv"]
-        CSV2["opportunity-scanner-log.csv\noption-suggestion-log.csv"]
+        CSV2["opportunity-scanner-logs/*.csv (one/run)\noption-suggestion-log.csv"]
         CSV3["rubric-changelog.csv"]
         HTML["dashboard.html\nopportunity-scanner.html"]
     end
@@ -90,7 +90,7 @@ flowchart LR
 | Skill | Purpose | Cadence | Key reads | Key writes |
 |---|---|---|---|---|
 | `portfolio-report` | Daily orchestrator: holdings, margin, tax, dividends, option-selling suggestions | Daily (weekdays, cloud-scheduled) | `robinhood-trading` MCP, both rubric files, prior day's report | `reports/YYYY-MM-DD.md`, `net-worth-history.csv`, `margin-balance-history.csv`, `option-suggestion-log.csv`, `dashboard.html` |
-| `opportunity-scanner` | Screens for asymmetric turnaround/compounder candidates | Daily full-rubric evaluation of the Stage 0-prefiltered set (~100 names/day as of 2026-07-07); outcome review quarterly via `rubric-engine` | `robinhood-trading` MCP (`run_scan`, batched `get_equity_fundamentals`), `rubric.md` | `opportunity-scanner-log.csv`, `opportunity-scanner.html` |
+| `opportunity-scanner` | Screens for asymmetric candidates across 4 risk/reward archetypes | Daily gate+full-rubric evaluation of each archetype's Stage 0-prefiltered set (~20-95 names/archetype/day as of 2026-07-07); outcome review quarterly via `rubric-engine` | `robinhood-trading` MCP (`run_scan`, batched `get_equity_fundamentals`), `rubric.md` | `opportunity-scanner-logs/*.csv` (one file per run), `opportunity-scanner.html` |
 | `option-trade-model` | Deep quantitative workup (Black-Scholes, tax-adjusted EV) for one specific candidate | On demand only | `robinhood-trading` MCP | Nothing persistent — conversational output, occasionally folded into a report's deep-dive section |
 | `rubric-engine` | Resolves logged outcomes, checks which rubric categories discriminate, proposes evidence-cited changes | Quarterly | Both `*-log.csv` files, `robinhood-trading` MCP (for current prices/positions) | `rubric-changelog.csv`, and (only on human approval) the rubric `.md` files themselves |
 
@@ -111,7 +111,7 @@ flat files *is* the system's database, and it's going to keep growing.
 | `reports/net-worth-history.csv` | One trading day | Append-only | `portfolio-report` step 8 | Future trend charts; quarterly reviews |
 | `reports/margin-balance-history.csv` | One (day, margin account) pair | Append-only | `portfolio-report` step 3 | Margin-interest estimate, loan-to-value trend |
 | `reports/margin-interest.csv` | One actual statement figure, whenever the user supplies one | Append-only, sparse | Manual (user pastes a real figure) | Ground-truth check against the tracked estimate |
-| `reports/opportunity-scanner-log.csv` | One scored candidate (sell *or* skip), one row per prefilter survivor — ~100/day | Append-only rows; outcome columns (`outcome_1q`, `outcome_1y`) filled in later by `rubric-engine` | `opportunity-scanner` (score), `rubric-engine` (outcomes) | `rubric-engine`'s correlation analysis |
+| `reports/opportunity-scanner-logs/*.csv` | One run's worth of scored/gated candidates (one row per Stage-0 survivor, full or gate-disqualified) — one CSV per run, never appended (changed 2026-07-07; pre-change history lives in the legacy `reports/opportunity-scanner-log.csv` snapshot) | Each run's file is append-only *within that run*; outcome columns (`outcome_1q`, `outcome_1y`) filled in later by `rubric-engine`, writing back into whichever file the row came from | `opportunity-scanner` (score), `rubric-engine` (outcomes) | `rubric-engine`'s correlation analysis (globs the directory) |
 | `reports/opportunity-scanner.html` | Current snapshot only | Mutable | `opportunity-scanner` | Redeployed as its own Artifact (public URL in `.opportunity-scanner-artifact-url`) |
 | `reports/option-suggestion-log.csv` | One suggested option trade (sell *or* skip) | Append-only rows; `outcome`/`realized_pnl`/`verdict`/`score_*` filled in later | `portfolio-report` (suggestion + score), `rubric-engine` (outcomes) | `rubric-engine`'s correlation analysis |
 | `reports/rubric-changelog.csv` | One proposed rubric change (`id, timestamp, rubric, category, change, status`) | Append-only; `status` field is the only thing ever updated in place (proposed → approved/rejected) | `rubric-engine` | Audit trail; future analysis of which changes actually helped |

@@ -15,13 +15,18 @@ review loop, run quarterly, not a continuously-optimizing system.
 
 ## The log
 
-`reports/opportunity-scanner-log.csv` — one row per candidate scored,
+`reports/opportunity-scanner-logs/` — one CSV per run (changed
+2026-07-07; never append to a single growing file — see `SKILL.md` step
+6). Across all files in that directory: one row per candidate scored,
 ever. Columns: `date_scanned, ticker, archetype, total_score,
 category_a..category_e` (subtotals), `price_at_scan,
 pct_off_high_at_scan`, then **one column per individual rubric
-criterion** — `a1_pctoffhigh` through `e32_fitstyle_judgment`, matching
-`rubric.md`'s 32 numbered criteria exactly — followed by `outcome_1q,
-outcome_1y`.
+criterion** — `a1_pctoffhigh` through `b33_domainleadership_judgment`,
+matching `rubric.md`'s numbered criteria exactly (criterion 12 is retired
+and always `N/A`; criterion 33 is a gate, not a score — see `rubric.md`'s
+"Gates" section) — followed by `outcome_1q, outcome_1y`. The pre-2026-07-07
+`reports/opportunity-scanner-log.csv` single file is kept as a historical
+snapshot only; don't append to it.
 
 **Every criterion cell is either a real score or the literal string
 `N/A`** — never a silent 0. `N/A` means the criterion genuinely wasn't

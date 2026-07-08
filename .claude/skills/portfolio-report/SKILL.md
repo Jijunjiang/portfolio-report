@@ -196,9 +196,13 @@ purpose; that skill is the deep-dive version.
 
 Separate from the option-selling suggestions above — this is about new
 stock positions, per the `opportunity-scanner` skill. Every run: `run_scan`
-both saved scans there, compute each result's mechanical subscore
-(category A + C, 50 pts, no judgment calls — see that skill's step 6),
-and map to a confidence band (≥70%: High, 50–69%: Moderate, <50%: Low).
+all four saved scans there (one per archetype — turnaround, moonshot_growth,
+compounder, steady_value), apply that skill's domain-leadership gate and any
+archetype-specific gate (e.g. the 40%-off-high gate for turnaround) first,
+then compute each gate-survivor's mechanical subscore (the no-judgment-call
+criteria only — Category A applies to turnaround alone, the others skip it —
+see that skill's step 6), and map to a confidence band (≥70%: High, 50–69%:
+Moderate, <50%: Low).
 
 - **High confidence**: run the full rubric (categories B/D/E too) same-day
   and include it in today's report as a real signal, not just a mention.

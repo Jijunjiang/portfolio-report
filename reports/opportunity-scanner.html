@@ -129,12 +129,12 @@
   <header class="top">
     <div class="eyebrow">Opportunity Scanner · Research &amp; Validation</div>
     <h1>Screening for the next HOOD, not the next PTON</h1>
-    <p class="sub">A 32-criterion rubric for asymmetric, multi-year setups — deep-value turnarounds and quality compounders — backtested against real historical price data before being trusted with a live signal.</p>
+    <p class="sub">A 31-criterion rubric plus 2 disqualifying gates for asymmetric, multi-year setups across 4 risk/reward archetypes — deep-value turnarounds, momentum moonshots, quality compounders, and steady blue-chip value — backtested against real historical price data before being trusted with a live signal.</p>
   </header>
 
   <div class="tiles">
-    <div class="tile"><div class="label">Saved scans</div><div class="num">2</div><div class="sub2">Deep Value Turnaround · Growth Compounder</div></div>
-    <div class="tile"><div class="label">Rubric criteria</div><div class="num">32</div><div class="sub2">across 5 categories, 100 pts</div></div>
+    <div class="tile"><div class="label">Saved scans</div><div class="num">4</div><div class="sub2">Turnaround · Moonshot Growth · Compounder · Steady Value</div></div>
+    <div class="tile"><div class="label">Rubric criteria</div><div class="num">31 + 2 gates</div><div class="sub2">across 5 categories, ~98 pts</div></div>
     <div class="tile"><div class="label">Historical cases tested</div><div class="num">4</div><div class="sub2">HOOD, INTC, CVNA, PTON</div></div>
     <div class="tile"><div class="label">Signal cadence</div><div class="num mono">Daily / Qtr</div><div class="sub2">mechanical watch · full review</div></div>
   </div>
@@ -179,8 +179,13 @@
     <p style="color:var(--ink-muted); font-size:0.9rem">Honest limit: fundamentals data is a current-only snapshot, so this distinction was validated narratively, not backtested mechanically — which is exactly why the rubric makes it a mandatory judgment check, not a footnote.</p>
   </div>
 
-  <h2>The rubric — 32 criteria, 100 points, 5 categories</h2>
+  <h2>The rubric — 31 scored criteria + 2 gates, 5 categories</h2>
   <p class="lede"><span class="tag-m">M</span> mechanical (computed directly from a tool) · <span class="tag-j">J</span> judgment (requires reading/context). Roughly two-thirds mechanical, one-third judgment — score guide: ≥70 strong candidate, 50–69 watchlist, &lt;50 discard.</p>
+
+  <div class="callout">
+    <div class="tag">Two criteria are gates, not scores (added 2026-07-07)</div>
+    <p><strong>Net profit margin &gt; 0</strong> is enforced identically for every candidate before it ever reaches the rubric (it's a Stage-0 scan filter on all four archetypes), so scoring it again downstream could never discriminate anything — retired as a point criterion. <strong>Domain leadership</strong> (a top-tier or solid niche market position, durable enough to hold through a full 10-year cycle) disqualifies a candidate outright if it's sub-scale/commoditized/easily-disrupted, rather than just costing it points — a real requirement, not a nice-to-have averaged into the total.</p>
+  </div>
 
   <div class="cat-grid">
     <div class="cat-card">
@@ -197,12 +202,12 @@
       </ol>
     </div>
     <div class="cat-card">
-      <div class="cat-head"><h3>B · Financial quality</h3><span class="cat-pts">25 pts</span></div>
+      <div class="cat-head"><h3>B · Financial quality</h3><span class="cat-pts">23 pts</span></div>
       <ol>
         <li><span class="tag-m">M</span>Market cap &gt; $2B → 3</li>
         <li><span class="tag-m">M</span>Gross margin &gt; 30% → 2</li>
         <li><span class="tag-m">M</span>Operating margin &gt; 0% → 2</li>
-        <li><span class="tag-m">M</span>Net margin &gt; 0% → 2 (improving-but-negative → 1)</li>
+        <li style="opacity:0.6"><em>Net margin &gt; 0% — retired as a scored criterion, now a Stage-0 gate (see above)</em></li>
         <li><span class="tag-m">M</span>ROE &gt; 10% → 3 (&gt;0% → 1)</li>
         <li><span class="tag-m">M</span>ROA &gt; 5% → 2 (&gt;0% → 1)</li>
         <li><span class="tag-m">M</span>Dividend maintained through the drawdown → 2</li>
@@ -242,8 +247,8 @@
     </div>
   </div>
 
-  <h2>Daily signal — mechanical monitoring, quarterly deep review</h2>
-  <p class="lede">Full scoring (categories B/D judgment calls included) stays quarterly — that research doesn't belong in a daily job, and this account only acts a few times a quarter regardless. But categories A + C are pure arithmetic (50 pts, no judgment), so they run daily as part of the portfolio report: a cheap watch for something new crossing into interesting territory, escalated to a full review the same day it happens rather than sitting unnoticed for months.</p>
+  <h2>Daily signal — gate first, then mechanical monitoring, quarterly deep review</h2>
+  <p class="lede">Every archetype's Stage-0 survivors get the domain-leadership gate applied first (turnaround also gets the 40%-off-high gate) — disqualified candidates are logged and dropped before any scoring effort is spent on them. Full scoring (categories B/D judgment calls included) stays quarterly for anything past the gates — that research doesn't belong in a daily job, and this account only acts a few times a quarter regardless. The no-judgment-call criteria (Category A for turnaround, the equivalent mechanical criteria for the other three archetypes) run daily as part of the portfolio report: a cheap watch for something new crossing into interesting territory, escalated to a full review the same day it happens rather than sitting unnoticed for months.</p>
   <div class="tiles">
     <div class="tile"><div class="label">High confidence</div><div class="num mono" style="color:var(--high)">≥70%</div><div class="sub2">≥35/50 · full rubric run same-day</div></div>
     <div class="tile"><div class="label">Moderate</div><div class="num mono" style="color:var(--mod)">50–69%</div><div class="sub2">25–34/50 · noted, no deep-dive</div></div>
@@ -267,7 +272,7 @@
   <p class="lede">Directionally consistent with the validation finding: CRWD's technically-oversold RSI doesn't save it once its (near-zero) distance from the high is in the picture — same pattern as the PTON false-positive risk above, just caught before it reaches a shortlist.</p>
 
   <h2>Refining the rubric over time</h2>
-  <p class="lede">Not an automated optimizer — there isn't enough resolved-outcome volume for that to be honest. Instead: every scored candidate is logged to <code class="mono">reports/opportunity-scanner-log.csv</code> (score, category subtotals, price at scan). Each quarter, prior candidates get their actual return checked against the log, and weights or thresholds get adjusted when the accumulated evidence supports it — never off fewer than ~5 resolved cases per category, to avoid fitting noise. Call it hill-climbing in spirit: a human-and-agent review loop paced to match how often this account actually acts.</p>
+  <p class="lede">Not an automated optimizer — there isn't enough resolved-outcome volume for that to be honest. Instead: every scored or gate-disqualified candidate is logged to <code class="mono">reports/opportunity-scanner-logs/</code> (one CSV per run, score/gate outcome, category subtotals, price at scan). Each quarter, prior candidates get their actual return checked against the accumulated logs, and weights or thresholds get adjusted when the evidence supports it — never off fewer than ~5 resolved cases per category, to avoid fitting noise. Call it hill-climbing in spirit: a human-and-agent review loop paced to match how often this account actually acts.</p>
 
   <footer>
     Read-only research tool — no trades are placed from this page or the skill behind it. Not investment advice; multi-bagger identification is inherently uncertain even with a validated rubric.

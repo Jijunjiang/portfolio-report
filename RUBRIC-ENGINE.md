@@ -24,7 +24,7 @@ is no autonomous trading and no autonomous rubric-editing here.
 | Prefilter (Stage 0) | Hard-cutoff pass/fail rubric that narrows the raw universe to a size the full rubric can completely evaluate | Saved-scan filters (`opportunity-scanner/SKILL.md` step 1); ~100 combined daily matches as of 2026-07-07 |
 | Candidate generator | Produces raw candidates to score | `run_scan` (saved scanners) / `get_option_chains` + `get_option_instruments` |
 | Scorer | Applies a rubric to a candidate → category subscores + total | Executed inline by `opportunity-scanner`/`portfolio-report` SKILL.md steps |
-| Decision log | Append-only fact table: candidate + score + decision + (later) outcome | `reports/opportunity-scanner-log.csv`, `reports/option-suggestion-log.csv` |
+| Decision log | Fact table: candidate + score + decision + (later) outcome | `reports/opportunity-scanner-logs/*.csv` (one file per run), `reports/option-suggestion-log.csv` |
 | Outcome resolver | Fills in what actually happened, once enough time has passed | `rubric-engine` skill, step 1 |
 | Correlation analyzer | Buckets resolved rows by score, checks which categories discriminate | `rubric-engine` skill, step 2 |
 | Proposal drafter | Turns a discriminating pattern into a specific, cited rubric diff | `rubric-engine` skill, step 3 |

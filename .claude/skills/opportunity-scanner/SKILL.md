@@ -42,7 +42,8 @@ Two archetypes (Turnaround, Quality Inflection) existed originally; two
 more (Moonshot Growth, Steady Value) were added 2026-07-07 because they
 are structurally different opportunities that the original two scans
 conflated. Each has its own Stage 0 prefilter scan and gets scored/logged
-with `archetype` set to the tag below in `reports/opportunity-scanner-log.csv`.
+with `archetype` set to the tag below and logged to
+`reports/opportunity-scanner-logs/` (one CSV per run — see step 6).
 
 | Archetype | Risk / Reward | Pattern | Scan ID | ~Daily matches |
 |---|---|---|---|---|
@@ -71,7 +72,7 @@ versus what step 6 scores afterward.
 ## 1. The saved scans — this is the Stage 0 prefilter
 
 Each scan *is* a rubric itself — a hard-cutoff, binary pass/fail prefilter
-that runs before `rubric.md`'s weighted 100-point scoring ever starts (see
+that runs before `rubric.md`'s weighted ~98-point scoring ever starts (see
 `../../../RUBRICS.md`'s lifecycle: this is Stage 0, not a separate ad hoc
 thing). Tuned so each archetype's daily universe is small enough to fully
 score and log every survivor (see step 6), loose enough not to miss real
@@ -178,20 +179,34 @@ Below ~25% off high: discard, regardless of RSI. 25–40%: borderline,
 mention only if nothing better clears the bar. ≥40%: passes the gate —
 score it with the full rubric next.
 
-## 3. Score every candidate that passes the gate with `rubric.md`
+## 3. Domain-leadership gate, then score survivors with `rubric.md`
 
-`rubric.md` has the full 33-criterion scoring rubric across five
-categories (value/drawdown depth, financial quality, momentum
-confirmation, catalyst/story, risk & portfolio fit) — this is what turns
-"passed the mechanical filters" into a ranked, explainable score rather
-than a pass/fail list. Score every candidate that cleared step 2 against
-it; don't shortlist on the 52-week-high filter alone. Criterion 33
-(domain leadership — added 2026-07-07, applies to every archetype) is the
-slowest one to score honestly: it needs a real competitive-position read,
-not a sector-label guess, so budget a `WebSearch` per candidate when the
-description alone doesn't make the answer obvious. ≥70 = strong
-candidate, 50–69 = watchlist, <50 = discard — see that file for the exact
-per-criterion scoring and the mechanical-vs-judgment split.
+`rubric.md` has 31 scored criteria across five categories (value/drawdown
+depth, financial quality, momentum confirmation, catalyst/story, risk &
+portfolio fit) plus 2 hard gates that run *before* scoring and can
+disqualify a candidate outright — see that file's "Gates" section. One gate
+(net profit margin > 0) is already enforced at Stage 0 by the saved scans
+themselves (step 1); the other (criterion 33, domain leadership) is a
+judgment call that has to be made per candidate, so it runs here, first,
+before the rest of the rubric:
+
+1. For every candidate that cleared step 2 (or, for non-turnaround
+   archetypes, every Stage 0 survivor), make the domain-leadership call —
+   dominant #1/#2, solid niche leader/#3-4, or sub-scale/commoditized/
+   disruptable. This is the slowest call to make honestly: budget a
+   `WebSearch` per candidate when the company description alone doesn't
+   make the competitive position obvious.
+2. **Dominant or niche leader → proceed** to score the full rubric (all
+   31 remaining criteria) normally.
+3. **Sub-scale/commoditized/disruptable → stop.** Log a disqualified row
+   (ticker, date, archetype, `b33_domainleadership_judgment=0`, everything
+   else `N/A`) and move to the next candidate — don't spend further tool
+   calls scoring the rest of the rubric for a candidate that's already
+   disqualified.
+
+≥70 = strong candidate, 50–69 = watchlist, <50 = discard, for whatever
+passes the gate — see `rubric.md` for the exact per-criterion scoring and
+the mechanical-vs-judgment split.
 
 ## 4. Growth compounder screen — quality at a reasonable growth price
 
@@ -232,7 +247,7 @@ decisions, not a signal to act on directly.**
 ## 6. Cadence — daily full evaluation of the prefiltered set, quarterly outcome review
 
 The Stage 0 prefilter (step 1) is what makes this affordable: at ~100
-combined matches/day, the full 32-criterion rubric can run on **every**
+combined matches/day, the full 31-criterion rubric (plus the domain-leadership gate) can run on **every**
 survivor, every day, not just a cheap mechanical subscore on a few
 hundred. This replaced an earlier "mechanical-only daily, full rubric
 only for high scorers" design once the prefilter itself was tightened
@@ -260,30 +275,40 @@ enough to make full daily evaluation practical — see
    fetched data (the batched fundamentals) can feed many sequential
    per-candidate scoring steps — it's the *scoring*, not the *data
    fetch*, that stays one-at-a-time.
-4. **Log every single one to `reports/opportunity-scanner-log.csv`** as
-   it's scored — full category breakdown, not just a subtotal, sell-worthy
-   or not. This is the "log everything" the account holder wants: every
-   survivor of the prefilter gets a complete, resolvable data point, every
-   day.
+4. **Log every single one** — full category breakdown, not just a
+   subtotal, sell-worthy or not, gate-disqualified or fully scored. This
+   is the "log everything" the account holder wants: every survivor of
+   the prefilter gets a complete, resolvable data point, every day.
+   **Logging convention (changed 2026-07-07): one CSV per run, never
+   appended.** Write to `reports/opportunity-scanner-logs/YYYY-MM-DD-full-
+   <archetype>.csv` (one file per archetype per run is fine — a later step
+   or a human can merge them into `YYYY-MM-DD-full.csv` if a single
+   combined view is wanted for that day). Never write into a prior run's
+   file. The old single ever-growing `reports/opportunity-scanner-log.csv`
+   is kept only as a historical snapshot from before this change — don't
+   append to it.
 5. Surface in that day's report only what's actually report-worthy
    (≥70 = full callout, 50–69 = one-line mention, <50 = not listed
-   individually) — the log has everything regardless of what's shown.
+   individually, gate-disqualified = one line in the caveats, not a full
+   entry) — the log has everything regardless of what's shown.
 
-**Quarterly outcome review:** unchanged — the `rubric-engine` skill reads
-this same log, resolves `outcome_1q`/`outcome_1y`, and proposes evidence-
-cited changes to either the weighted rubric or this Stage 0 prefilter.
+**Quarterly outcome review:** unchanged in spirit — the `rubric-engine`
+skill globs across every file in `reports/opportunity-scanner-logs/`
+(not a single fixed path, since each run is now its own file), resolves
+`outcome_1q`/`outcome_1y`, and proposes evidence-cited changes to either
+the weighted rubric or this Stage 0 prefilter.
 
 ## 7. Files in this skill
 
-- `rubric.md` — the 32-criterion scoring rubric (step 3).
+- `rubric.md` — the 31-criterion scoring rubric plus 2 hard gates (step 3).
 - `validation.md` — the backtest that shaped the rubric: HOOD/INTC/CVNA
   (recovered) vs. PTON (didn't, despite a near-identical drawdown) —
   read this before trusting category A alone on a new candidate.
 - `refinement.md` — how the rubric gets tuned over time using
-  `reports/opportunity-scanner-log.csv`: log every scored candidate,
-  review outcomes quarterly, reweight/re-threshold on accumulated
-  evidence. Not automated — a human-and-agent review loop matched to
-  this account's quarterly cadence.
+  `reports/opportunity-scanner-logs/` (one CSV per run): log every scored
+  candidate, review outcomes quarterly, reweight/re-threshold on
+  accumulated evidence. Not automated — a human-and-agent review loop
+  matched to this account's quarterly cadence.
 
 ## 8. Rubric/validation page (separate from the daily portfolio dashboard)
 

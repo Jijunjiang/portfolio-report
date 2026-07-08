@@ -235,7 +235,7 @@ that would corrupt the very evidence used to justify changing it.
 
 | Rubric | Skill | Log | Refinement doc |
 |---|---|---|---|
-| `.claude/skills/opportunity-scanner/rubric.md` | opportunity-scanner | `reports/opportunity-scanner-log.csv` | `.claude/skills/opportunity-scanner/refinement.md` |
+| `.claude/skills/opportunity-scanner/rubric.md` | opportunity-scanner | `reports/opportunity-scanner-logs/*.csv` (one file per run) | `.claude/skills/opportunity-scanner/refinement.md` |
 | `.claude/skills/portfolio-report/playbooks/option-suggestion-rubric.md` | portfolio-report | `reports/option-suggestion-log.csv` | `.claude/skills/portfolio-report/playbooks/option-suggestion-refinement.md` |
 
 When a new strategy needs a rubric, follow the five stages above and add a
