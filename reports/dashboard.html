@@ -1,4 +1,4 @@
-<title>Portfolio Report — 2026-07-07</title>
+<title>Portfolio Report — 2026-10-12</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root {
@@ -283,88 +283,83 @@
   <header class="top">
     <div>
       <div class="eyebrow">Daily portfolio report · Robinhood</div>
-      <h1>2026&#8202;-&#8202;07&#8202;-&#8202;07</h1>
+      <h1>2026&#8202;-&#8202;10&#8202;-&#8202;12</h1>
     </div>
     <div class="netnum">
       <div class="label">Total net worth</div>
-      <div class="value mono">$2,234,318</div>
+      <div class="value mono">$2,199,602</div>
     </div>
   </header>
 
   <h2><span class="idx">01</span> Overview</h2>
-  <p class="lede">Down $15,588 since 7/6 — HOOD gave back ~4%, INTC/MSFT/ORCL softer, partially offset by GOOG/TSM/ASML. Heavy real option trading today (2 rolls, 3 new opens, 1 new directional long call) — see sections 02 and 06. Note: the scheduled cloud routine fired today but never committed/pushed the dated report — only the Artifact got refreshed. Fixed going forward; this report was generated manually to close the gap.</p>
+  <div class="callout" style="border-color: var(--caution); background: var(--caution-soft)">
+    <div class="tag">97-day gap in the report history</div>
+    <p>The last dated report before this one is <strong>2026-07-07</strong> — nothing was written or committed between 7/8 and 10/11. This run reconstructs changes since 7/7, not a real day-over-day diff; read every delta below with that in mind.</p>
+  </div>
+  <p class="lede">Down $34,716 since 7/7 (not a single day). Main account unrealized gain eased from ≈$1,148,045 to ≈$1,065,042 as GOOG/INTC/NKE/ORCL are all lower than their 7/7 prices. The open option book is far smaller than 7/7's (≈$6,435 vs. ≈$54,899) — nearly everything from 7/7 has since expired, closed, or been assigned, and this is a fresh, small batch opened almost entirely in the last two weeks.</p>
   <div class="tiles">
     <div class="tile">
       <div class="label">Main account value</div>
-      <div class="num mono">$2,188,206</div>
+      <div class="num mono">$2,166,568</div>
       <div class="sub">margin, individual · ••••2213</div>
     </div>
     <div class="tile">
       <div class="label">Unrealized gain</div>
-      <div class="num mono gain">+$1,148,045</div>
-      <div class="sub">62% GOOG, 14% INTC</div>
+      <div class="num mono gain">+$1,065,042</div>
+      <div class="sub">62.2% GOOG, 13.2% INTC</div>
     </div>
     <div class="tile">
       <div class="label">Margin loan-to-value</div>
-      <div class="num mono">18.4%</div>
-      <div class="sub">$496,039 borrowed / $2,695,687 equity</div>
+      <div class="num mono">23.5%</div>
+      <div class="sub">up from 18.4% on 7/7 — $659,015 borrowed / $2,808,482 equity</div>
     </div>
     <div class="tile">
       <div class="label">Open option premium</div>
-      <div class="num mono">$54,899</div>
-      <div class="sub">~93.5% concentrated in one INTC position</div>
+      <div class="num mono">$6,435</div>
+      <div class="sub">small fresh book — every position spans earnings (see §06)</div>
     </div>
     <div class="tile">
       <div class="label">Crypto value</div>
-      <div class="num mono">$16,844</div>
+      <div class="num mono">$22,280</div>
       <div class="sub">not yet in this skill's position pipeline</div>
     </div>
     <div class="tile">
       <div class="label">Realized P&amp;L, YTD</div>
-      <div class="num mono loss">&minus;$39,658</div>
-      <div class="sub">options &minus;$37,448 &middot; equity &minus;$2,210 &middot; crypto $0</div>
+      <div class="num mono gain">+$24,914.89</div>
+      <div class="sub">options $20,954 &middot; equity $3,961 &middot; crypto $0 — see §02 for roll-netting</div>
     </div>
   </div>
 
   <h2><span class="idx">02</span> Tax exposure</h2>
-  <div class="callout" style="border-color: var(--gain); background: var(--gain-soft)">
-    <div class="tag" style="color:var(--gain)">Update: INTC covered call is back out-of-the-money</div>
-    <p>Short 17&nbsp;contracts of the $120 call expiring 9/18; INTC closed today at <strong>$110.39</strong>, down from $122.20 yesterday — <strong>now OTM</strong> for the first time in several reports. The 1,756 shares behind it (cost basis $20.98) would still realize roughly <strong>+$174,000</strong> of gain if it ever gets assigned, and this call still spans INTC's 7/23 earnings report, so this could reverse quickly. Still worth a deliberate roll-or-hold decision before that date, not a "problem solved" signal.</p>
+  <div class="callout" style="border-color: var(--loss); background: var(--loss-soft)">
+    <div class="tag" style="color:var(--loss)">Closest-to-the-money: BRK.B short call, 6.2% OTM, real embedded gain</div>
+    <p>Short 5 contracts of the BRK.B $550 call (opened 10/2, exp 12/18); BRK.B closed at <strong>$517.77</strong>. The 537.52 shares behind it (cost basis $481.65) would realize <strong>≈+$19,415</strong> if assigned. BRK.B's own earnings report is tentatively 11/2 — inside this call's window.</p>
   </div>
-
+  <div class="callout" style="border-color: var(--caution); background: var(--caution-soft)">
+    <div class="tag">Second-closest: new PFE short put, 5.0% OTM — a fresh-basis case, not an embedded-gain one</div>
+    <p>20 contracts of the PFE $27 put (opened 10/9, exp 11/13); PFE closed at $28.41. PFE isn't currently held, so assignment would create a new ~2,000-share position at a $27 basis, not realize a gain on an existing lot. PFE reports 11/3, inside this put's window.</p>
+  </div>
   <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">Today's real option activity — 2 rolls, 3 new opens, 1 new long call (all placed directly by the account holder)</div>
-    <p><strong>HOOD covered call rolled:</strong> closed $200c/7-17 (15 ctr) for $15, opened $290c/9-18 (15 ctr) for $300 credit — net <strong>+$285</strong>. New expiry now spans HOOD's 7/29 earnings (the old one didn't).</p>
-    <p><strong>MSFT put rolled:</strong> closed $350p/7-17 for $48, opened $345p/8-14 for $460 credit — net <strong>+$412</strong>. Also now spans MSFT's 7/29 earnings (the old one didn't).</p>
-    <p><strong>New SPG covered call:</strong> 3 contracts, $250 strike, exp 8/21, <strong>+$465</strong> credit — well OTM, no earnings overlap.</p>
-    <p><strong>New BX cash-secured put:</strong> 1 contract, $113 strike, exp 8/14, <strong>+$350</strong> credit — spans BX's 7/23 earnings; would add to an already-held 151-share BX position if assigned.</p>
-    <p><strong>New AVGO cash-secured put:</strong> 1 contract, $330 strike, exp 8/21, <strong>+$1,060</strong> credit — new name for this account, no earnings overlap (next report 9/3).</p>
-    <p><strong>New UBER long call (directional, not covered-call/CSP style):</strong> 10 contracts, $115 strike, exp <strong>2027-03-19</strong>, <strong>&minus;$1,900</strong> debit — a departure from this account's usual income-focused option style. Spans every earnings between now and expiry.</p>
-    <p>Net cash flow from today's option activity: <strong class="gain-cell">+$672</strong> (($285+$412+$465+$350+$1,060) credit &minus; $1,900 debit).</p>
+    <div class="tag" style="color:var(--accent)">Every open option position spans an earnings date before expiration</div>
+    <p>A first for this account's reports — this cycle's expirations (10/30&ndash;12/18) land squarely across Q3 earnings season (10/15&ndash;11/6) for nearly every underlying held. See §06 for the full table. Nothing is currently ITM, but the earnings cluster 10/27&ndash;11/3 (HOOD, MSFT, META, INTC, PFE, O, BRK.B) is worth a deliberate look.</p>
   </div>
-
-  <p class="lede">Other large embedded gains, for context: GOOG +$705,584 &middot; HOOD +$86,640 &middot; TSM +$63,177 &middot; ASML +$53,438 &middot; SOFI +$23,085.</p>
+  <p class="lede">O's covered call (9.7% OTM) is a nuance worth noting: its underlying position currently shows an unrealized <em>loss</em> (avg cost $57.33 vs. $54.69 today, from ongoing DRIP purchases), so assignment there would realize a loss, not a gain — a possible wash-sale check if O was ever repurchased within 30 days of a loss-sale.</p>
 
   <div class="table-scroll" style="margin-bottom:1rem">
     <table style="min-width:420px">
       <thead><tr><th>Realized P&amp;L YTD (2026-01-01 &rarr; today)</th><th>Amount</th></tr></thead>
       <tbody class="mono">
-        <tr><td>Options</td><td class="loss-cell">&minus;$37,448.00</td></tr>
-        <tr><td>Equity</td><td class="loss-cell">&minus;$2,209.69</td></tr>
+        <tr><td>Options</td><td class="gain-cell">$20,954.00</td></tr>
+        <tr><td>Equity</td><td class="gain-cell">$3,960.89</td></tr>
         <tr><td>Crypto</td><td>$0.00</td></tr>
-        <tr><td><strong>Combined</strong></td><td class="loss-cell"><strong>&minus;$39,657.69</strong></td></tr>
+        <tr><td><strong>Combined</strong></td><td class="gain-cell"><strong>$24,914.89</strong></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">Today's two rolls were real gains on the closed leg, not losses</div>
-    <p>HOOD's close cost $15 against an original $225 credit (<strong class="gain-cell">+$210</strong> realized); MSFT's cost $48 against an original $188 credit (<strong class="gain-cell">+$140</strong> realized). Combined <strong class="gain-cell">+$350</strong> — exactly the improvement in the YTD options total above vs. yesterday.</p>
-  </div>
-
   <div class="callout" style="border-color: var(--ink-faint); background: var(--surface); border-left-color: var(--ink-faint)">
-    <div class="tag" style="color:var(--ink-muted)">That &minus;$37,448 is still mostly two INTC rolls, not real losses</div>
-    <p>Combined <strong class="loss-cell">&minus;$51,748</strong> in apparent realized losses on paper (5/14 and 7/1 INTC rolls), true net cash cost only <strong class="loss-cell">≈&minus;$1,190</strong> — the position was extended, not closed. Backing that out plus today's +$350: every other option trade YTD nets to <strong class="gain-cell">+$14,300</strong> — solidly profitable non-INTC option activity, continuing to improve.</p>
+    <div class="tag" style="color:var(--ink-muted)">Roll-netting: two weekly "losses" were really just INTC call rolls</div>
+    <p>Week of 5/12&ndash;19 printed <strong class="loss-cell">&minus;$34,264</strong> (closing a $95c bought back for $35,700 &mdash; but a new $105c opened the same day for $37,400, net roll cash <strong class="gain-cell">+$1,700</strong>). Week of 6/30&ndash;7/7 printed <strong class="loss-cell">&minus;$16,714</strong> (the atomic $105c&rarr;$120c roll, net roll cash <strong class="loss-cell">&minus;$2,890</strong>). Including every later leg of the ladder ($120c&rarr;$125c&rarr;$170c, a standalone close, a fresh $200c open, and today's $200c/10-16&rarr;$200c/11-20 roll) plus the INTC put ladder, <strong>INTC options' net cash flow YTD is ≈+$1,307</strong> &mdash; a small credit, not a loss, despite the scary-looking weekly prints.</p>
   </div>
 
   <div class="callout" style="background:var(--surface); border-color:var(--border); border-left-color: var(--ink-faint)">
@@ -376,16 +371,16 @@
   <div class="tiles">
     <div class="tile">
       <div class="label">YTD dividends received</div>
-      <div class="num mono gain">$8,424.39</div>
-      <div class="sub">via DRIP reinvestment &middot; unchanged since 7/5</div>
+      <div class="num mono gain">$10,794.09</div>
+      <div class="sub">via DRIP · 30 orders Jan&ndash;Oct, incl. 3 now-closed positions</div>
     </div>
     <div class="tile">
       <div class="label">Forward annualized estimate</div>
-      <div class="num mono">≈$23,486/yr</div>
-      <div class="sub">carried forward — no new equity purchases today</div>
+      <div class="num mono">≈$19,961/yr</div>
+      <div class="sub">down from ≈$23,486/yr on 7/7 — SOFI share count down, NKE price collapse</div>
     </div>
   </div>
-  <p class="lede">No new DRIP reinvestment posted today (verified against the full 2026 order history, not just yesterday's cached figure). Forward estimate unchanged since only option activity happened today, not equity share purchases.</p>
+  <p class="lede">INTC, HOOD, SOFI, BRK.B, BULL, and TSLA all excluded from the forward estimate — INTC's dividend data is stale (2024), the rest simply pay no dividend. ≈$19,429/yr from the main account, ≈$532/yr from the Roth IRA's BX position.</p>
 
   <h2><span class="idx">04</span> Holdings — main account</h2>
   <div class="table-scroll">
@@ -394,90 +389,93 @@
         <tr><th>Symbol</th><th>Qty</th><th>Avg cost</th><th>Price</th><th>Value</th><th>Unrealized gain</th></tr>
       </thead>
       <tbody class="mono">
-        <tr><td class="sym">GOOG</td><td>2,923.00</td><td>$122.23</td><td>$363.62</td><td>$1,062,863</td><td class="gain-cell">+$705,584</td></tr>
-        <tr><td class="sym">INTC</td><td>1,756.00</td><td>$20.98</td><td>$110.39</td><td>$193,845</td><td class="gain-cell">+$157,004</td></tr>
-        <tr><td class="sym">HOOD</td><td>1,500.00</td><td>$55.14</td><td>$112.90</td><td>$169,350</td><td class="gain-cell">+$86,640</td></tr>
-        <tr><td class="sym">BRK.B</td><td>537.52</td><td>$481.65</td><td>$504.00</td><td>$270,913</td><td class="gain-cell">+$12,014</td></tr>
-        <tr><td class="sym">ASML</td><td>52.00</td><td>$719.62</td><td>$1,747.28</td><td>$90,859</td><td class="gain-cell">+$53,438</td></tr>
-        <tr><td class="sym">TSM</td><td>207.50</td><td>$128.11</td><td>$432.57</td><td>$89,760</td><td class="gain-cell">+$63,177</td></tr>
-        <tr><td class="sym">SOFI</td><td>4,500.00</td><td>$12.62</td><td>$17.75</td><td>$79,875</td><td class="gain-cell">+$23,085</td></tr>
-        <tr><td class="sym">O</td><td>3,436.08</td><td>$57.12</td><td>$64.01</td><td>$219,944</td><td class="gain-cell">+$23,675</td></tr>
-        <tr><td class="sym">SPG</td><td>306.67</td><td>$130.54</td><td>$227.19</td><td>$69,672</td><td class="gain-cell">+$29,639</td></tr>
-        <tr><td class="sym">MSFT</td><td>281.33</td><td>$409.82</td><td>$388.84</td><td>$109,393</td><td class="loss-cell">&minus;$5,902</td></tr>
-        <tr><td class="sym">META</td><td>120.22</td><td>$611.38</td><td>$615.58</td><td>$74,007</td><td class="gain-cell">+$505</td></tr>
-        <tr><td class="sym">ORCL</td><td>360.20</td><td>$159.97</td><td>$141.60</td><td>$51,004</td><td class="loss-cell">&minus;$6,617</td></tr>
-        <tr><td class="sym">UBER</td><td>620.00</td><td>$70.64</td><td>$74.33</td><td>$46,085</td><td class="gain-cell">+$2,288</td></tr>
-        <tr><td class="sym">NKE</td><td>1,000.00</td><td>$44.13</td><td>$43.21</td><td>$43,210</td><td class="loss-cell">&minus;$920</td></tr>
-        <tr><td class="sym">BULL</td><td>10,000.00</td><td>$7.19</td><td>$7.27</td><td>$72,700</td><td class="gain-cell">+$800</td></tr>
-        <tr><td class="sym">SLG</td><td>507.40</td><td>$40.62</td><td>$50.27</td><td>$25,507</td><td class="gain-cell">+$4,896</td></tr>
-        <tr><td class="sym">BX</td><td>151.40</td><td>$120.63</td><td>$120.89</td><td>$18,302</td><td class="gain-cell">+$39</td></tr>
-        <tr><td class="sym">RC</td><td>5,000.00</td><td>$1.94</td><td>$1.68</td><td>$8,400</td><td class="loss-cell">&minus;$1,300</td></tr>
+        <tr><td class="sym">GOOG</td><td>2,923.00</td><td>$122.23</td><td>$348.97</td><td>$1,020,041</td><td class="gain-cell">+$662,814</td></tr>
+        <tr><td class="sym">O</td><td>8,041.07</td><td>$57.33</td><td>$54.69</td><td>$439,766</td><td class="loss-cell">&minus;$21,228</td></tr>
+        <tr><td class="sym">BRK.B</td><td>537.52</td><td>$481.65</td><td>$517.77</td><td>$278,414</td><td class="gain-cell">+$19,415</td></tr>
+        <tr><td class="sym">HOOD</td><td>1,500.00</td><td>$55.14</td><td>$109.25</td><td>$163,875</td><td class="gain-cell">+$81,165</td></tr>
+        <tr><td class="sym">INTC</td><td>1,756.00</td><td>$20.98</td><td>$101.33</td><td>$177,935</td><td class="gain-cell">+$141,095</td></tr>
+        <tr><td class="sym">MSFT</td><td>281.86</td><td>$409.97</td><td>$541.19</td><td>$152,538</td><td class="gain-cell">+$36,987</td></tr>
+        <tr><td class="sym">TSM</td><td>207.50</td><td>$128.11</td><td>$444.49</td><td>$92,234</td><td class="gain-cell">+$65,649</td></tr>
+        <tr><td class="sym">ASML</td><td>52.00</td><td>$719.62</td><td>$1,750.26</td><td>$91,014</td><td class="gain-cell">+$53,593</td></tr>
+        <tr><td class="sym">META</td><td>120.22</td><td>$611.38</td><td>$743.11</td><td>$89,339</td><td class="gain-cell">+$15,838</td></tr>
+        <tr><td class="sym">ORCL</td><td>522.64</td><td>$146.19</td><td>$137.40</td><td>$71,829</td><td class="loss-cell">&minus;$4,597</td></tr>
+        <tr><td class="sym">SOFI</td><td>4,200.00</td><td>$11.86</td><td>$15.22</td><td>$63,924</td><td class="gain-cell">+$14,112</td></tr>
+        <tr><td class="sym">BULL</td><td>10,000.00</td><td>$7.19</td><td>$6.30</td><td>$63,000</td><td class="loss-cell">&minus;$8,900</td></tr>
+        <tr><td class="sym">SPG</td><td>310.01</td><td>$131.36</td><td>$201.39</td><td>$62,433</td><td class="gain-cell">+$21,710</td></tr>
+        <tr><td class="sym">NKE</td><td>1,000.00</td><td>$44.13</td><td>$35.34</td><td>$35,343</td><td class="loss-cell">&minus;$8,787</td></tr>
+        <tr><td class="sym">RC</td><td>5,032.15</td><td>$1.93</td><td>$1.17</td><td>$5,888</td><td class="loss-cell">&minus;$3,824</td></tr>
       </tbody>
     </table>
   </div>
+  <p class="lede" style="margin-top:1rem">UBER, SLG, AVGO, AAPL, and JNJ were all held or in-progress as of 7/7 and are no longer in the book — fully unwound over the gap, not reconstructed trade-by-trade this run.</p>
 
   <h2><span class="idx">05</span> Margin</h2>
   <p class="lede">Approximation only — no maintenance-requirement tool exists here; check the app for the authoritative figure.</p>
   <div class="tiles">
     <div class="tile">
       <div class="label">Loan-to-value</div>
-      <div class="num mono">18.4%</div>
-      <div class="sub">conservative — well under typical call territory</div>
+      <div class="num mono">23.5%</div>
+      <div class="sub">up from 18.4% on 7/7 — still well under call territory</div>
     </div>
     <div class="tile">
       <div class="label">Buying power (margined)</div>
-      <div class="num mono">$1,272,366</div>
+      <div class="num mono">$1,870,880</div>
     </div>
     <div class="tile">
       <div class="label">Buying power (unleveraged)</div>
-      <div class="num mono">$636,183</div>
+      <div class="num mono">$935,440</div>
     </div>
     <div class="tile">
       <div class="label">Margin interest, estimated</div>
-      <div class="num mono">$61.16/day</div>
-      <div class="sub">4.5%/yr &times; today's balance &middot; $183.40 tracked since 7/5</div>
+      <div class="num mono">$81.25/day</div>
+      <div class="sub">4.5%/yr &times; today's balance &middot; tracking has a 97-day gap, only 4 rows total</div>
     </div>
   </div>
 
   <h2><span class="idx">06</span> Open option positions</h2>
+  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
+    <div class="tag" style="color:var(--accent)">Every position spans an earnings report before expiration</div>
+    <p>A small, fresh book (10 contracts across 8 underlyings, opened 10/2 and 10/9) that happens to land entirely across Q3 earnings season.</p>
+  </div>
   <div class="table-scroll">
     <table>
       <thead>
-        <tr><th>Underlying</th><th>Type</th><th>Strike</th><th>Exp</th><th>Qty</th><th>Premium</th><th>Price</th><th>Status</th><th>Earnings overlap</th></tr>
+        <tr><th>Underlying</th><th>Type</th><th>Strike</th><th>Exp</th><th>Qty</th><th>Premium</th><th>Price</th><th>OTM dist.</th><th>Earnings overlap</th></tr>
       </thead>
       <tbody class="mono">
-        <tr><td class="sym">INTC</td><td>call</td><td>$120</td><td>9/18</td><td>17</td><td>$51,374</td><td>$110.39</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/23</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">HOOD</td><td>call</td><td>$290</td><td>9/18</td><td>15</td><td>$300 — rolled</td><td>$112.90</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29 (new)</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">MSFT</td><td>put</td><td>$345</td><td>8/14</td><td>1</td><td>$460 — rolled</td><td>$388.84</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29 (new)</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">SPG</td><td>call</td><td>$250</td><td>8/21</td><td>3</td><td>$465 — new</td><td>$227.19</td><td><span class="pill safe">OTM</span></td><td class="flag no">no</td></tr>
-        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>9/18</td><td>5</td><td>$350</td><td>$227.19</td><td><span class="pill safe">OTM</span></td><td class="flag no">no</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">BX</td><td>put</td><td>$113</td><td>8/14</td><td>1</td><td>$350 — new</td><td>$120.89</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/23</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">AVGO</td><td>put</td><td>$330</td><td>8/21</td><td>1</td><td>$1,060 — new</td><td>—</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — next report 9/3</td></tr>
-        <tr><td class="sym">O</td><td>put</td><td>$55</td><td>8/21</td><td>20</td><td>$600</td><td>$64.01</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 8/5</td></tr>
-        <tr><td class="sym">SLG</td><td>put</td><td>$40</td><td>8/21</td><td>5</td><td>$250</td><td>$50.27</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/22</td></tr>
-        <tr><td class="sym">META</td><td>put</td><td>$440</td><td>10/16</td><td>1</td><td>$740</td><td>$615.58</td><td><span class="pill safe">OTM</span></td><td class="flag yes">yes — 7/29</td></tr>
-        <tr><td class="sym">SPG</td><td>put</td><td>$165</td><td>7/17</td><td>1</td><td>$260</td><td>$227.19</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">TSM</td><td>put</td><td>$310</td><td>7/17</td><td>2</td><td>$160</td><td>$432.57</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
-        <tr><td class="sym">TSM</td><td>call</td><td>$600</td><td>7/17</td><td>1</td><td>$300</td><td>$432.57</td><td><span class="pill safe">OTM</span></td><td class="flag tight">7/16 — 1 day before exp.</td></tr>
-        <tr><td class="sym">UBER</td><td>put</td><td>$68</td><td>7/24</td><td>3</td><td>$390</td><td>$74.33</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">SOFI</td><td>put</td><td>$14</td><td>7/24</td><td>20</td><td>$280</td><td>$17.75</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr><td class="sym">ORCL</td><td>put</td><td>$120</td><td>7/31</td><td>2</td><td>$260</td><td>$141.60</td><td><span class="pill safe">OTM</span></td><td class="flag no">no — after exp.</td></tr>
-        <tr style="background:var(--accent-soft)"><td class="sym">UBER</td><td>call (long)</td><td>$115</td><td>2027-03-19</td><td>10</td><td>&minus;$1,900 debit — new</td><td>$74.33</td><td><span class="pill watch">far OTM, long-dated</span></td><td class="flag yes">spans every earnings until expiry</td></tr>
+        <tr><td class="sym">TSM</td><td>call</td><td>$550</td><td>10/30</td><td>2</td><td>$264</td><td>$444.49</td><td>23.7%</td><td class="flag yes">yes — 10/15</td></tr>
+        <tr><td class="sym">MSFT</td><td>call</td><td>$600</td><td>10/30</td><td>2</td><td>$220</td><td>$541.19</td><td>10.9%</td><td class="flag yes">yes — 10/28</td></tr>
+        <tr><td class="sym">HOOD</td><td>call</td><td>$180</td><td>11/13</td><td>15</td><td>$285</td><td>$109.25</td><td>64.8%</td><td class="flag yes">yes — 10/27</td></tr>
+        <tr><td class="sym">META</td><td>call</td><td>$900</td><td>11/6</td><td>1</td><td>$370</td><td>$743.11</td><td>21.1%</td><td class="flag yes">yes — 10/28 (unverified)</td></tr>
+        <tr><td class="sym">INTC</td><td>put</td><td>$80</td><td>11/13</td><td>5</td><td>$325</td><td>$101.33</td><td>21.0%</td><td class="flag yes">yes — 10/29</td></tr>
+        <tr><td class="sym">INTC</td><td>call</td><td>$200</td><td>11/20</td><td>17</td><td>$1,411</td><td>$101.33</td><td>97.4%</td><td class="flag yes">yes — 10/29</td></tr>
+        <tr style="background:var(--loss-soft)"><td class="sym">PFE</td><td>put</td><td>$27</td><td>11/13</td><td>20</td><td>$1,040</td><td>$28.41</td><td>5.0%</td><td class="flag yes">yes — 11/3</td></tr>
+        <tr><td class="sym">O</td><td>call</td><td>$60</td><td>12/18</td><td>54</td><td>$1,350</td><td>$54.69</td><td>9.7%</td><td class="flag yes">yes — 11/2</td></tr>
+        <tr style="background:var(--loss-soft)"><td class="sym">BRK.B</td><td>call</td><td>$550</td><td>12/18</td><td>5</td><td>$1,000</td><td>$517.77</td><td>6.2%</td><td class="flag yes">yes — 11/2 (unverified)</td></tr>
+        <tr><td class="sym">NKE</td><td>call</td><td>$45</td><td>12/18</td><td>10</td><td>$170</td><td>$35.34</td><td>27.3%</td><td class="flag tight">yes — 12/17 (unverified), 1 day before exp.</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="lede" style="margin-top:1rem">HOOD $200c/7-17 and MSFT $350p/7-17 both rolled forward today — see section 02 for the roll economics.</p>
+  <p class="lede" style="margin-top:1rem">Total open short-option premium: <strong class="mono">≈$6,435</strong>. No long/speculative positions remain open — 7/7's new UBER long call was fully closed 9/18 for a $600 credit.</p>
 
   <h2><span class="idx">07</span> Option-selling suggestions</h2>
-  <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">No fresh screen this cycle</div>
-    <p>Today's actual activity (2 rolls, 3 new opens, 1 new long call) already covers substantially more ground than a suggestion pass would. GOOG remains excluded from all option suggestions per standing preference (now encoded in <code class="mono">CLAUDE.md</code>).</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Symbol</th><th>Strike</th><th>Exp</th><th>DTE</th><th>Assign. prob.</th><th>Operation</th><th>Score</th></tr>
+      </thead>
+      <tbody class="mono">
+        <tr><td class="sym">SOFI</td><td>$14.50p</td><td>10/23</td><td>11</td><td>22.4%</td><td>Sell 20 ctr ($29,000, collects $270)</td><td>88/100</td></tr>
+        <tr><td class="sym">NKE</td><td>$33p</td><td>11/6</td><td>25</td><td>20.5%</td><td>Sell 10 ctr ($33,000, collects $385)</td><td>88/100</td></tr>
+      </tbody>
+    </table>
   </div>
+  <p class="lede" style="margin-top:1rem">SOFI: effective cost ($14.365) prices 2.9% <em>below</em> the 52wk low, but no dividend floor — a "still like it at this price" bet. NKE: 1.7% above its 52wk low, with a 4.7% dividend floor — the stronger fundamentals case. Both exps land before their respective next earnings reports. Aggregate: $62,000 committed, $655 premium, 6.6% of unleveraged buying power. GOOG excluded per standing preference. Logged to <code class="mono">reports/option-suggestion-log.csv</code>.</p>
 
-  <h2><span class="idx">07b</span> Daily opportunity signal</h2>
+  <h2><span class="idx">08</span> Daily opportunity signal</h2>
   <div class="callout" style="border-color: var(--accent); background: var(--accent-soft)">
-    <div class="tag" style="color:var(--accent)">Full 4-archetype gated run already completed today</div>
-    <p>235 Stage-0 survivors across turnaround/moonshot_growth/compounder/steady_value, 171 fully scored past the domain-leadership gate. Turnaround came back with <strong>zero survivors</strong> (legitimate — nothing was both severely oversold and genuinely 40%+ off its high and a real market leader today). Top names: <strong>MGNI</strong> (28, moonshot_growth), <strong>DUOL/CRDO</strong> (27, compounder), and a cluster of steady_value blue-chips (NVO, NOC, MPLX, OKE, AER) tied at 27. Full writeup: <code class="mono">reports/opportunity-scan-2026-07-07-full.md</code>.</p>
+    <div class="tag" style="color:var(--accent)">290 Stage-0 survivors, 3x the documented daily target</div>
+    <p>Turnaround 82 (19 cleared the 40%-off-high gate, 10 passed domain-leadership, 0 High/7 Moderate/3 Low). Moonshot_growth 6 (3 passed domain-leadership; <strong>ONON</strong> High at 41/68 pts). Compounder 79 (44 passed; <strong>VIK</strong> 45/68, <strong>CHDN</strong> 44/68 — both fully scored). Steady_value 123 (102 passed; <strong>YUMC</strong> 36/68, <strong>ZTS</strong> 35/68). CVNA, SMCI, and GME were recognizable names screened out on domain-leadership; VZ/T/CMCSA/TMUS/HSBC/DB didn't clear turnaround's 40%-off-high gate. Full detail and the scoring-ceiling caveat (non-turnaround archetypes cap at 68 pts, below the "strong" band by construction) in the dated report.</p>
   </div>
 
   <footer>

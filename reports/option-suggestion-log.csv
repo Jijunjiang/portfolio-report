@@ -20,3 +20,5 @@ date_suggested,symbol,type,strike,expiration,contracts_suggested,total_premium_s
 2026-07-05,ORCL,call,190,2026-08-21,3,483,140.29,sell,tax-favorable loss position,no,,,,,,,,,,,,
 2026-07-05,SOFI,call,25,2026-08-21,15,435,18.26,sell,fine tax-neutral - not full 45 ctr capacity,no,,,,,,,,,,,,
 2026-07-05,BULL,call,10,2026-08-21,20,270,7.16,sell,tax-neutral small name - not full 100 ctr capacity,no,,,,,,,,,,,,
+2026-10-12,SOFI,put,14.5,2026-10-23,20,270,15.22,sell,near 52wk low effective cost below the low but no dividend floor,,,,,,,88,25,20,10,15,10,8
+2026-10-12,NKE,put,33,2026-11-06,10,385,35.343,sell,near 52wk low plus 4.7% dividend floor earnings-safe,,,,,,,88,15,20,20,15,10,8
