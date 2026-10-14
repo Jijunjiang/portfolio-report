@@ -22,3 +22,6 @@ date_suggested,symbol,type,strike,expiration,contracts_suggested,total_premium_s
 2026-07-05,BULL,call,10,2026-08-21,20,270,7.16,sell,tax-neutral small name - not full 100 ctr capacity,no,,,,,,,,,,,,
 2026-10-12,SOFI,put,14.5,2026-10-23,20,270,15.22,sell,near 52wk low effective cost below the low but no dividend floor,,,,,,,88,25,20,10,15,10,8
 2026-10-12,NKE,put,33,2026-11-06,10,385,35.343,sell,near 52wk low plus 4.7% dividend floor earnings-safe,,,,,,,88,15,20,20,15,10,8
+2026-10-14,SOFI,put,13.5,2026-10-23,15,262.5,14.2278,sell,fresh 52wk low today effective cost below the low but no dividend floor,,,,,,,87,25,20,10,15,10,7
+2026-10-14,NKE,put,32,2026-11-06,10,190,35.31,sell,below 52wk low plus 4.6% dividend floor earnings-safe stronger tier than 33 strike,,,,,,,100,25,20,20,15,10,10
+2026-10-14,ORCL,put,120,2026-11-13,5,2062.5,130.598,sell,entry after todays 8.8% single-day drop premium inflated by crash-day IV spike yield not fully risk-free,,,,,,,67,15,12,10,15,10,5
