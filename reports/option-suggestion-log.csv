@@ -28,3 +28,20 @@ date_suggested,symbol,type,strike,expiration,contracts_suggested,total_premium_s
 2026-10-15,NKE,put,34,2026-11-06,10,205,37.17,sell,broad +5.3% rally pushed NKE past the prior 32 strike; 34 strike keeps under-10%-above-low tier plus 4.6% dividend floor,,,,,,,87,15,20,20,15,10,7
 2026-10-15,SOFI,put,14,2026-10-23,15,112.5,15.075,sell,SOFI hit a fresh intraday 52wk low 13.875 then closed +6%; 14 strike sits 0.36% above that fresh low no dividend floor so name-conviction bet not yield play,,,,,,,78,15,20,10,15,10,8
 2026-10-15,ORCL,put,120,2026-11-13,5,1465,134.47,sell,ORCL rebounded 3% after Mondays 8.8% crash IV still elevated 58.5% so yield still somewhat crash-inflated dividend yield 1.5% doesnt clear fundamental floor bar,,,,,,,75,15,20,10,15,10,5
+2026-10-16,SOFI,put,13.5,2026-11-06,15,690,14.56,sell,fresh 52wk low yesterday continued selling today effective cost 13.04 sits below the 13.86 52wk low no dividend floor but positive PE conviction bet spans Oct27 earnings,,,,,,,73,25,12,10,8,10,8
+2026-10-16,ORCL,put,120,2026-11-13,5,2300,128.22,sell,near 52wk low after Mondays crash still only 0.4% above 114.50 low low dividend floor 1.5% earnings clear until Dec,,,,,,,70,15,12,10,15,10,8
+2026-10-16,NKE,put,34,2026-11-13,10,325,37.125,sell,near 52wk low 4.4% above it strong fundamental floor 4.6% dividend positive PE safest assignment band 16% delta earnings clear until Dec,,,,,,,89,15,20,20,15,10,9
+2026-10-16,O,call,65,2026-12-18,20,150,56.08,sell,covered call using spare capacity 26 contracts beyond existing 60 strike position carries unrealized loss not gain so no tax floor concern delta 4.4% far OTM spans Nov2 earnings tiny premium given far strike and low share price,,,,,,,93,35,20,15,8,15,
+2026-10-16,GOOG,,,,,,336.86,skip,excluded by standing user preference no options activity on GOOG in either direction,,,,,,,,,,,,,
+2026-10-16,INTC,put,,,,,89.80,skip,up sharply from cost basis far from 52wk low 32.89 not a value entry already carries large embedded gain and far OTM covered call,,,,,,,,,,,,,
+2026-10-16,HOOD,call,,,,,98.88,skip,mid-range at 41% of 52wk range not near low existing 180c already far OTM and safe,,,,,,,,,,,,,
+2026-10-16,MSFT,call,,,,,528.95,skip,no spare covered call capacity 2 of 2 contracts already short against the position also 88% up its 52wk range not a CSP value entry,,,,,,,,,,,,,
+2026-10-16,BRK.B,call,,,,,532.02,skip,no spare covered call capacity 5 of 5 contracts already short also 92% up its 52wk range,,,,,,,,,,,,,
+2026-10-16,TSM,call,,,,,412.5101,skip,no spare covered call capacity 2 of 2 contracts already short also 66% up its 52wk range not a value entry,,,,,,,,,,,,,
+2026-10-16,SPG,put,,,,,205.53,skip,50% of 52wk range not near low no clear edge versus other candidates,,,,,,,,,,,,,
+2026-10-16,ASML,put,,,,,1641.54,skip,66% of 52wk range not near low,,,,,,,,,,,,,
+2026-10-16,RC,put,,,,,1.105,skip,1.9% above fresh 52wk low but negative PE and negligible 1 cent dividend no fundamental floor tiny contract economics not worth the capital,,,,,,,,,,,,,
+2026-10-16,BULL,put,,,,,6.06,skip,21% of 52wk range no dividend floor speculative name skipped for this run,,,,,,,,,,,,,
+2026-10-16,META,call,,,,,709.34,skip,73% of 52wk range existing 900c already 27% OTM and safe no new capacity need,,,,,,,,,,,,,
+2026-10-16,TSLA,put,,,,,354.67,skip,Roth account idle buying power only 252.57 insufficient capital for a meaningful CSP,,,,,,,,,,,,,
+2026-10-16,BX,put,,,,,106.62,skip,Roth account idle buying power only 252.57 insufficient capital for a meaningful CSP,,,,,,,,,,,,,
