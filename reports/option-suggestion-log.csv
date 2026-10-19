@@ -45,3 +45,20 @@ date_suggested,symbol,type,strike,expiration,contracts_suggested,total_premium_s
 2026-10-16,META,call,,,,,709.34,skip,73% of 52wk range existing 900c already 27% OTM and safe no new capacity need,,,,,,,,,,,,,
 2026-10-16,TSLA,put,,,,,354.67,skip,Roth account idle buying power only 252.57 insufficient capital for a meaningful CSP,,,,,,,,,,,,,
 2026-10-16,BX,put,,,,,106.62,skip,Roth account idle buying power only 252.57 insufficient capital for a meaningful CSP,,,,,,,,,,,,,
+2026-10-19,NKE,put,34,2026-11-13,10,260,37.23,sell,"4.6pct above 52wk low, 14.3pct delta, 4.4pct div yield PE 17.8, no earnings before expiry",,,,,,,88,15,20,20,15,10,8
+2026-10-19,SOFI,put,13.50,2026-11-06,15,690,14.295,sell,below 52wk low (effective cost 13.04 vs low 13.86) 31.6pct delta spans 10/27 earnings flagged,,,,,,,72,25,12,10,8,10,7
+2026-10-19,ORCL,put,120,2026-11-13,5,1900,129.62,sell,0.9pct above 52wk low 27.8pct delta no earnings before expiry div yield 1.56pct below 2pct floor,,,,,,,70,15,12,10,15,10,8
+2026-10-19,O,call,65,2026-12-18,20,150,55.52,sell,4.3pct delta almost impossible to settle spare capacity 26 of 80 position carries unrealized loss not gain spans 11/2 earnings flagged tiny dollar impact,,,,,,,93,35,20,15,8,15,
+2026-10-19,GOOG,put,,,,,340.18,skip,excluded from all option suggestions per standing user preference encoded in CLAUDE.md checked before generating any candidate,,,,,,,,,,,,,
+2026-10-19,INTC,put,,,,,91.97,skip,no spare covered-call capacity (17 of 17 contracts used) and 54pct of 52wk range too far up for a value CSP entry,,,,,,,,,,,,,
+2026-10-19,TSM,put,,,,,420.29,skip,no spare covered-call capacity (2 of 2 contracts used) and 70pct of 52wk range too far up for a value CSP entry,,,,,,,,,,,,,
+2026-10-19,HOOD,put,,,,,96.53,skip,no spare covered-call capacity (15 of 15 contracts used) and 38pct of 52wk range mid-range not a value entry,,,,,,,,,,,,,
+2026-10-19,MSFT,call,,,,,533.61,skip,zero spare covered-call capacity (2 contracts already written against 2.8 available),,,,,,,,,,,,,
+2026-10-19,BRK.B,call,,,,,532.47,skip,zero spare covered-call capacity (5 of 5 contracts used),,,,,,,,,,,,,
+2026-10-19,SPG,put,,,,,202.465,skip,45.7pct of 52wk range not near the low,,,,,,,,,,,,,
+2026-10-19,ASML,put,,,,,1647.42,skip,66.5pct of 52wk range not near the low,,,,,,,,,,,,,
+2026-10-19,META,call,,,,,704.945,skip,existing 900c already 27.7pct OTM and safe no new covered-call capacity (1 of 1.2 contracts used),,,,,,,,,,,,,
+2026-10-19,RC,put,,,,,1.18,skip,5.4pct above a fresh 52wk low but negative PE (-0.32) no real fundamental floor despite nominal 3.6pct yield on a 1cent dividend thin illiquid penny stock,,,,,,,,,,,,,
+2026-10-19,BULL,put,,,,,5.895,skip,18.7pct of 52wk range no dividend floor speculative name,,,,,,,,,,,,,
+2026-10-19,TSLA,put,,,,,368.09,skip,Roth account idle buying power only 252.57 insufficient capital for a meaningful CSP,,,,,,,,,,,,,
+2026-10-19,BX,put,,,,,107.10,skip,Roth account idle buying power only 252.57 insufficient capital for a meaningful CSP,,,,,,,,,,,,,
