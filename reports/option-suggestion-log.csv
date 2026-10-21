@@ -79,3 +79,20 @@ date_suggested,symbol,type,strike,expiration,contracts_suggested,total_premium_s
 2026-10-20,BULL,put,,,,,6.035,skip,"20.6pct of 52wk range, no dividend floor, speculative name",,,,,,,,,,,,,
 2026-10-20,TSLA,put,,,,,373.775,skip,"Roth account idle buying power only 252.57, insufficient capital for a meaningful CSP",,,,,,,,,,,,,
 2026-10-20,BX,put,,,,,110.35,skip,"Roth account idle buying power only 252.57, insufficient capital for a meaningful CSP",,,,,,,,,,,,,
+2026-10-21,NKE,put,34,2026-11-13,10,195.00,37.53,sell,"4.8pct up 52wk range from low, 11.8pct assignment prob, 4.33pct div yield, no earnings before exp",,,,,,,88,15,20,20,15,10,8
+2026-10-21,SOFI,put,13.50,2026-11-06,15,442.50,14.905,sell,"effective cost below 52wk low, 22.3pct assignment prob, spans 10/27 earnings (flagged), rich IV",,,,,,,79,25,20,10,8,10,6
+2026-10-21,ORCL,put,120,2026-11-13,5,1875.00,129.09,sell,"only 1pct up 52wk range from low (fresh value signal as ORCL fell today), 28.3pct assignment prob, no earnings before exp",,,,,,,69,15,12,10,15,10,7
+2026-10-21,ORCL,call,200,2026-12-18,5,395.00,129.09,sell,"far-OTM covered call pairing with ORCL CSP candidate, 6.1pct delta, position carries unrealized loss not gain, spans 12/14 earnings (flagged), 5 contracts = all spare capacity",,,,,,,93,35,20,15,8,15,
+2026-10-21,O,call,65,2026-12-18,20,150.00,55.34,sell,"4.2pct delta almost-impossible-to-settle tier, position carries unrealized loss not gain, spans 11/2 earnings (flagged)",,,,,,,93,35,20,15,8,15,
+2026-10-21,INTC,put,,,,,92.90,skip,"zero spare covered-call capacity (17/17 used); 54.8pct up 52wk range, not a CSP value entry",,,,,,,,,,,,,
+2026-10-21,TSM,call,,,,,431.765,skip,"zero spare covered-call capacity (2/2 used); existing 550c already assessed in tax section",,,,,,,,,,,,,
+2026-10-21,HOOD,call,,,,,101.94,skip,"zero spare covered-call capacity (15/15 used); existing 180c already 76.6pct OTM and safe",,,,,,,,,,,,,
+2026-10-21,MSFT,call,,,,,532.81,skip,"zero spare covered-call capacity (2/2 used); existing 600c flagged in tax section for earnings-window embedded gain",,,,,,,,,,,,,
+2026-10-21,BRK.B,call,,,,,540.89,skip,"zero spare covered-call capacity (5/5 used); existing 550c is the headline tax-section watch item, not a new-sell candidate",,,,,,,,,,,,,
+2026-10-21,SPG,call,,,,,205.555,skip,"3 contracts spare capacity exists (never written against) but not screened this run - noted for a future pass; not near 52wk low for a CSP either (50.3pct of range)",,,,,,,,,,,,,
+2026-10-21,ASML,put,,,,,1676.315,skip,"69.3pct up 52wk range, not a value entry; also <100 shares so no covered-call capacity",,,,,,,,,,,,,
+2026-10-21,META,call,,,,,698.43,skip,"existing 900c already assessed in tax section (earnings beat tonight tightened it to ~23.9pct OTM after-hours); zero spare capacity",,,,,,,,,,,,,
+2026-10-21,RC,put,,,,,1.01,skip,"hit a fresh 52wk low today but negative PE, nominal 1cent dividend on thin illiquid penny stock - no real fundamental floor despite the low",,,,,,,,,,,,,
+2026-10-21,BULL,put,,,,,6.095,skip,"21.4pct of 52wk range, no dividend floor, speculative name",,,,,,,,,,,,,
+2026-10-21,TSLA,put,,,,,386.555,skip,"Roth account idle buying power only 252.57, insufficient capital for a meaningful CSP",,,,,,,,,,,,,
+2026-10-21,BX,put,,,,,109.60,skip,"Roth account idle buying power only 252.57, insufficient capital for a meaningful CSP",,,,,,,,,,,,,
