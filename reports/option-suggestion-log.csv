@@ -112,3 +112,19 @@ date_suggested,symbol,type,strike,expiration,contracts_suggested,total_premium_s
 2026-10-23,META,put,,,,,642.26,skip,"existing open short put on this name ($595 strike, 1 contract, 11/6 exp, opened 10/22) - stacking avoided",,,,,,,,,,,,
 2026-10-23,HOOD,put,,,,,95.07,skip,"existing open short put on this name ($85 strike, 2 contracts, 11/13 exp, opened 10/22) - stacking avoided",,,,,,,,,,,,
 2026-10-23,SPG,call,230,2026-11-20,,,211.65,skip,"liquidity resolved since 10/22 (real bid/ask 0.45/0.85, OI 217) but 10.5% delta still sits inside the standard 0.20-0.30 delta screen the user rejects for covered calls, not the almost-impossible-to-settle tier",,,,,,,,,,,,
+2026-10-26,NKE,put,34,2026-11-13,10,155.00,37.905,Sell,"CSP; effective cost $33.845 is 4.87% up the 52wk range from the low ($31.97); P/E 17.88, dividend yield 4.40% both clear fundamental floor; no earnings before 11/13 expiry (next report 12/17); |delta| 9.76%",,,,,,89,15,20,20,15,10,9
+2026-10-26,SOFI,put,13.50,2026-11-06,15,547.50,14.465,Sell,"CSP; effective cost $13.135 sits below the 52wk low ($13.86); spans SOFI's 10/27 earnings report (flagged); |delta| 28.05%; implied annualized yield ~89.7% vs IV 78.8% -- rich, treat with real skepticism not free money",,,,,,68,25,12,10,8,10,3
+2026-10-26,O,call,65,2026-12-18,20,150.00,57.15,Sell,"Covered call; |delta| 4.81% (almost-impossible-to-settle tier); position carries an unrealized loss so no embedded-gain floor applies; spans O's 11/2 earnings report (flagged); spare capacity 26 contracts, using 20",,,,,,93,35,20,15,8,15,N/A
+2026-10-26,ORCL,call,200,2026-12-18,5,282.50,126.09,Sell,"Covered call; |delta| 4.72%; position carries an unrealized loss, no embedded-gain floor; spans ORCL's 12/14 earnings report per extended-lookahead (not reverified this run); uses full 5-contract spare capacity",,,,,,93,35,20,15,8,15,N/A
+2026-10-26,ORCL,put,110,,,,126.09,Skip,Existing open short put already on this name -- a fresh put would be real strike-proximity stacking,,,,,,N/A,,,,,,
+2026-10-26,META,put,595,,,,630.47,Skip,Existing open short put already on this name,,,,,,N/A,,,,,,
+2026-10-26,HOOD,put,85,,,,92.86,Skip,Existing open short put already on this name,,,,,,N/A,,,,,,
+2026-10-26,SPG,call,230,2026-11-20,,,212.75,Skip,10.5% delta -- fails the far-OTM 'almost impossible to settle' bar this account requires for covered calls (standard 0.20-0.30 delta screen explicitly rejected),,,,,,N/A,,,,,,
+2026-10-26,INTC,call,200,,,,90.53,Skip,Zero spare covered-call capacity (17 short vs 17 contracts available),,,,,,N/A,,,,,,
+2026-10-26,TSM,call,550,,,,424.39,Skip,Zero spare covered-call capacity (2 short vs 2 contracts available),,,,,,N/A,,,,,,
+2026-10-26,HOOD,call,180,,,,92.86,Skip,Zero spare covered-call capacity (15 short vs 15 contracts available),,,,,,N/A,,,,,,
+2026-10-26,MSFT,call,600,,,,532.75,Skip,Zero spare covered-call capacity (2 short vs 2 contracts available),,,,,,N/A,,,,,,
+2026-10-26,BRK.B,call,550,,,,548.72,Skip,Zero spare covered-call capacity (5 short vs 5 contracts available),,,,,,N/A,,,,,,
+2026-10-26,RC,put,,,,,1.10,Skip,"Negative P/E penny stock, no dividend -- no fundamental floor under the price",,,,,,N/A,,,,,,
+2026-10-26,BULL,put,,,,,5.465,Skip,"No dividend, speculative -- no fundamental floor",,,,,,N/A,,,,,,
+2026-10-26,ROTH-IDLE,put,,,,,,Skip,Roth IRA idle buying power only $252.57 -- insufficient for a meaningful CSP,,,,,,N/A,,,,,,
